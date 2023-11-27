@@ -1,0 +1,8 @@
+//
+// Created by Andreas Lynnerup on 27/11/2023.
+//
+
+#ifndef PROJECT_USERPREFERENCES_H
+#define PROJECT_USERPREFERENCES_H
+
+#endif //PROJECT_USERPREFERENCES_H
