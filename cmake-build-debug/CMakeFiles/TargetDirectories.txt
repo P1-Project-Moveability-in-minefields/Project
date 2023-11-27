@@ -1,0 +1,3 @@
+C:/Users/lsalt/CLionProjects/P1-Project/cmake-build-debug/CMakeFiles/P1_Project.dir
+C:/Users/lsalt/CLionProjects/P1-Project/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/lsalt/CLionProjects/P1-Project/cmake-build-debug/CMakeFiles/rebuild_cache.dir
