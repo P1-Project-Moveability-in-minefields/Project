@@ -7,6 +7,7 @@
 
 userSettings chosenSettings;
 
+// Ask user to decide settings, then return the settings.
 userSettings obtain_user_settings() {
     printf("\nPlease decide setup parameters");
     printf("\nDecide the following 4 settings:\n");
@@ -37,4 +38,5 @@ userSettings obtain_user_settings() {
     printf("3. Risk level:          %s\n", stringRiskLevel[chosenSettings.riskLevel]);
     printf("4. Prioritize cover:    %s\n", stringPrioritizeCover[chosenSettings.prioritizeCover]);
 
+    return (chosenSettings);
 }
