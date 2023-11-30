@@ -2,6 +2,7 @@
 #include "Dijkstra's algorithm/dijkstra.h"
 #include "Databehandling/userPreferences.h"
 
+
 int main() {
 
     obtain_user_settings();
