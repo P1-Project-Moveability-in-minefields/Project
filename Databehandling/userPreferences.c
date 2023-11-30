@@ -7,6 +7,12 @@
 
 userSettings chosenSettings;
 
+// Strings matching to enum values
+const char* stringIsWaterPassable[] = {"False", "True"};
+const char* stringTroopType[] = {"Squad unit", "Company unit", "Logistic unit", "Armor unit"};
+const char* stringRiskLevel[] = {"Low", "Medium", "High"};
+const char* stringPrioritizeCover[] = {"False", "True"};
+
 // Ask user to decide settings, then return the settings.
 userSettings obtain_user_settings() {
     printf("\nPlease decide setup parameters");
