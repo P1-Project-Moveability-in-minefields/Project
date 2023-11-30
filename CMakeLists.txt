@@ -8,4 +8,5 @@ add_executable(P1_Project main.c
         "Dijkstra's algorithm/dijkstra.h"
         "Dijkstra's algorithm/priority_queue.c"
         "Dijkstra's algorithm/priority_queue.h"
-        Databehandling/userPreferences.c)
+        Databehandling/userPreferences.c
+        Databehandling/userPreferences.h)

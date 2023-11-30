@@ -5,6 +5,7 @@
 #ifndef PROJECT_USERPREFERENCES_H
 #define PROJECT_USERPREFERENCES_H
 
+
 typedef enum {
     Squad_Unit,     // 7-14 soldiers
     Company_Unit,   // 100-250 soldiers
@@ -26,12 +27,6 @@ typedef struct {
 
 } userSettings;
 
-// Strings matching to enum values
-const char* stringIsWaterPassable[] = {"False", "True"};
-const char* stringTroopType[] = {"Squad unit", "Company unit", "Logistic unit", "Armor unit"};
-const char* stringRiskLevel[] = {"Low", "Medium", "High"};
-const char* stringPrioritizeCover[] = {"False", "True"};
-
-
+userSettings obtain_user_settings();
 
 #endif //PROJECT_USERPREFERENCES_H

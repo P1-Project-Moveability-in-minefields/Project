@@ -103,7 +103,8 @@
 			"sourceIndexes" : 
 			[
 				2,
-				4
+				4,
+				6
 			]
 		}
 	],
@@ -142,6 +143,11 @@
 			"compileGroupIndex" : 0,
 			"path" : "Databehandling/userPreferences.c",
 			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "Databehandling/userPreferences.h",
+			"sourceGroupIndex" : 1
 		}
 	],
 	"type" : "EXECUTABLE"
