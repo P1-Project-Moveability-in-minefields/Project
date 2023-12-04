@@ -1,8 +1,12 @@
-//
-// Created by thoma on 30/11/2023.
-//
 
 #ifndef P1_PROJECT_RELATIONSHIPMETHODS_H
 #define P1_PROJECT_RELATIONSHIPMETHODS_H
 
-#endif //P1_PROJECT_RELATIONSHIPMETHODS_H
+#define ROWS 3
+#define COLS 3
+
+void processMatrix(int matrix[ROWS][COLS]);
+void printMatrix(int matrix[ROWS][COLS]);
+
+
+#endif

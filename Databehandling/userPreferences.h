@@ -19,11 +19,18 @@ typedef enum {
     High
 } risk;
 
+typedef enum {
+    MICLIC,
+    Plow,
+    Rafael
+} clearing_implement;
+
 typedef struct {
     int isWaterPassable; // 1 = yes, 0 = no
     troop troopType;
     risk riskLevel;
     int prioritizeCover; // 1 = yes, 0 = no
+    clearing_implement clearingImplement;
 
 } userSettings;
 
