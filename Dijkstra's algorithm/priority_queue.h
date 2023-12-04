@@ -15,5 +15,7 @@ void add_to_queue(entry *queue[], entry *element, int index);
 void decrease_entry(entry *queue[], int child_index);
 void swap_entries(entry **e1, entry **e2);
 entry *extract_min(entry *queue[], int *queue_size);
+int right_child_index(int index, entry **queue, const int *queue_size);
+int left_child_index(int index, entry **queue, const int *queue_size);
 
 #endif //P1_PROJECT_PRIORITY_QUEUE_H
