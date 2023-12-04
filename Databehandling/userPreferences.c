@@ -22,6 +22,7 @@ userSettings obtain_user_settings() {
     printf("\n2. Which troop type should maneuver?");
     printf("\n3. How much risk is acceptable?");
     printf("\n4. Should cover be prioritized?\n");
+    printf("\n5. Which kinds of clearance implements are desired for usage?");
 
     printf("\n1. Should water be passable? ('1' = yes  |  '0' = no )\n");
     scanf("%d", &chosenSettings.isWaterPassable);
