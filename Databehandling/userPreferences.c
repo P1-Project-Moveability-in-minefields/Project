@@ -12,6 +12,7 @@ const char* stringIsWaterPassable[] = {"False", "True"};
 const char* stringTroopType[] = {"Squad unit", "Company unit", "Logistic unit", "Armor unit"};
 const char* stringRiskLevel[] = {"Low", "Medium", "High"};
 const char* stringPrioritizeCover[] = {"False", "True"};
+const char* stringClearanceType[] = {"MICLIC","Plow","Rafael"};
 
 // Ask user to decide settings, then return the settings.
 userSettings obtain_user_settings() {
@@ -37,6 +38,10 @@ userSettings obtain_user_settings() {
     printf("\n4. Should cover be prioritized? ('1' = yes  |  '0' = no )\n");
     scanf("%d", &chosenSettings.prioritizeCover);
     printf("You have chosen to make cover prioritization %s\n", stringPrioritizeCover[chosenSettings.prioritizeCover]);
+
+    printf("\n5. Specify availabel and desired clearance method: ('1' = MICLIC, '2' = Vehicle mounted plow, '3' = 'Rafael Missile Carpet System");
+    scanf("%d",&chosenSettings.clearingImplement);
+    printf("You have specified the availability of clearance method %s\n", stringClearanceType[chosenSettings.prioritizeCover]);
 
     printf("\nYour chosen settings are: \n");
     printf("1. Is water passable:   %s\n", stringIsWaterPassable[chosenSettings.isWaterPassable]);
