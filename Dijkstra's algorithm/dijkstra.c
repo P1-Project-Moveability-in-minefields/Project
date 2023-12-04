@@ -4,7 +4,8 @@
 #include <stdlib.h>
 #include <math.h>
 
-result *dijkstra(int **input, int size, const int start_pos[], const int end_pos[]){
+
+result *dijkstra(double **input, int size, const int start_pos[], const int end_pos[]){
     int queue_size = size*size;
     entry matrix[size][size];
     entry *priority_queue[queue_size];
@@ -52,7 +53,7 @@ result *dijkstra(int **input, int size, const int start_pos[], const int end_pos
         }
 
         for (int i = 0; i < neighbor_index; i++){
-            int path_cost = current_entry->current_cost + neighbors[i]->weight;
+            double path_cost = current_entry->current_cost + neighbors[i]->weight;
             if(path_cost < neighbors[i]->current_cost){
                 neighbors[i]->current_cost = path_cost;
                 neighbors[i]->previous = current_entry;

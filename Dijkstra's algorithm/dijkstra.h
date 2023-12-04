@@ -8,7 +8,7 @@ typedef struct{
     int path_length;
 }result;
 
-result *dijkstra(int **input, int size, const int start_pos[], const int end_pos[]);
+result *dijkstra(double **input, int size, const int start_pos[], const int end_pos[]);
 result *backtrace_path(entry *goal, int size);
 
 #endif //P1_PROJECT_DIJKSTRA_H

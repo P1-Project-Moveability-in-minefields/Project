@@ -5,8 +5,8 @@ struct entry;
 
 typedef struct{
     int pos[2];
-    int weight;
-    int current_cost;
+    double weight;
+    double current_cost;
     struct entry *previous;
     int priority_status;
 }entry;

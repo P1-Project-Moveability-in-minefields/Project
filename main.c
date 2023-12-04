@@ -7,11 +7,11 @@
 int main() {
     // test af dijkstra
     int size = 4;
-    int *input[size];
-    int row0[] = {1,3,11,4};
-    int row1[] = {7,60,40,6};
-    int row2[] = {6,27,50,1};
-    int row3[] = {30,6,7,5};
+    double *input[size];
+    double row0[] = {0.2    , 0.1   , 0.11  , 0.4};
+    double row1[] = {0.45   , 0.60  , 0.40  , 0.6};
+    double row2[] = {0.6    , 0.27  , 0.50  , 1.0};
+    double row3[] = {0.30   , 0.6   , 6.7   , 0.5};
     input[0] = row0;
     input[1] = row1;
     input[2] = row2;
@@ -28,8 +28,8 @@ int main() {
     printf("Goal \n");
     printf("Path length = %d", optimal_path->path_length);
 
-
-    obtain_user_settings();
+/**
+ *  obtain_user_settings();
 
     // En matrix (3x3) som et eksempel, bare et for at teste jeg satte den her ind.
     int myMatrix[ROWS][COLS] = {
@@ -45,6 +45,8 @@ int main() {
 
     printf("\nDen nye Matrix:\n");
     printMatrix(myMatrix);
+
+ */
 
     return 0;
 }
