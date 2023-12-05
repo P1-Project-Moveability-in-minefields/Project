@@ -6,15 +6,18 @@
 #include "../Databehandling/userPreferences.h"
 #include "math.h"
 #include <stdio.h>
+#include "stdbool.h"
 
 
-int** ConfigureSlopeMapRelationships(MatrixInfo slopeMap, userSettings settings){
+MatrixInfo ConfigureSlopeMapRelationships(MatrixInfo slopeMap, userSettings settings){
     for (int i = 0; i < slopeMap.rows; ++i) {
         for (int j = 0; j < slopeMap.cols; ++j) {
-            
+            if (/*slopeMap.matrix[i][j] > settings.acceptableSlope*/ true){
+                slopeMap.matrix[i][j] = -1;
+            }
         }
     }
-    return overallMatrix;
+    return slopeMap;
 }
 
 int** ProcessWaterMapRelationships(int** overallMatrix, WeightedMatrix waterMap, userSettings settings){
