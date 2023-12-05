@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "Dijkstra's algorithm/dijkstra.h"
 #include "Databehandling/userPreferences.h"
-#include "Relationship Methods/RelationshipMethods.h"
+#include "Configuration Of Matrices/RelationshipMethods.h"
 
 
 int main() {
