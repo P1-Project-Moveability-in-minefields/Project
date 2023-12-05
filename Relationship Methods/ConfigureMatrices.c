@@ -32,3 +32,18 @@ MatrixInfo ProcessWaterMapRelationships(MatrixInfo waterMap, userSettings settin
     return waterMap;
 }
 
+MatrixInfo ConfigureMineMap(MatrixInfo mineMap, userSettings settings){
+
+}
+
+MatrixInfo ConfigureSoilMap(MatrixInfo soilMap, userSettings settings){
+
+}
+
+MatrixInfo ConfigureVegitationMap(MatrixInfo vegitationMap, userSettings settings){
+
+}
+
+MatrixInfo ConfigureRoadMap(MatrixInfo roadMap, userSettings settings){
+    
+}
