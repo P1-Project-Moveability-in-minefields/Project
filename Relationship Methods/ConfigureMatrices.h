@@ -2,6 +2,8 @@
 // Created by thoma on 05/12/2023.
 //
 
+#include "../Databehandling/userPreferences.h"
+
 #ifndef P1_PROJECT_CONFIGUREMATRICES_H
 #define P1_PROJECT_CONFIGUREMATRICES_H
 
@@ -17,7 +19,12 @@ typedef struct{
     double weight;
 } WeightedMatrix;
 
-int** ConfigureSlopeMapRelationships(MatrixInfo heightMap, userSettings settings);
-int** ConfigureWaterMapRelationships(MatrixInfo waterMap, userSettings settings);
+MatrixInfo ConfigureSlopeMap(MatrixInfo slopeMap, userSettings settings);
+MatrixInfo ConfigureWaterMap(MatrixInfo waterMap, userSettings settings);
+MatrixInfo ConfigureMineMap(MatrixInfo mineMap, userSettings settings);
+MatrixInfo ConfigureSoilMap(MatrixInfo soilMap, userSettings settings);
+MatrixInfo ConfigureVegitationMap(MatrixInfo vegitationMap, userSettings settings);
+MatrixInfo ConfigureRoadMap(MatrixInfo roadMap, userSettings settings);
+
 
 #endif //P1_PROJECT_CONFIGUREMATRICES_H
