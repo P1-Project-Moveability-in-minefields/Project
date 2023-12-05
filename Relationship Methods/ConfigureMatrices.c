@@ -4,12 +4,10 @@
 
 #include "ConfigureMatrices.h"
 #include "../Databehandling/userPreferences.h"
-#include "math.h"
-#include <stdio.h>
 #include "stdbool.h"
 
 
-MatrixInfo ConfigureSlopeMapRelationships(MatrixInfo slopeMap, userSettings settings){
+void ConfigureSlopeMapRelationships(MatrixInfo slopeMap, userSettings settings){
     for (int i = 0; i < slopeMap.rows; ++i) {
         for (int j = 0; j < slopeMap.cols; ++j) {
             if (/*slopeMap.matrix[i][j] > settings.acceptableSlope*/ true){
@@ -17,10 +15,9 @@ MatrixInfo ConfigureSlopeMapRelationships(MatrixInfo slopeMap, userSettings sett
             }
         }
     }
-    return slopeMap;
 }
 
-MatrixInfo ProcessWaterMapRelationships(MatrixInfo waterMap, userSettings settings){
+void ProcessWaterMapRelationships(MatrixInfo waterMap, userSettings settings){
 
     for (int i = 0; i < waterMap.rows; ++i) {
         for (int j = 0; j < waterMap.cols; ++j) {
@@ -29,10 +26,9 @@ MatrixInfo ProcessWaterMapRelationships(MatrixInfo waterMap, userSettings settin
             }
         }
     }
-    return waterMap;
 }
 
-MatrixInfo ConfigureMineMap(MatrixInfo mineMap, userSettings settings){
+void ConfigureMineMap(MatrixInfo mineMap, userSettings settings){
 
     for (int i = 0; i < mineMap.rows; ++i) {
         for (int j = 0; j < mineMap.cols; ++j) {
@@ -41,11 +37,9 @@ MatrixInfo ConfigureMineMap(MatrixInfo mineMap, userSettings settings){
             }
         }
     }
-    return mineMap;
-
 }
 
-MatrixInfo ConfigureSoilMap(MatrixInfo soilMap, userSettings settings){
+void ConfigureSoilMap(MatrixInfo soilMap, userSettings settings){
 
     for (int i = 0; i < soilMap.rows; ++i) {
         for (int j = 0; j < soilMap.cols; ++j) {
@@ -54,11 +48,9 @@ MatrixInfo ConfigureSoilMap(MatrixInfo soilMap, userSettings settings){
             }
         }
     }
-    return soilMap;
-
 }
 
-MatrixInfo ConfigureVegitationMap(MatrixInfo vegitationMap, userSettings settings){
+void ConfigureVegitationMap(MatrixInfo vegitationMap, userSettings settings){
 
     for (int i = 0; i < vegitationMap.rows; ++i) {
         for (int j = 0; j < vegitationMap.cols; ++j) {
@@ -67,11 +59,9 @@ MatrixInfo ConfigureVegitationMap(MatrixInfo vegitationMap, userSettings setting
             }
         }
     }
-    return vegitationMap;
-
 }
 
-MatrixInfo ConfigureRoadMap(MatrixInfo roadMap, userSettings settings){
+void ConfigureRoadMap(MatrixInfo roadMap, userSettings settings){
 
     for (int i = 0; i < roadMap.rows; ++i) {
         for (int j = 0; j < roadMap.cols; ++j) {
@@ -80,6 +70,4 @@ MatrixInfo ConfigureRoadMap(MatrixInfo roadMap, userSettings settings){
             }
         }
     }
-    return roadMap;
-
 }

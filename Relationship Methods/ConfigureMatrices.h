@@ -19,12 +19,12 @@ typedef struct{
     double weight;
 } WeightedMatrix;
 
-MatrixInfo ConfigureSlopeMap(MatrixInfo slopeMap, userSettings settings);
-MatrixInfo ConfigureWaterMap(MatrixInfo waterMap, userSettings settings);
-MatrixInfo ConfigureMineMap(MatrixInfo mineMap, userSettings settings);
-MatrixInfo ConfigureSoilMap(MatrixInfo soilMap, userSettings settings);
-MatrixInfo ConfigureVegitationMap(MatrixInfo vegitationMap, userSettings settings);
-MatrixInfo ConfigureRoadMap(MatrixInfo roadMap, userSettings settings);
+void ConfigureSlopeMap(MatrixInfo slopeMap, userSettings settings);
+void ConfigureWaterMap(MatrixInfo waterMap, userSettings settings);
+void ConfigureMineMap(MatrixInfo mineMap, userSettings settings);
+void ConfigureSoilMap(MatrixInfo soilMap, userSettings settings);
+void ConfigureVegitationMap(MatrixInfo vegitationMap, userSettings settings);
+void ConfigureRoadMap(MatrixInfo roadMap, userSettings settings);
 
 
 #endif //P1_PROJECT_CONFIGUREMATRICES_H
