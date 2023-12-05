@@ -11,4 +11,6 @@ add_executable(P1_Project main.c
         "Databehandling/userPreferences.c"
         "Databehandling/userPreferences.h"
         "Relationship Methods/RelationshipMethods.c"
-        "Relationship Methods/RelationshipMethods.h")
+        "Relationship Methods/RelationshipMethods.h"
+        "Relationship Methods/ConfigureMatrices.c"
+        "Relationship Methods/ConfigureMatrices.h")
