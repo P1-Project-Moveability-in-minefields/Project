@@ -10,7 +10,7 @@ add_executable(P1_Project main.c
         "Dijkstra's algorithm/priority_queue.h"
         "Databehandling/userPreferences.c"
         "Databehandling/userPreferences.h"
-        "Relationship Methods/RelationshipMethods.c"
-        "Relationship Methods/RelationshipMethods.h"
-        "Relationship Methods/ConfigureMatrices.c"
-        "Relationship Methods/ConfigureMatrices.h")
+        "Configuration Of Matrices/RelationshipMethods.c"
+        "Configuration Of Matrices/RelationshipMethods.h"
+        "Configuration Of Matrices/ConfigureMatrices.c"
+        "Configuration Of Matrices/ConfigureMatrices.h")
