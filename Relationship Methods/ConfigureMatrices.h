@@ -24,7 +24,7 @@ void ConfigureWaterMap(MatrixInfo waterMap, userSettings settings);
 void ConfigureMineMap(MatrixInfo mineMap, userSettings settings);
 void ConfigureSoilMap(MatrixInfo soilMap, userSettings settings);
 void ConfigureVegitationMap(MatrixInfo vegitationMap, userSettings settings);
-void ConfigureRoadMap(MatrixInfo roadMap, userSettings settings);
+void ConfigureRoadQualityMap(MatrixInfo roadQualityMap, userSettings settings);
 
 
 #endif //P1_PROJECT_CONFIGUREMATRICES_H
