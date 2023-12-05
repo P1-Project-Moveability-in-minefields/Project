@@ -20,29 +20,15 @@ MatrixInfo ConfigureSlopeMapRelationships(MatrixInfo slopeMap, userSettings sett
     return slopeMap;
 }
 
-int** ProcessWaterMapRelationships(int** overallMatrix, WeightedMatrix waterMap, userSettings settings){
-    if (waterMap.matrixInfo.matrix == NULL){ // Check for bad data
-        return overallMatrix;
-    }
-    if (overallMatrix == NULL){ // Check for bad data
-        overallMatrix = CreateDynamicMatrix(waterMap.matrixInfo.rows, waterMap.matrixInfo.cols);
-    }
+MatrixInfo ProcessWaterMapRelationships(MatrixInfo waterMap, userSettings settings){
 
-    for (int i = 0; i < waterMap.matrixInfo.rows; ++i) {
-        for (int j = 0; j < waterMap.matrixInfo.cols; ++j) {
-            if (waterMap.matrixInfo.matrix[i][j] > 0) { // Is there water here?
-                int cost = waterMap.weight * waterMap.matrixInfo.matrix[i][j]; // Calculate cost
-                if (settings.isWaterPassable) {
-                    overallMatrix[i][j] += cost; // The more water the worse it is.
-                } else {
-                    overallMatrix[i][j] += 100 * cost; // If we can't cross water then we don't want to so 100 times worse.
-                }
-            }
-            else{
-                // No water no change
+    for (int i = 0; i < waterMap.rows; ++i) {
+        for (int j = 0; j < waterMap.cols; ++j) {
+            if (/*waterMap.matrix[i][j] > settings.acceptableWaterlevel*/ true){
+             waterMap.matrix[i][j] = -1;
             }
         }
     }
-    return overallMatrix;
+    return waterMap;
 }
 
