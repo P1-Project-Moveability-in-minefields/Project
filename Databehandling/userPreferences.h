@@ -4,7 +4,7 @@
 
 #ifndef PROJECT_USERPREFERENCES_H
 #define PROJECT_USERPREFERENCES_H
-
+#define NUMBER_OF_TROOP_SETTINGS 5
 
 typedef enum {
     Squad_Unit,     // 7-14 soldiers
@@ -20,20 +20,39 @@ typedef enum {
 } risk;
 
 typedef enum {
+    none,
     MICLIC,
     Plow,
-    Rafael
+    Rafael,
 } clearing_implement;
 
 typedef struct {
-    int isWaterPassable; // 1 = yes, 0 = no
-    troop troopType;
-    risk riskLevel;
-    int prioritizeCover; // 1 = yes, 0 = no
-    clearing_implement clearingImplement;
+    double max_water_depth;
+    double max_mine_risk;
+    double max_slope;
+    double max_road;
+    double max_terrain_difficulty;
+}troop_settings;
 
+typedef struct {
+    int is_cover_prioritized;
+    clearing_implement clearing_implement;
+}additional_settings;
+
+typedef struct {
+    risk road_weight;
+    risk mine_weight;
+    risk vegetation_weight;
+} priorities;
+
+typedef struct {
+    troop_settings troop_settings;
+    priorities weights;
+    additional_settings additional_settings;
 } userSettings;
 
 userSettings obtain_user_settings();
+
+void add_troop_settings(userSettings *chosenSettings, int troop_type);
 
 #endif //PROJECT_USERPREFERENCES_H

@@ -4,8 +4,8 @@
 #include "priority_queue.h"
 
 typedef struct{
-    int **path;
-    int path_length;
+    int **path; // array containing coordinates of path segments
+    int path_length; // number of nodes in path
 }result;
 
 result *dijkstra(double **input, int size, const int start_pos[], const int end_pos[]);

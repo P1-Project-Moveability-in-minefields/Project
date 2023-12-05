@@ -11,7 +11,16 @@ typedef struct{
     int priority_status; // Keeps track of previous
 }entry;
 
+/*!
+ * @function    add_to_queue
+ * @describtion adds a node to a priority queue
+ * @param queue the priority queue in to which the node will be added
+ * @param element the node node that will
+ * @param index
+ */
 void add_to_queue(entry *queue[], entry *element, int index);
+
+
 void decrease_entry(entry *queue[], int child_index);
 void swap_entries(entry **e1, entry **e2);
 entry *extract_min(entry *queue[], int *queue_size);
