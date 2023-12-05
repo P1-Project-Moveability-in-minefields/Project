@@ -89,10 +89,10 @@ void ConfigureVegitationMap(MatrixInfo vegitationMap, userSettings settings){
 /// settings (struct) is only used for the acceptable value in question with the map.
 void ConfigureRoadQualityMap(MatrixInfo roadQualityMap, userSettings settings){
 
-    for (int i = 0; i < roadMap.rows; ++i) {
-        for (int j = 0; j < roadMap.cols; ++j) {
+    for (int i = 0; i < roadQualityMap.rows; ++i) {
+        for (int j = 0; j < roadQualityMap.cols; ++j) {
             if (/*roadMap.matrix[i][j] > settings.acceptableRoad*/ true){
-                roadMap.matrix[i][j] = -1;
+                roadQualityMap.matrix[i][j] = -1;
             }
         }
     }
