@@ -3,30 +3,15 @@
 //
 
 #include "ConfigureMatrices.h"
+#include "../Databehandling/userPreferences.h"
+#include "math.h"
+#include <stdio.h>
 
 
-int** ConfigureSlopeMapRelationships(WeightedMatrix heightMap, userSettings settings){
-    for (int i = 0; i < heightMap.matrixInfo.rows; ++i) {
-        for (int j = 0; j < heightMap.matrixInfo.cols; ++j) {
-            if (settings.prioritizeCover){
-                // Check neighbors and calculate cost
-                for (int x = -1; x <= 1; x++) {
-                    for (int y = -1; y <= 1; y++) {
-                        int ni = i + x;
-                        int nj = j + y;
-
-                        // Check if the neighbor is within bounds
-                        if (ni >= 0 && ni < heightMap.matrixInfo.rows && nj >= 0 && nj < heightMap.matrixInfo.cols) {
-                            // Calculate the cost based on the elevation difference
-                            overallMatrix[i][j] += heightMap.weight * ( abs(heightMap.matrixInfo.matrix[i][j] - heightMap.matrixInfo.matrix[ni][nj]) );
-                        }
-                    }
-                }
-            }
-            else {
-                // Don't know what to do if cover isn't prioritized, approach here is that lower height is better.
-                overallMatrix[i][j] += heightMap.weight * heightMap.matrixInfo.matrix[i][j];
-            }
+int** ConfigureSlopeMapRelationships(MatrixInfo slopeMap, userSettings settings){
+    for (int i = 0; i < slopeMap.rows; ++i) {
+        for (int j = 0; j < slopeMap.cols; ++j) {
+            
         }
     }
     return overallMatrix;
