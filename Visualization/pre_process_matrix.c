@@ -3,6 +3,7 @@
 ///
 #define NUMBEROFMATRICES 5
 #include "pre_process_matrix.h"
+#include "stdio.h"
 
 double** createMatrixPainting(int rows, int cols,
                               double** soilMatrix[rows][cols],
@@ -37,8 +38,21 @@ void addSoilToMatrix(int size, double** matrixPainting, double** terrainMatrix){
         }
     }
 }
-void addWaterToMatrix(double** matrix, double** terrainMatrix){
+void addWaterToMatrix(int size, double** matrix, double** terrainMatrix){
+    if (terrainMatrix == NULL)
+    for (int row = 0; row < size; ++row) {
+        for (int col = 0; col < size; ++col) {
+            double value = terrainMatrix[row][col];
+            if (value > 0){
+                if (value > 0.5){
 
+                }
+                else {
+
+                }
+            }
+        }
+    }
 }
 void addVegetationToMatrix(int size, double** matrixPainting, double** terrainMatrix){
     for (int i = 0; i < size; i++){
@@ -50,9 +64,9 @@ void addVegetationToMatrix(int size, double** matrixPainting, double** terrainMa
         }
     }
 }
-void addRoadToMatrix(double** matrix, double** terrainMatrix){
+void addRoadToMatrix(int size, double** matrix, double** terrainMatrix){
 
 }
-void addMineToMatrix(double** matrix, double** terrainMatrix){
-    
+void addMineToMatrix(int size, double** matrix, double** terrainMatrix){
+
 }
