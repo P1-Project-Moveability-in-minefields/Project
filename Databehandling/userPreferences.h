@@ -41,14 +41,14 @@ typedef struct {
 }additional_settings;
 
 typedef struct {
-    risk road_weight;
-    risk mine_weight;
-    risk vegetation_weight;
+    // risk road_weight;
+    risk mine_risk;
+    // risk vegetation_weight;
 } priorities;
 
 typedef struct {
     troop_settings troop_settings;
-    priorities weights;
+    priorities priority_level;
     additional_settings additional_settings;
 } userSettings;
 

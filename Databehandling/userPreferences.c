@@ -22,9 +22,9 @@ userSettings obtain_user_settings() {
     printf("\nDecide the following 4 settings:\n");
     printf("\n1. Which troop type should maneuver?");
     printf("\n2. How much risk is acceptable?");
-    printf("\n3. Priority of roads");
+    /*printf("\n3. Priority of roads");
     printf("\n4. Priority of terrain");
-    printf("\n5. Should cover be prioritized?");
+    printf("\n5. Should cover be prioritized?");*/
     printf("\n6. Which kinds of clearance implements are desired for usage?");
     printf("\n7. Size of matrices?\n");
 
@@ -40,7 +40,7 @@ userSettings obtain_user_settings() {
     scanf("%d", &chosenSettings.weights.mine_weight);
     printf("You have chosen a %s risk level", stringRiskLevel[chosenSettings.weights.mine_weight]);
 
-    //3rd setting
+    /*3rd setting
     printf("\n3. Road priority? ('0' = Low  |  '1' = Medium  |  '2' = High )\n");
     scanf("%d", &chosenSettings.weights.road_weight);
     printf("You have chosen %s road priority",stringRiskLevel[chosenSettings.weights.road_weight]);
@@ -54,6 +54,7 @@ userSettings obtain_user_settings() {
     printf("\n5. Should cover be prioritized? ('1' = yes  |  '0' = no )\n");
     scanf("%d", &chosenSettings.additional_settings.is_cover_prioritized);
     printf("You have chosen to make cover prioritization %s\n", stringPrioritizeCover[chosenSettings.additional_settings.is_cover_prioritized]);
+    */
 
     //6th setting
     printf("\n6. Specify available and desired clearance method: ('0' = None '1' = MICLIC, '2' = Vehicle mounted plow, '3' = Rafael Missile Carpet System");
@@ -66,9 +67,9 @@ userSettings obtain_user_settings() {
     printf("\nYour chosen settings are: \n");
     printf("1. Troop type:          %s\n", stringTroopType[troop_type]);
     printf("2. Risk level:          %s\n", stringRiskLevel[chosenSettings.weights.mine_weight]);
-    printf("3. Road priority:       %s\n", stringRiskLevel[chosenSettings.additional_settings.is_cover_prioritized]);
-    printf("4. Terrain priority:    %s\n", stringRiskLevel[chosenSettings.weights.vegetation_weight]);
-    printf("5. Prioritize cover:    %s\n", stringPrioritizeCover[chosenSettings.additional_settings.is_cover_prioritized]);
+    // printf("3. Road priority:       %s\n", stringRiskLevel[chosenSettings.additional_settings.is_cover_prioritized]);
+    // printf("4. Terrain priority:    %s\n", stringRiskLevel[chosenSettings.weights.vegetation_weight]);
+    // printf("5. Prioritize cover:    %s\n", stringPrioritizeCover[chosenSettings.additional_settings.is_cover_prioritized]);
     printf("6. Clearance method:    %s\n", stringClearanceType[chosenSettings.additional_settings.clearing_implement]);
     printf("7. Size of matrices:    %dx%d\n", chosenSettings.additional_settings.size,chosenSettings.additional_settings.size);
     return (chosenSettings);

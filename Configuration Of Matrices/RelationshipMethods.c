@@ -25,6 +25,26 @@ double **processMatrix(WeightedMatrix matrix_array [], int array_length, int mat
     return processed_matrix;
 }
 
+void determine_weights(WeightedMatrix matrix_array [], int array_length, userSettings *settings){
+    double base_weight = (double)1/array_length;
+
+    for (int i = 0; i < array_length; ++i) {
+        if(matrix_array->type == mine) {
+            switch (settings->priority_level.mine_risk) {
+                case High:
+                    matrix_array->weight = base_weight;
+                case Medium:
+                    matrix_array->weight = 1.5 * base_weight;
+                case Low:
+                    matrix_array->weight = 1.75 * base_weight;
+            }
+            base_weight = (1-matrix_array->weight)/(array_length-1);
+            continue;
+        }
+        matrix_array->weight = base_weight;
+    }
+}
+
 double** CreateDynamicMatrix(int size){
     double** matrix = (double**)calloc(size, sizeof(double*));
     for (int i = 0; i < size; i++) {
