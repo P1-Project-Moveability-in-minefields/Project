@@ -11,7 +11,7 @@
 /// Parameters:
 /// slopeMap (struct) is a matrix pointer and dimension values.
 /// settings (struct) is only used for the passable value in question with the map.
-void ConfigureSlopeMapRelationships(WeightedMatrix slopeMap, userSettings *settings){
+void ConfigureSlopeMapRelationships(int** slopeMap, userSettings *settings){
     for (int i = 0; i < settings->additional_settings.size; ++i) {
         for (int j = 0; j < settings->additional_settings.size; ++j) {
             if (slopeMap.matrix[i][j] > settings->troop_settings.max_slope){
@@ -26,7 +26,7 @@ void ConfigureSlopeMapRelationships(WeightedMatrix slopeMap, userSettings *setti
 /// Parameters:
 /// waterMap (struct) is a matrix pointer and dimension values.
 /// settings (struct) is only used for the passable value in question with the map.
-void ProcessWaterMapRelationships(WeightedMatrix waterMap, userSettings *settings){
+void ProcessWaterMapRelationships(int** waterMap, userSettings *settings){
 
     for (int i = 0; i < settings->additional_settings.size; ++i) {
         for (int j = 0; j < settings->additional_settings.size; ++j) {
@@ -42,7 +42,7 @@ void ProcessWaterMapRelationships(WeightedMatrix waterMap, userSettings *setting
 /// Parameters:
 /// mineMap (struct) is a matrix pointer and dimension values.
 /// settings (struct) is only used for the acceptable value in question with the map.
-void ConfigureMineMap(WeightedMatrix mineMap, userSettings *settings){
+void ConfigureMineMap(int** mineMap, userSettings *settings){
 
     for (int i = 0; i < settings->additional_settings.size; ++i) {
         for (int j = 0; j < settings->additional_settings.size; ++j) {
@@ -71,7 +71,7 @@ void ConfigureSoilMap(MatrixInfo soilMap, userSettings settings){
 /// Parameters:
 /// vegitationMap (struct) is a matrix pointer and dimension values.
 /// settings (struct) is only used for the acceptable value in question with the map.
-void ConfigureVegitationMap(WeightedMatrix vegitationMap, userSettings *settings){
+void ConfigureVegitationMap(int** vegitationMap, userSettings *settings){
 
     for (int i = 0; i < settings->additional_settings.size; ++i) {
         for (int j = 0; j < settings->additional_settings.size; ++j) {
@@ -87,7 +87,7 @@ void ConfigureVegitationMap(WeightedMatrix vegitationMap, userSettings *settings
 /// Parameters:
 /// roadQualityMap (struct) is a matrix pointer and dimension values.
 /// settings (struct) is only used for the acceptable value in question with the map.
-void ConfigureRoadQualityMap(WeightedMatrix roadQualityMap, userSettings *settings){
+void ConfigureRoadQualityMap(int** roadQualityMap, userSettings *settings){
 
     for (int i = 0; i < settings->additional_settings.size; ++i) {
         for (int j = 0; j < settings->additional_settings.size; ++j) {
