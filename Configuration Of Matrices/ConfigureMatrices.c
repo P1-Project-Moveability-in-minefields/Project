@@ -15,15 +15,25 @@ int CreateSlopeMap(slope_struct** slopeMap,int** heightMap, userSettings *settin
             slope_data.altitude = heightMap[x][y];
             if (x > 0) {
                 slope_data.westward_slope = 100*(heightMap[x][y] / heightMap[x-1][y]);
+                slope_data.steepest_slope = slope_data.westward_slope;
             }
             if (x < matrix_dimensions) {
                 slope_data.eastward_slope = 100*(heightMap[x][y] / heightMap[x+1][y]);
+                if (!slope_data.steepest_slope || slope_data.steepest_slope < slope_data.eastward_slope) {
+                    slope_data.steepest_slope = slope_data.eastward_slope;
+                }
             }
             if (y > 0) {
                 slope_data.northward_slope = 100*(heightMap[x][y] / heightMap[x][y+1]);
+                if (!slope_data.steepest_slope || slope_data.steepest_slope < slope_data.northward_slope) {
+                    slope_data.steepest_slope = slope_data.northward_slope;
+                }
             }
             if (y < matrix_dimensions) {
                 slope_data.southward_slope = 100*(heightMap[x][y] / heightMap[x][y-1]);
+                if (!slope_data.steepest_slope || slope_data.steepest_slope < slope_data.northward_slope) {
+                    slope_data.steepest_slope = slope_data.northward_slope;
+                }
             }
             slopeMap[x][y] = slope_data;
         }

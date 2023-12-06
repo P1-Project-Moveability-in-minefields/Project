@@ -18,6 +18,7 @@ typedef struct {
     double eastward_slope;
     double southward_slope;
     double westward_slope;
+    double steepest_slope;
 } slope_struct;
 
 /// Creates slope values from heightmap
