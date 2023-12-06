@@ -24,6 +24,18 @@ double** createMatrixPainting(int rows, int cols,
 }
 
 
-void addSoilToMatrix(double** painting) {
+void addSoilToMatrix(double** matrixPainting, double** terrainMatrix){
 
+}
+void addWaterToMatrix(double** matrix, double** terrainMatrix){
+
+}
+void addVegetationToMatrix(double** matrix, double** terrainMatrix){
+
+}
+void addRoadToMatrix(double** matrix, double** terrainMatrix){
+
+}
+void addMineToMatrix(double** matrix, double** terrainMatrix){
+    
 }
