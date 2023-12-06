@@ -15,7 +15,6 @@ double** createMatrixPainting(int size,
                               int number_of_steps){
 
     double** matrix[size][size];
-    int length = sizeof(optimal_route) / sizeof(optimal_route[0]);
 
     addSoilToMatrix(size, matrix[size][size], soilMatrix[size]);
     addWaterToMatrix(size, matrix[size][size], waterMatrix[size]);
