@@ -8,7 +8,7 @@
 #define ROWS 3
 #define COLS 3
 
-void processMatrix(WeightedMatrix matrix_array [], int array_size, int matrix_size);
+double **processMatrix(WeightedMatrix matrix_array [], int array_size, int matrix_size);
 
 double** CreateDynamicMatrix(int size);
 void printMatrix(int matrix[ROWS][COLS]);
