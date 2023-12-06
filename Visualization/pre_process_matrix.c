@@ -15,8 +15,8 @@ double** createMatrixPainting(int rows, int cols,
 
     double** matrixPainting[rows][cols];
 
-    addSoilToMatrix(matrixPainting, soilMatrix);
-    addWaterToMatrix(matrixPainting);
+    addSoilToMatrix(rows, cols, matrixPainting[rows][cols], soilMatrix[rows][cols]);
+    addWaterToMatrix(matrixPainting, waterMatrix);
     addVegetationToMatrix(matrixPainting);
     addRoadToMatrix(matrixPainting);
     addMineToMatrix(matrixPainting);
@@ -25,8 +25,18 @@ double** createMatrixPainting(int rows, int cols,
 }
 
 
-void addSoilToMatrix(double** matrixPainting, double** terrainMatrix){
+void addSoilToMatrix(int size, double** matrixPainting, double** terrainMatrix){
+    for (int i = 0; i < size; i++){
+        for (int j = 0; j < size; j++){
 
+            if (terrainMatrix[i][j] > 0.5) {
+                matrixPainting[i][j] = 0.2;
+            } else {
+                matrixPainting[i][j] = 0.1;
+            }
+
+        }
+    }
 }
 void addWaterToMatrix(int size, double** matrix, double** terrainMatrix){
     if (terrainMatrix == NULL){
@@ -47,8 +57,15 @@ void addWaterToMatrix(int size, double** matrix, double** terrainMatrix){
         }
     }
 }
-void addVegetationToMatrix(double** matrix, double** terrainMatrix){
+void addVegetationToMatrix(int size, double** matrixPainting, double** terrainMatrix){
+    for (int i = 0; i < size; i++){
+        for (int j = 0; j < size; j++){
 
+            if ((matrixPainting[i][j] != 0.4) && (terrainMatrix[i][j] )) {
+
+            }
+        }
+    }
 }
 void addRoadToMatrix(int size, double** matrix, double** terrainMatrix){
     if (terrainMatrix == NULL){

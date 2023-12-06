@@ -12,12 +12,20 @@ typedef struct{
     double weight;
 } WeightedMatrix;
 
-/// Checks for impassable slopes
+typedef struct {
+    double altitude;
+    double northward_slope;
+    double eastward_slope;
+    double southward_slope;
+    double westward_slope;
+} slope_struct;
+
+/// Creates slope values from heightmap
 ///
-/// Parameters:
-/// slopeMap (struct) is a matrix pointer and dimension values.
-/// settings (struct) is only used for the passable value in question with the map.
-void ConfigureSlopeMap(int** slopeMap, userSettings *settings);
+/// \param heightMap pointer to a 2D matrix containing altitude values
+/// \param settings pointer to struct containing user settings
+/// \return returns a 2d array of slope structs, featuring the slope in each cardinal direction
+slope_struct* CreateSlopeMap(int** heightMap, userSettings *settings);
 
 /// Checks for impassable water depth
 ///
