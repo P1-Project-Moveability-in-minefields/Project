@@ -8,9 +8,9 @@
 #define ROWS 3
 #define COLS 3
 
-void processMatrix(int matrix[ROWS][COLS]);
+double **processMatrix(WeightedMatrix matrix_array [], int array_size, int matrix_size);
 
-int** CreateDynamicMatrix(int rows, int cols);
+double** CreateDynamicMatrix(int size);
 void printMatrix(int matrix[ROWS][COLS]);
 
 /// Adjusts the likelihood of the Mine_Matrix based on the Slope_Matrix

@@ -4,38 +4,28 @@
 #include <stdlib.h>
 #include "math.h"
 
-// This should be adjusted to pull from a config file.
-#define MAXIMUM_SLOPE 70
-
-void processMatrix(int matrix[ROWS][COLS]) {
-    // Tjek om tilknyttet data er tilstede (f.eks. vanddybde)
-    int waterDepth;
-
-    printf("Indtast vanddybden: ");
-    scanf("%d", &waterDepth);
-
-    if (waterDepth > 0) {
-        // Aktiver en for-loop, hvis water depth > 0
-        for (int i = 0; i < ROWS; ++i) {
-            for (int j = 0; j < COLS; ++j) {
-                // Check hver celledybde og påvirk data om nødvendigt
-                if (matrix[i][j] <= waterDepth) {
-                    matrix[i][j] = 0;  // Opdater eller overskriv cellens værdi til 0
-                } else {
-                    matrix[i][j] = 1;  // Opdater eller overskriv cellens værdi til 1
+double **processMatrix(WeightedMatrix matrix_array [], int array_length, int matrix_size){
+    double **processed_matrix = CreateDynamicMatrix(matrix_size);
+    double **current_matrix = NULL;
+    for (int i = 0; i < array_length; ++i) {
+        for (int j = 0; j < matrix_size; ++j) {
+            for (int k = 0; k < matrix_size; ++k) {
+                current_matrix = matrix_array[i].matrix;
+                if (current_matrix[j][k] == -1){
+                    processed_matrix[j][k] = -1;
+                    continue;
                 }
+                processed_matrix[j][k] += matrix_array[i].weight * matrix_array[i].matrix[j][k];
             }
         }
     }
+    return processed_matrix;
 }
 
-int** CreateDynamicMatrix(int rows, int cols){
-    int** matrix = (int**)malloc(rows * sizeof(int*));
-    for (int i = 0; i < rows; i++) {
-        matrix[i] = (int*)malloc(cols * sizeof(int));
-        for (int j = 0; j < cols; j++) {
-            matrix[i][j] = 0;  // Initialize to zero or other default value
-        }
+double** CreateDynamicMatrix(int size){
+    double** matrix = (double**)calloc(size, sizeof(double*));
+    for (int i = 0; i < size; i++) {
+        matrix[i] = (double*)calloc(size, sizeof(double));
     }
     return matrix;
 }
@@ -50,11 +40,4 @@ void printMatrix(int matrix[ROWS][COLS]) {
     }
 }
 
-int Relate_MineSlope(int** Mine_Matrix, int** Slope_Matrix, userSettings* settings){
-    for (int i = 0; i < settings->additional_settings.size; ++i) {
-        if (*Slope_Matrix[i] > MAXIMUM_SLOPE) {
-            *Mine_Matrix[i] = 0;
-        }
-    }
-    return 1;
-}
+
