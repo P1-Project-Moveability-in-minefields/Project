@@ -13,5 +13,14 @@ double **processMatrix(WeightedMatrix matrix_array [], int array_size, int matri
 double** CreateDynamicMatrix(int size);
 void printMatrix(int matrix[ROWS][COLS]);
 
+/// Adjusts the likelihood of the Mine_Matrix based on the Slope_Matrix
+///
+/// \param Mine_Matrix Pointer to the primary matrix containing mine probability
+/// \param Slope_Matrix Pointer to the primary matrix containing slope degrees
+/// \param settings Pointer to the primary setting struct
+/// \return 1 on a success, 0 on failure, adjusts errno as necessary.
+int Relate_MineSlope(int** Mine_Matrix, int** Slope_Matrix, userSettings* settings);
+
+
 
 #endif
