@@ -69,7 +69,7 @@ void ConfigureSoilMap(MatrixInfo soilMap, userSettings settings){
 /// Checks for acceptable amount of vegitation
 ///
 /// Parameters:
-/// vegitationMap (struct) is a matrix pointer and dimension values.
+/// vegetationMap (struct) is a matrix pointer and dimension values.
 /// settings (struct) is only used for the acceptable value in question with the map.
 void ConfigureVegetationMap(WeightedMatrix vegitationMap, userSettings *settings){
 
