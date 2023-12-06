@@ -71,7 +71,7 @@ void ConfigureSoilMap(MatrixInfo soilMap, userSettings settings){
 /// Parameters:
 /// vegitationMap (struct) is a matrix pointer and dimension values.
 /// settings (struct) is only used for the acceptable value in question with the map.
-void ConfigureVegitationMap(WeightedMatrix vegitationMap, userSettings *settings){
+void ConfigureVegetationMap(WeightedMatrix vegitationMap, userSettings *settings){
 
     for (int i = 0; i < settings->additional_settings.size; ++i) {
         for (int j = 0; j < settings->additional_settings.size; ++j) {
