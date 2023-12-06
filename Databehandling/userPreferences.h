@@ -37,6 +37,7 @@ typedef struct {
 typedef struct {
     int is_cover_prioritized;
     clearing_implement clearing_implement;
+    int size;
 }additional_settings;
 
 typedef struct {

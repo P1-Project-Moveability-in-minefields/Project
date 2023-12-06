@@ -25,7 +25,8 @@ userSettings obtain_user_settings() {
     printf("\n3. Priority of roads");
     printf("\n4. Priority of terrain");
     printf("\n5. Should cover be prioritized?");
-    printf("\n6. Which kinds of clearance implements are desired for usage?\n");
+    printf("\n6. Which kinds of clearance implements are desired for usage?");
+    printf("\n7. Size of matrices?\n");
 
     //1st setting
     printf("\n1. Which troop type should maneuver? ('0' = Squad  |  '1' = Company  |  '2' = Logistic unit  |  '3' = Armor unit )\n");
@@ -54,11 +55,13 @@ userSettings obtain_user_settings() {
     scanf("%d", &chosenSettings.additional_settings.is_cover_prioritized);
     printf("You have chosen to make cover prioritization %s\n", stringPrioritizeCover[chosenSettings.additional_settings.is_cover_prioritized]);
 
-    //5th setting
-    printf("\n5. Specify availabel and desired clearance method: ('0' = None '1' = MICLIC, '2' = Vehicle mounted plow, '3' = Rafael Missile Carpet System");
+    //6th setting
+    printf("\n6. Specify available and desired clearance method: ('0' = None '1' = MICLIC, '2' = Vehicle mounted plow, '3' = Rafael Missile Carpet System");
     scanf("%d",&chosenSettings.additional_settings.clearing_implement);
     printf("You have specified the availability of clearance method %s\n", stringClearanceType[chosenSettings.additional_settings.clearing_implement]);
 
+    printf("\n7. What is the size of the input matrices?\n");
+    scanf("%d",&chosenSettings.additional_settings.size);
 
     printf("\nYour chosen settings are: \n");
     printf("1. Troop type:          %s\n", stringTroopType[troop_type]);
@@ -67,7 +70,7 @@ userSettings obtain_user_settings() {
     printf("4. Terrain priority:    %s\n", stringRiskLevel[chosenSettings.weights.vegetation_weight]);
     printf("5. Prioritize cover:    %s\n", stringPrioritizeCover[chosenSettings.additional_settings.is_cover_prioritized]);
     printf("6. Clearance method:    %s\n", stringClearanceType[chosenSettings.additional_settings.clearing_implement]);
-
+    printf("7. Size of matrices:    %dx%d\n", chosenSettings.additional_settings.size,chosenSettings.additional_settings.size);
     return (chosenSettings);
 }
 
