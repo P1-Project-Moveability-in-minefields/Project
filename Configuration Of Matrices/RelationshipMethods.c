@@ -4,6 +4,9 @@
 #include <stdlib.h>
 #include "math.h"
 
+// Should be corrected to refer to a doctrinal document.
+#define MAXIMUM_SLOPE 70
+
 double **processMatrix(WeightedMatrix matrix_array [], int array_length, int matrix_size){
     double **processed_matrix = CreateDynamicMatrix(matrix_size);
     double **current_matrix = NULL;
@@ -60,4 +63,17 @@ void printMatrix(int matrix[ROWS][COLS]) {
     }
 }
 
+int Relate_MineSlope(int** Mine_Matrix, int** Slope_Matrix, userSettings* settings){
+    int success = 0;
+    int matrix_dimensions = settings->additional_settings.size;
 
+    for (int i = 0; i < matrix_dimensions; ++i) {
+        for (int j = 0; j < matrix_dimensions; ++j) {
+            if (Slope_Matrix[i][j] > MAXIMUM_SLOPE) {
+                Mine_Matrix[i][j] = 0;
+            }
+        }
+    }
+
+    return success;
+}

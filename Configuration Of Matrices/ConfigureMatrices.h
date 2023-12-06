@@ -15,39 +15,49 @@ typedef struct{
     double weight;
 } WeightedMatrix;
 
-/// Checks for impassable slopes
-///
-/// Parameters:
-/// slopeMap (struct) is a matrix pointer and dimension values.
-/// settings (struct) is only used for the passable value in question with the map.
-void ConfigureSlopeMap(int** slopeMap, userSettings *settings);
+typedef struct {
+    double altitude;
+    double northward_slope;
+    double eastward_slope;
+    double southward_slope;
+    double westward_slope;
+} slope_struct;
 
-/// Checks for impassable water depth
+/// Creates slope values from heightmap
+///
+/// \param slopeMap pointer to 2D array to be filled by function
+/// \param heightMap pointer to 2D array containing altitude values
+/// \param settings pointer to struct array containing global user settings
+/// \return returns a 1 on success
+int CreateSlopeMap(slope_struct** slopeMap, int** heightMap, userSettings *settings);
+
+/// Pre-analysis configuration of watermap to account for user parameters
 ///
 /// Parameters:
-/// waterMap (struct) is a matrix pointer and dimension values.
-/// settings (struct) is only used for the passable value in question with the map.
-void ConfigureWaterMap(int** waterMap, userSettings *settings);
+/// \param waterMap (struct) is a matrix pointer and dimension values.
+/// \param settings (struct) is only used for the passable value in question with the map.
+/// \return returns a 1 on success
+int ConfigureDepthMap(double** waterMap, userSettings *settings);
 
 /// Checks for unacceptable mine chances
 ///
 /// Parameters:
-/// mineMap (struct) is a matrix pointer and dimension values.
-/// settings (struct) is only used for the acceptable value in question with the map.
+/// \param mineMap (struct) is a matrix pointer and dimension values.
+/// \param settings (struct) is only used for the acceptable value in question with the map.
 void ConfigureMineMap(int** mineMap, userSettings *settings);
 
 /// Checks for acceptable amount of vegitation
 ///
 /// Parameters:
-/// vegetationMap (struct) is a matrix pointer and dimension values.
-/// settings (struct) is only used for the acceptable value in question with the map.
+/// \param vegetationMap (struct) is a matrix pointer and dimension values.
+/// \param settings (struct) is only used for the acceptable value in question with the map.
 void ConfigureSoilMap(int** soilMap, userSettings *settings);
 
 /// Checks for acceptable road quality
 ///
 /// Parameters:
-/// roadQualityMap (struct) is a matrix pointer and dimension values.
-/// settings (struct) is only used for the acceptable value in question with the map.
+/// \param roadQualityMap (struct) is a matrix pointer and dimension values.
+/// \param settings (struct) is only used for the acceptable value in question with the map.
 void ConfigureVegetationMap(int** vegetationMap, userSettings *settings);
 
 /// Configures matrix for acceptable road traversal
