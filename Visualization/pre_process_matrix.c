@@ -48,10 +48,10 @@ void addWaterToMatrix(int size, double** matrix, double** terrainMatrix){
             double value = terrainMatrix[row][col];
             if (value > 0){
                 if (value > 0.5){
-                    matrix[row][col] = 0.4;
+                    matrix[row][col] = 0.4; // Set to the color of deep water
                 }
                 else {
-                    matrix[row][col] = 0.3;
+                    matrix[row][col] = 0.3; // Set to the color of shallow water
                 }
             }
         }
@@ -93,10 +93,10 @@ void addRoadToMatrix(int size, double** matrix, double** terrainMatrix){
             double value = terrainMatrix[row][col];
             if (value > 0){
                 if (value > 0.5){
-                    matrix[row][col] = 1;
+                    matrix[row][col] = 1; // Set the color to dark road
                 }
                 else {
-                    matrix[row][col] = 0.9;
+                    matrix[row][col] = 0.9; // Set the color to light road
                 }
             }
         }
@@ -111,7 +111,7 @@ void addMineToMatrix(int size, double** matrix, double** terrainMatrix){
         for (int col = 0; col < size; ++col) {
             double value = terrainMatrix[row][col];
             if (value > 0){
-                matrix[row][col] = 0.95;
+                matrix[row][col] = 0.95; // Set the color for mines
             }
         }
     }
