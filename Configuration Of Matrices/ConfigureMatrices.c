@@ -71,12 +71,12 @@ void ConfigureSoilMap(MatrixInfo soilMap, userSettings settings){
 /// Parameters:
 /// vegetationMap (struct) is a matrix pointer and dimension values.
 /// settings (struct) is only used for the acceptable value in question with the map.
-void ConfigureVegitationMap(int** vegitationMap, userSettings *settings){
+void ConfigureVegetationMap(int** vegetationMap, userSettings *settings){
 
     for (int i = 0; i < settings->additional_settings.size; ++i) {
         for (int j = 0; j < settings->additional_settings.size; ++j) {
-            if (vegitationMap[i][j] > settings->troop_settings.max_terrain_difficulty){
-                vegitationMap[i][j] = -1;
+            if (vegetationMap[i][j] > settings->troop_settings.max_terrain_difficulty){
+                vegetationMap[i][j] = -1;
             }
         }
     }
