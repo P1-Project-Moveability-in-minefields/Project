@@ -4,6 +4,9 @@
 #include "malloc.h"
 #include "math.h"
 
+// This should be adjusted to pull from a config file.
+#define MAXIMUM_SLOPE 70
+
 void processMatrix(int matrix[ROWS][COLS]) {
     // Tjek om tilknyttet data er tilstede (f.eks. vanddybde)
     int waterDepth;
@@ -47,4 +50,11 @@ void printMatrix(int matrix[ROWS][COLS]) {
     }
 }
 
-
+int Relate_MineSlope(int** Mine_Matrix, int** Slope_Matrix, userSettings* settings){
+    for (int i = 0; i < settings->additional_settings.size; ++i) {
+        if (*Slope_Matrix[i] > MAXIMUM_SLOPE) {
+            *Mine_Matrix[i] = 0;
+        }
+    }
+    return 1;
+}
