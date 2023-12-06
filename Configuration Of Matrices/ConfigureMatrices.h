@@ -47,6 +47,15 @@ int ConfigureDepthMap(double** waterMap, userSettings *settings);
 /// \param settings (struct) is only used for the acceptable value in question with the map.
 void ConfigureMineMap(int** mineMap, userSettings *settings);
 
+/// Combines technical mine maps from multiple sources.
+/// Exclusively for use with high reliability sources.
+/// \param mineMap Pointer to array for outputting the final combined values
+/// \param mineMaps Array containing pointers to all relevant mine arrays
+/// \param map_count Amount of maps, for iteration
+/// \param settings Pointer to struct with global user settings
+/// \return Returns 1 on success
+int CombineMineMaps(int** mineMap, int*** mineMaps, int map_count, userSettings *settings);
+
 /// Checks for acceptable amount of vegitation
 ///
 /// Parameters:
