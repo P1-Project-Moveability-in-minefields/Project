@@ -15,4 +15,6 @@ add_executable(P1_Project main.c
         "Configuration Of Matrices/ConfigureMatrices.c"
         "Configuration Of Matrices/ConfigureMatrices.h"
         Visualization/exportMatrixToFile.c
-        Visualization/pre_process_matrix.c)
+        Visualization/pre_process_matrix.c
+        Bitmap/bmp_import.c
+        Bitmap/bmp_import.h)
