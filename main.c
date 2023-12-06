@@ -8,23 +8,7 @@ int main() {
 
     double number = 0x9d;
     printf("%lf", number);
-     obtain_user_settings();
-
-    // En matrix (3x3) som et eksempel, bare et for at teste jeg satte den her ind.
-    int myMatrix[ROWS][COLS] = {
-            {1, 2, 2},
-            {2, 4, 1},
-            {1, 4, 2}
-    };
-
-    printf("Originale matrix:\n");
-    printMatrix(myMatrix);
-
-    processMatrix(myMatrix);
-
-    printf("\nDen nye Matrix:\n");
-    printMatrix(myMatrix);
-
+    userSettings settings = obtain_user_settings();
 
     return 0;
 }
