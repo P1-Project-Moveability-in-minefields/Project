@@ -6,11 +6,6 @@
 #include "../Databehandling/userPreferences.h"
 #include "stdbool.h"
 
-/// Checks for impassable slopes
-///
-/// Parameters:
-/// slopeMap (struct) is a matrix pointer and dimension values.
-/// settings (struct) is only used for the passable value in question with the map.
 void ConfigureSlopeMapRelationships(int** slopeMap, userSettings *settings){
     for (int i = 0; i < settings->additional_settings.size; ++i) {
         for (int j = 0; j < settings->additional_settings.size; ++j) {
@@ -21,11 +16,6 @@ void ConfigureSlopeMapRelationships(int** slopeMap, userSettings *settings){
     }
 }
 
-/// Checks for impassable water depth
-///
-/// Parameters:
-/// waterMap (struct) is a matrix pointer and dimension values.
-/// settings (struct) is only used for the passable value in question with the map.
 void ProcessWaterMapRelationships(int** waterMap, userSettings *settings){
 
     for (int i = 0; i < settings->additional_settings.size; ++i) {
@@ -37,11 +27,6 @@ void ProcessWaterMapRelationships(int** waterMap, userSettings *settings){
     }
 }
 
-/// Checks for inacceptable mine chances
-///
-/// Parameters:
-/// mineMap (struct) is a matrix pointer and dimension values.
-/// settings (struct) is only used for the acceptable value in question with the map.
 void ConfigureMineMap(int** mineMap, userSettings *settings){
 
     for (int i = 0; i < settings->additional_settings.size; ++i) {
@@ -66,11 +51,6 @@ void ConfigureSoilMap(MatrixInfo soilMap, userSettings settings){
 }
 */
 
-/// Checks for acceptable amount of vegitation
-///
-/// Parameters:
-/// vegetationMap (struct) is a matrix pointer and dimension values.
-/// settings (struct) is only used for the acceptable value in question with the map.
 void ConfigureVegetationMap(int** vegetationMap, userSettings *settings){
 
     for (int i = 0; i < settings->additional_settings.size; ++i) {
@@ -82,11 +62,6 @@ void ConfigureVegetationMap(int** vegetationMap, userSettings *settings){
     }
 }
 
-/// Checks for acceptable road quality
-///
-/// Parameters:
-/// roadQualityMap (struct) is a matrix pointer and dimension values.
-/// settings (struct) is only used for the acceptable value in question with the map.
 void ConfigureRoadQualityMap(int** roadQualityMap, userSettings *settings){
 
     for (int i = 0; i < settings->additional_settings.size; ++i) {
