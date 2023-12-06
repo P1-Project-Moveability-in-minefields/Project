@@ -1,6 +1,6 @@
 //
 // Created by Andreas Lynnerup on 06/12/2023.
-///
+//
 
 #ifndef P1_PROJECT_PRE_PROCESS_MATRIX_H
 #define P1_PROJECT_PRE_PROCESS_MATRIX_H
