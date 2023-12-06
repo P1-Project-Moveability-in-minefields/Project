@@ -37,8 +37,8 @@ userSettings obtain_user_settings() {
 
     //2nd setting
     printf("\n2. How much risk is acceptable? ('0' = Low risk  |  '1' = Medium risk  |  '2' = High risk )\n");
-    scanf("%d", &chosenSettings.weights.mine_weight);
-    printf("You have chosen a %s risk level", stringRiskLevel[chosenSettings.weights.mine_weight]);
+    scanf("%d", &chosenSettings.priority_level.mine_risk);
+    printf("You have chosen a %s risk level", stringRiskLevel[chosenSettings.priority_level.mine_risk]);
 
     /*3rd setting
     printf("\n3. Road priority? ('0' = Low  |  '1' = Medium  |  '2' = High )\n");
@@ -66,7 +66,7 @@ userSettings obtain_user_settings() {
 
     printf("\nYour chosen settings are: \n");
     printf("1. Troop type:          %s\n", stringTroopType[troop_type]);
-    printf("2. Risk level:          %s\n", stringRiskLevel[chosenSettings.weights.mine_weight]);
+    printf("2. Risk level:          %s\n", stringRiskLevel[chosenSettings.priority_level.mine_risk]);
     // printf("3. Road priority:       %s\n", stringRiskLevel[chosenSettings.additional_settings.is_cover_prioritized]);
     // printf("4. Terrain priority:    %s\n", stringRiskLevel[chosenSettings.weights.vegetation_weight]);
     // printf("5. Prioritize cover:    %s\n", stringPrioritizeCover[chosenSettings.additional_settings.is_cover_prioritized]);
