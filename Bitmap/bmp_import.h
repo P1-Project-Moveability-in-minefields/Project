@@ -1,0 +1,2 @@
+
+int import_bmp();
