@@ -75,6 +75,20 @@ void ConfigureMineMap(int** mineMap, userSettings *settings){
     }
 }
 
+int CombineMineMaps(int** mineMap, int*** mineMaps, int map_count, userSettings *settings){
+    for (int map_number = 0; map_number < map_count; ++map_number) {
+        for (int x = 0; x < settings->additional_settings.size; ++x) {
+            for (int y = 0; x < settings->additional_settings.size; ++y){
+                mineMap[x][y] = (mineMap[x][y] + mineMaps[map_number][x][y]) / 2;
+                if (mineMap[x][y] > 1) {
+                    mineMap[x][y] = 1;
+                }
+            }
+        }
+    }
+    return 1;
+}
+
 /*
 void ConfigureSoilMap(MatrixInfo soilMap, userSettings settings){
 
