@@ -32,15 +32,26 @@ int CreateSlopeMap(slope_struct** slopeMap,int** heightMap, userSettings *settin
     return 1;
 }
 
-void ProcessWaterMapRelationships(int** waterMap, userSettings *settings){
+int ConfigureDepthMap(double** waterMap, userSettings *settings){
+    int matrix_dimensions = settings->additional_settings.size;
+    double max_water_depth = settings->troop_settings.max_water_depth;
 
-    for (int i = 0; i < settings->additional_settings.size; ++i) {
-        for (int j = 0; j < settings->additional_settings.size; ++j) {
-            if (waterMap[i][j] > settings->troop_settings.max_water_depth){
-             waterMap[i][j] = -1;
+    for (int i = 0; i < matrix_dimensions; ++i) {
+        for (int j = 0; j < matrix_dimensions; ++j) {
+            double* current_location = &waterMap[i][j];
+            if (*current_location > max_water_depth){
+                *current_location = 0;
+            }
+            else if (*current_location) {
+                *current_location = max_water_depth / *current_location;
+            }
+            else {
+                *current_location = 0;
             }
         }
     }
+
+    return 1;
 }
 
 void ConfigureMineMap(int** mineMap, userSettings *settings){

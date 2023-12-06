@@ -28,12 +28,13 @@ typedef struct {
 /// \return returns a 1 on success
 int CreateSlopeMap(slope_struct** slopeMap, int** heightMap, userSettings *settings);
 
-/// Checks for impassable water depth
+/// Pre-analysis configuration of watermap to account for user parameters
 ///
 /// Parameters:
 /// waterMap (struct) is a matrix pointer and dimension values.
 /// settings (struct) is only used for the passable value in question with the map.
-void ConfigureWaterMap(int** waterMap, userSettings *settings);
+/// \return returns a 1 on success
+int ConfigureDepthMap(double** waterMap, userSettings *settings);
 
 /// Checks for unacceptable mine chances
 ///
