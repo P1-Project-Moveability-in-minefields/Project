@@ -12,7 +12,8 @@ colors = [(0.95, 0.74, 0.43),  # 1.  Light soil/
           (0.12, 0.51, 0.09),  # 7.  Dark vegetation
           (0.68, 0.68, 0.68),  # 8.  Light roads
           (0.43, 0.43, 0.43),  # 9.  Hard roads
-          (0.95, 0.05, 0.05)]   # 10. Optimal route
+          (0.43, 0.43, 0.43),  # 10. Mines
+          (0.80, 0.00, 0.98)]  # 11. Optimal route
 values = [0.1,
           0.2,
           0.3,
@@ -22,11 +23,12 @@ values = [0.1,
           0.7,
           0.8,
           0.9,
+          0.95,
           1]
 custom_cmap = ListedColormap(colors, name='Custom Colormap', N=len(values))
 
 # Open the file for reading
-with open("../OutputMatrices/outputmatrix.txt", "r") as file:
+with open("../OutputMatrices/outputMatrix.txt", "r") as file:
     # Read lines from the file
     lines = file.readlines()
 
