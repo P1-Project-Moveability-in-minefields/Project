@@ -11,7 +11,8 @@ double** createMatrixPainting(int size,
                               double** vegetationMatrix[size],
                               double** roadMatrix[size],
                               double** mineMatrix[size],
-                              int** optimal_route){
+                              int** optimal_route,
+                              int number_of_steps){
 
     double** matrix[size][size];
 
@@ -20,6 +21,7 @@ double** createMatrixPainting(int size,
     addVegetationToMatrix(size, matrix[size][size], vegetationMatrix[size]);
     addRoadToMatrix(size, matrix[size][size], roadMatrix[size]);
     addMineToMatrix(size, matrix[size][size], vegetationMatrix[size]);
+    addOptimalRouteToMatrix(size, matrix[size][size], optimal_route, number_of_steps);
 
     return matrix[size][size];
 }
@@ -115,4 +117,14 @@ void addMineToMatrix(int size, double** matrix, double** terrainMatrix){
             }
         }
     }
+}
+
+void addOptimalRouteToMatrix(int size, double** matrix, int** optimal_route, int number_of_steps){
+
+    for (int i = 0; i < number_of_steps; i++) {
+        int x = optimal_route[i][0];
+        int y = optimal_route[i][1];
+        matrix[x][y] = 1;
+    }
+
 }

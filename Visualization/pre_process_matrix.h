@@ -5,6 +5,16 @@
 #ifndef P1_PROJECT_PRE_PROCESS_MATRIX_H
 #define P1_PROJECT_PRE_PROCESS_MATRIX_H
 
+double** createMatrixPainting(int size,
+                              double** soilMatrix[size],
+                              double** waterMatrix[size],
+                              double** vegetationMatrix[size],
+                              double** roadMatrix[size],
+                              double** mineMatrix[size],
+                              int** optimal_route,
+                              int number_of_steps);
+
+void addOptimalRouteToMatrix(int size, double** matrix, int** optimal_route, int number_of_steps);
 void addSoilToMatrix(int size, double** matrix, double** terrainMatrix);
 void addWaterToMatrix(int size, double** matrix, double** terrainMatrix);
 void addVegetationToMatrix(int size, double** matrix, double** terrainMatrix);
