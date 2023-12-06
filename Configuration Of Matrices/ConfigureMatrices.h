@@ -7,7 +7,10 @@
 #ifndef P1_PROJECT_CONFIGUREMATRICES_H
 #define P1_PROJECT_CONFIGUREMATRICES_H
 
+typedef enum {mine, road, soil, steepness, vegetation, water} matrix_type;
+
 typedef struct{
+    matrix_type type;
     double** matrix;
     double weight;
 } WeightedMatrix;
