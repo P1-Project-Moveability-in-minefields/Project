@@ -16,7 +16,6 @@ int main() {
     // Export matrix painting to txt
 
     // Import matrix painting in python and visualize.
-
     return 0;
 }
 
