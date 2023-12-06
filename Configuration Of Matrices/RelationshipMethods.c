@@ -55,5 +55,5 @@ int Relate_MineSlope(int** Mine_Matrix, int** Slope_Matrix, userSettings* settin
         }
     }
 
-    return 1;
+    return success;
 }
