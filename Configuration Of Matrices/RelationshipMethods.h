@@ -22,5 +22,4 @@ void printMatrix(int matrix[ROWS][COLS]);
 int Relate_MineSlope(int** Mine_Matrix, int** Slope_Matrix, userSettings* settings);
 
 
-
 #endif

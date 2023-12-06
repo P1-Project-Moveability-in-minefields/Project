@@ -31,30 +31,30 @@ int CreateSlopeMap(slope_struct** slopeMap, int** heightMap, userSettings *setti
 /// Pre-analysis configuration of watermap to account for user parameters
 ///
 /// Parameters:
-/// waterMap (struct) is a matrix pointer and dimension values.
-/// settings (struct) is only used for the passable value in question with the map.
+/// \param waterMap (struct) is a matrix pointer and dimension values.
+/// \param settings (struct) is only used for the passable value in question with the map.
 /// \return returns a 1 on success
 int ConfigureDepthMap(double** waterMap, userSettings *settings);
 
 /// Checks for unacceptable mine chances
 ///
 /// Parameters:
-/// mineMap (struct) is a matrix pointer and dimension values.
-/// settings (struct) is only used for the acceptable value in question with the map.
+/// \param mineMap (struct) is a matrix pointer and dimension values.
+/// \param settings (struct) is only used for the acceptable value in question with the map.
 void ConfigureMineMap(int** mineMap, userSettings *settings);
 
 /// Checks for acceptable amount of vegitation
 ///
 /// Parameters:
-/// vegetationMap (struct) is a matrix pointer and dimension values.
-/// settings (struct) is only used for the acceptable value in question with the map.
+/// \param vegetationMap (struct) is a matrix pointer and dimension values.
+/// \param settings (struct) is only used for the acceptable value in question with the map.
 void ConfigureSoilMap(int** soilMap, userSettings *settings);
 
 /// Checks for acceptable road quality
 ///
 /// Parameters:
-/// roadQualityMap (struct) is a matrix pointer and dimension values.
-/// settings (struct) is only used for the acceptable value in question with the map.
+/// \param roadQualityMap (struct) is a matrix pointer and dimension values.
+/// \param settings (struct) is only used for the acceptable value in question with the map.
 void ConfigureVegetationMap(int** vegetationMap, userSettings *settings);
 
 /// Configures matrix for acceptable road traversal
