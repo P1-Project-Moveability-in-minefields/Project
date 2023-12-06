@@ -5,9 +5,9 @@
 #ifndef P1_PROJECT_PRE_PROCESS_MATRIX_H
 #define P1_PROJECT_PRE_PROCESS_MATRIX_H
 
-void addSoilToMatrix(double** matrixPainting, double** terrainMatrix);
+void addSoilToMatrix(int size, double** matrixPainting, double** terrainMatrix);
 void addWaterToMatrix(double** matrix, double** terrainMatrix);
-void addVegetationToMatrix(double** matrix, double** terrainMatrix);
+void addVegetationToMatrix(int size, double** matrixPainting, double** terrainMatrix);
 void addRoadToMatrix(double** matrix, double** terrainMatrix);
 void addMineToMatrix(double** matrix, double** terrainMatrix);
 
