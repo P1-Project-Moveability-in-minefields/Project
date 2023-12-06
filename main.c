@@ -6,6 +6,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#define SIZE 100
+
+
+
 int main() {
 
     // Import bitmap funktion
@@ -16,6 +20,7 @@ int main() {
     // Export matrix painting to txt
 
     // Import matrix painting in python and visualize.
+
     return 0;
 }
 
