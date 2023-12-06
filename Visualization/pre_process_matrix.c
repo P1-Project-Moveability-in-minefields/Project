@@ -5,34 +5,34 @@
 #include "pre_process_matrix.h"
 #include "stdio.h"
 
-double** createMatrixPainting(int rows, int cols,
-                              double** soilMatrix[rows][cols],
-                              double** waterMatrix[rows][cols],
-                              double** vegetationMatrix[rows][cols],
-                              double** roadMatrix[rows][cols],
-                              double** mineMatrix[rows][cols],
+double** createMatrixPainting(int size,
+                              double** soilMatrix[size],
+                              double** waterMatrix[size],
+                              double** vegetationMatrix[size],
+                              double** roadMatrix[size],
+                              double** mineMatrix[size],
                               int** optimal_route){
 
-    double** matrixPainting[rows][cols];
+    double** matrix[size];
 
-    addSoilToMatrix(rows, cols, matrixPainting[rows][cols], soilMatrix[rows][cols]);
-    addWaterToMatrix(matrixPainting, waterMatrix);
-    addVegetationToMatrix(matrixPainting);
-    addRoadToMatrix(matrixPainting);
-    addMineToMatrix(matrixPainting);
+    addSoilToMatrix(size, matrix[size], soilMatrix[size]);
+    addWaterToMatrix(matrix, waterMatrix);
+    addVegetationToMatrix(size, matrix[size], vegetationMatrix[size]);
+    addRoadToMatrix(matrix);
+    addMineToMatrix(matrix);
 
 
 }
 
 
-void addSoilToMatrix(int size, double** matrixPainting, double** terrainMatrix){
+void addSoilToMatrix(int size, double** matrix, double** terrainMatrix){
     for (int i = 0; i < size; i++){
         for (int j = 0; j < size; j++){
 
             if (terrainMatrix[i][j] > 0.5) {
-                matrixPainting[i][j] = 0.2;
+                matrix[i][j] = 0.2;
             } else {
-                matrixPainting[i][j] = 0.1;
+                matrix[i][j] = 0.1;
             }
 
         }
@@ -54,13 +54,25 @@ void addWaterToMatrix(int size, double** matrix, double** terrainMatrix){
         }
     }
 }
-void addVegetationToMatrix(int size, double** matrixPainting, double** terrainMatrix){
+void addVegetationToMatrix(int size, double** matrix, double** terrainMatrix){
+    // For each cell
     for (int i = 0; i < size; i++){
         for (int j = 0; j < size; j++){
 
-            if ((matrixPainting[i][j] != 0.4) && (terrainMatrix[i][j] )) {
+
+
+
+            if ((terrainMatrix[i][j] != 0) && (matrix[i][j] == 0.4)) {
+                matrix[i][j] = 0.5;
+            }
+
+            if ((terrainMatrix[i][j] != 0) && (matrix[i][j] != 0.4)) {
+                if ()
 
             }
+
+
+
         }
     }
 }
