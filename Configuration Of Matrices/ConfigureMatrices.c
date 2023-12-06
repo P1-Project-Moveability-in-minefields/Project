@@ -11,10 +11,10 @@
 /// Parameters:
 /// slopeMap (struct) is a matrix pointer and dimension values.
 /// settings (struct) is only used for the passable value in question with the map.
-void ConfigureSlopeMapRelationships(MatrixInfo slopeMap, userSettings settings){
-    for (int i = 0; i < slopeMap.rows; ++i) {
-        for (int j = 0; j < slopeMap.cols; ++j) {
-            if (/*slopeMap.matrix[i][j] > settings.acceptableSlope*/ true){
+void ConfigureSlopeMapRelationships(WeightedMatrix slopeMap, userSettings *settings){
+    for (int i = 0; i < settings->additional_settings.size; ++i) {
+        for (int j = 0; j < settings->additional_settings.size; ++j) {
+            if (slopeMap.matrix[i][j] > settings->troop_settings.max_slope){
                 slopeMap.matrix[i][j] = -1;
             }
         }
@@ -26,11 +26,11 @@ void ConfigureSlopeMapRelationships(MatrixInfo slopeMap, userSettings settings){
 /// Parameters:
 /// waterMap (struct) is a matrix pointer and dimension values.
 /// settings (struct) is only used for the passable value in question with the map.
-void ProcessWaterMapRelationships(MatrixInfo waterMap, userSettings settings){
+void ProcessWaterMapRelationships(WeightedMatrix waterMap, userSettings *settings){
 
-    for (int i = 0; i < waterMap.rows; ++i) {
-        for (int j = 0; j < waterMap.cols; ++j) {
-            if (/*waterMap.matrix[i][j] > settings.acceptableWater*/ true){
+    for (int i = 0; i < settings->additional_settings.size; ++i) {
+        for (int j = 0; j < settings->additional_settings.size; ++j) {
+            if (waterMap.matrix[i][j] > settings->troop_settings.max_water_depth){
              waterMap.matrix[i][j] = -1;
             }
         }
@@ -42,11 +42,11 @@ void ProcessWaterMapRelationships(MatrixInfo waterMap, userSettings settings){
 /// Parameters:
 /// mineMap (struct) is a matrix pointer and dimension values.
 /// settings (struct) is only used for the acceptable value in question with the map.
-void ConfigureMineMap(MatrixInfo mineMap, userSettings settings){
+void ConfigureMineMap(WeightedMatrix mineMap, userSettings *settings){
 
-    for (int i = 0; i < mineMap.rows; ++i) {
-        for (int j = 0; j < mineMap.cols; ++j) {
-            if (/*mineMap.matrix[i][j] > settings.acceptableMine*/ true){
+    for (int i = 0; i < settings->additional_settings.size; ++i) {
+        for (int j = 0; j < settings->additional_settings.size; ++j) {
+            if (mineMap.matrix[i][j] > settings->troop_settings.max_mine_risk){
                 mineMap.matrix[i][j] = -1;
             }
         }
@@ -71,11 +71,11 @@ void ConfigureSoilMap(MatrixInfo soilMap, userSettings settings){
 /// Parameters:
 /// vegitationMap (struct) is a matrix pointer and dimension values.
 /// settings (struct) is only used for the acceptable value in question with the map.
-void ConfigureVegitationMap(MatrixInfo vegitationMap, userSettings settings){
+void ConfigureVegitationMap(WeightedMatrix vegitationMap, userSettings *settings){
 
-    for (int i = 0; i < vegitationMap.rows; ++i) {
-        for (int j = 0; j < vegitationMap.cols; ++j) {
-            if (/*vegitationMap.matrix[i][j] > settings.acceptableVegitation*/ true){
+    for (int i = 0; i < settings->additional_settings.size; ++i) {
+        for (int j = 0; j < settings->additional_settings.size; ++j) {
+            if (vegitationMap.matrix[i][j] > settings->troop_settings.max_terrain_difficulty){
                 vegitationMap.matrix[i][j] = -1;
             }
         }
@@ -87,13 +87,14 @@ void ConfigureVegitationMap(MatrixInfo vegitationMap, userSettings settings){
 /// Parameters:
 /// roadQualityMap (struct) is a matrix pointer and dimension values.
 /// settings (struct) is only used for the acceptable value in question with the map.
-void ConfigureRoadQualityMap(MatrixInfo roadQualityMap, userSettings settings){
+void ConfigureRoadQualityMap(WeightedMatrix roadQualityMap, userSettings *settings){
 
-    for (int i = 0; i < roadQualityMap.rows; ++i) {
-        for (int j = 0; j < roadQualityMap.cols; ++j) {
-            if (/*roadMap.matrix[i][j] > settings.acceptableRoad*/ true){
+    for (int i = 0; i < settings->additional_settings.size; ++i) {
+        for (int j = 0; j < settings->additional_settings.size; ++j) {
+            if (roadQualityMap.matrix[i][j] > settings->troop_settings.max_road){
                 roadQualityMap.matrix[i][j] = -1;
             }
         }
     }
 }
+
