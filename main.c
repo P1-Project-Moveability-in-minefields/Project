@@ -8,19 +8,14 @@
 #include <time.h>
 int main() {
 
-    // double number = 0x9d;
-    //printf("%lf", number);
-    // userSettings settings = obtain_user_settings();
-    double terrain[50][50];
-    srand((unsigned int)time(NULL)); // Seed for random numbers
+    // Import bitmap funktion
+    // Configure matrices
+    // Combine matrices
+    // Insert into Djikstras
+    // Create matrix to be painted
+    // Export matrix painting to txt
 
-    for (int i = 0; i < 50; i++) {
-        for (int j = 0; j < 50; j++) {
-            terrain[i][j] = ((double)rand() / RAND_MAX); // values between 0 and 1
-        }
-    }
-
-    exportMatrixToFile(terrain);
+    // Import matrix painting in python and visualize.
 
     return 0;
 }
