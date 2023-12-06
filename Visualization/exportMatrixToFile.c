@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include "stdlib.h"
 
-#include "Visualization.h"
+#include "exportMatrixToFile.h"
 
 void exportMatrixToFile(int rows, int cols, double matrix[rows][cols]) {
 

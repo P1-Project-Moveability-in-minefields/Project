@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "RelationshipMethods.h"
 #include "../Databehandling/userPreferences.h"
-#include "malloc.h"
+#include <stdlib.h>
 #include "math.h"
 
 // This should be adjusted to pull from a config file.

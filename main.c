@@ -6,6 +6,8 @@
 
 int main() {
 
+    double number = 0x9d;
+    printf("%lf", number);
      obtain_user_settings();
 
     // En matrix (3x3) som et eksempel, bare et for at teste jeg satte den her ind.
@@ -22,6 +24,7 @@ int main() {
 
     printf("\nDen nye Matrix:\n");
     printMatrix(myMatrix);
+
 
     return 0;
 }

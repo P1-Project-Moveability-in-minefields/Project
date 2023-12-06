@@ -13,4 +13,6 @@ add_executable(P1_Project main.c
         "Configuration Of Matrices/RelationshipMethods.c"
         "Configuration Of Matrices/RelationshipMethods.h"
         "Configuration Of Matrices/ConfigureMatrices.c"
-        "Configuration Of Matrices/ConfigureMatrices.h")
+        "Configuration Of Matrices/ConfigureMatrices.h"
+        Visualization/exportMatrixToFile.c
+        Visualization/pre_process_matrix.c)

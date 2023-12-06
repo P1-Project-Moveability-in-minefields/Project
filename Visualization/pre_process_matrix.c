@@ -3,3 +3,8 @@
 ///
 
 #include "pre_process_matrix.h"
+
+double** createMatrixPainting(list)
+}
+
+void
