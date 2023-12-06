@@ -22,10 +22,11 @@ typedef struct {
 
 /// Creates slope values from heightmap
 ///
-/// \param heightMap pointer to a 2D matrix containing altitude values
-/// \param settings pointer to struct containing user settings
-/// \return returns a 2d array of slope structs, featuring the slope in each cardinal direction
-slope_struct* CreateSlopeMap(int** heightMap, userSettings *settings);
+/// \param slopeMap pointer to 2D array to be filled by function
+/// \param heightMap pointer to 2D array containing altitude values
+/// \param settings pointer to struct array containing global user settings
+/// \return returns a 1 on success
+int CreateSlopeMap(slope_struct** slopeMap, int** heightMap, userSettings *settings);
 
 /// Checks for impassable water depth
 ///

@@ -6,9 +6,8 @@
 #include "../Databehandling/userPreferences.h"
 #include "stdbool.h"
 
-slope_struct* CreateSlopeMap(int** heightMap, userSettings *settings){
+int CreateSlopeMap(slope_struct** slopeMap,int** heightMap, userSettings *settings){
     int matrix_dimensions = settings->additional_settings.size;
-    slope_struct slopeMap[matrix_dimensions][matrix_dimensions];
 
     for (int x = 0; x < matrix_dimensions; ++x) {
         for (int y = 0; y < matrix_dimensions; ++y) {
@@ -29,6 +28,8 @@ slope_struct* CreateSlopeMap(int** heightMap, userSettings *settings){
             slopeMap[x][y] = slope_data;
         }
     }
+
+    return 1;
 }
 
 void ProcessWaterMapRelationships(int** waterMap, userSettings *settings){
