@@ -1,2 +1,2 @@
 
-int import_bmp();
+float* import_bmp(char* path);
