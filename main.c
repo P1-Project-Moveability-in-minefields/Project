@@ -3,6 +3,7 @@
 //#include "Databehandling/userPreferences.h"
 //#include "Configuration Of Matrices/RelationshipMethods.h"
 #include "Visualization/exportMatrixToFile.h"
+#include "Bitmap/bmp_import.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -13,6 +14,7 @@
 int main() {
 
     // Import bitmap funktion
+    double** mine_array = import_bmp("C:\\Users\\payth\\CLionProjects\\Project\\Mock_Values\\BMP's\\mines.bmp");
     // Configure matrices
     // Combine matrices
     // Insert into Djikstras
