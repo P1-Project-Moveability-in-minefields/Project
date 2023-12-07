@@ -34,24 +34,26 @@ result *dijkstra(double **input, int size, const int start_pos[], const int end_
     while (goal->priority_status != -1){ // Priority status of -1 indicates that node is no longer in queue
         entry *current_entry = extract_min(priority_queue, &queue_size); // current entry = node with highest priority in queue
 
+        if(current_entry != root_entry && current_entry->previous == NULL) return NULL;
+
         int *current_pos = current_entry->pos;
         entry *neighbors[4];
 
         int neighbor_index = 0; // keeps track of number of valid neighbors
 
-        if(current_pos[1]-1 >= 0 && matrix[current_pos[0]][current_pos[1]-1].priority_status != -1){ // Checks if neighbor is valid and has not been explored
+        if(current_pos[1]-1 >= 0 && matrix[current_pos[0]][current_pos[1]-1].priority_status != -1 && matrix[current_pos[0]][current_pos[1]-1].weight != -1){ // Checks if neighbor is valid and has not been explored
             neighbors[neighbor_index] = &matrix[current_pos[0]][current_pos[1]-1]; // left neighbor
             neighbor_index++;
         }
-        if(current_pos[0]-1 >= 0 && matrix[current_pos[0]-1][current_pos[1]].priority_status != -1){
+        if(current_pos[0]-1 >= 0 && matrix[current_pos[0]-1][current_pos[1]].priority_status != -1 && matrix[current_pos[0]-1][current_pos[1]].weight != -1){
             neighbors[neighbor_index] = &matrix[current_pos[0]-1][current_pos[1]]; // up neighbor
             neighbor_index++;
         }
-        if(current_pos[1]+1 < size && matrix[current_pos[0]][current_pos[1]+1].priority_status != -1){
+        if(current_pos[1]+1 < size && matrix[current_pos[0]][current_pos[1]+1].priority_status != -1 && matrix[current_pos[0]][current_pos[1]+1].weight != -1){
             neighbors[neighbor_index] = &matrix[current_pos[0]][current_pos[1]+1]; // right neighbor
             neighbor_index++;
         }
-        if(current_pos[0]+1 < size && matrix[current_pos[0]+1][current_pos[1]].priority_status != -1){
+        if(current_pos[0]+1 < size && matrix[current_pos[0]+1][current_pos[1]].priority_status != -1 && matrix[current_pos[0]+1][current_pos[1]].weight != -1){
             neighbors[neighbor_index] = &matrix[current_pos[0]+1][current_pos[1]]; // down neighbor
             neighbor_index++;
         }

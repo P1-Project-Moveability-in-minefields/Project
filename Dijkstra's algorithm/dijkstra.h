@@ -15,7 +15,7 @@ typedef struct{
 /// \param size (int) is the dimension of the 2D-array.
 /// \param start_pos (int [2]) array containing the coordinates of the starting position
 /// \param end_pos (int [2]) array containing the coordinates of the starting position
-/// \return returns a pointer to a result struct, which contains the path and its length
+/// \return a pointer to a result struct, which contains the path and its length. If no path was found NULL is returned
 result *dijkstra(double **input, int size, const int start_pos[], const int end_pos[]);
 
 /// Backtracks the path found by dijktra()
