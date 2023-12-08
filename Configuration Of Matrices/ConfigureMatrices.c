@@ -70,6 +70,9 @@ void ConfigureMineMap(double** mineMap, userSettings *settings){
             if (mineMap[i][j] > settings->troop_settings.max_mine_risk){
                 mineMap[i][j] = -1;
             }
+            if (mineMap[i][j] < 0 ) {
+                mineMap[i][j] = mineMap[i][j] + 1;
+            }
         }
     }
 }
