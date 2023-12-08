@@ -49,7 +49,7 @@ result *backtrace_path(entry *path_section, int size) {
     current_index++;
 
     // Excess storage is cut off, now that we know the "path length",
-    realloc(path_array, sizeof(path_array[0]) * (current_index));
+    path_array = realloc(path_array, sizeof(path_array[0]) * current_index);
 
     // Declare and initialize result struct
     result *shortest_path = (result *)malloc(sizeof(result));
