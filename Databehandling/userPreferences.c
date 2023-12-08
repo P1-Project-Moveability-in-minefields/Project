@@ -8,10 +8,10 @@ const char* stringRiskLevel[] = {"Low", "Medium", "High"};
 const char* stringPrioritizeCover[] = {"False", "True"};
 const char* stringClearanceType[] = {"none","MICLIC","Plow","Rafael"};
 
-double SQUAD_UNIT_SETTINGS[NUMBER_OF_TROOP_SETTINGS] = {0.5, 0.9, 0.2, 0.1, 0.5};
-double COMPANY_UNIT[NUMBER_OF_TROOP_SETTINGS]        = {0.5, 0.9, 0.2, 0.1, 0.5};
-double LOGISTIC_UNIT[NUMBER_OF_TROOP_SETTINGS]       = {0.5, 0.9, 0.2, 0.1, 0.5};
-double ARMOR_UNIT[NUMBER_OF_TROOP_SETTINGS]          = {0.5, 0.9, 0.2, 0.1, 0.5};
+double SQUAD_UNIT_SETTINGS[NUMBER_OF_TROOP_SETTINGS] = {0.5, 0.9, 0.2, 0.1, 1};
+double COMPANY_UNIT[NUMBER_OF_TROOP_SETTINGS]        = {0.5, 0.9, 0.2, 0.1, 1};
+double LOGISTIC_UNIT[NUMBER_OF_TROOP_SETTINGS]       = {0.5, 0.9, 0.2, 0.1, 1};
+double ARMOR_UNIT[NUMBER_OF_TROOP_SETTINGS]          = {0.5, 0.9, 0.2, 0.1, 1};
 
 
 // Ask user to decide settings, then return the settings.

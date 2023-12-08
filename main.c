@@ -58,12 +58,7 @@ int main() {
 
     double** water_array = import_bmp("../Mock_Values/BMP's/water_levels.bmp");
     rotate90Clockwise(water_array, 100, 100);
-    for (int y = 0; y < 100; y++){
-        for (int x = 0; x < 100; x++){
-            printf("%lf ", soil_array[y][x]);
-        }
-        printf("\n");
-    }
+
     double** vegetation_array = import_bmp("../Mock_Values/BMP's/vegetation.bmp");
     rotate90Clockwise(vegetation_array, 100, 100);
     for (int y = 0; y < 100; y++){
@@ -81,6 +76,12 @@ int main() {
     double** mine_array = import_bmp("../Mock_Values/BMP's/mines.bmp");
     rotate90Clockwise(mine_array, 100, 100);
 
+    for (int i = 0; i < 100; ++i) {
+        for (int j = 0; j < 100; ++j) {
+            printf("%lf ",vegetation_array[j][i]);
+        }
+        printf("\n");
+    }
 
     ConfigureDepthMap(water_array, &userSettings);
     ConfigureVegetationMap(vegetation_array, &userSettings);
@@ -97,6 +98,13 @@ int main() {
     WeightedMatrix configuredMineMatrix = {water, mine_array, userSettings.priority_level.mine_risk};
 
     WeightedMatrix listOfConfiguredMatrix[6] = {configuredSoilMatrix, configuredWaterMatrix, configuredVegetationMatrix, configuredRoadMatrix, configuredSteepnessMatrix, configuredMineMatrix};
+
+    for (int i = 0; i < 100; ++i) {
+        for (int j = 0; j < 100; ++j) {
+            printf("%lf ",vegetation_array[j][i]);
+        }
+        printf("\n");
+    }
 
 
     double** processedMatrix = processMatrix(listOfConfiguredMatrix, 6, 100);

@@ -118,8 +118,8 @@ void ConfigureVegetationMap(double** vegetationMap, userSettings *settings){
 
     for (int i = 0; i < settings->additional_settings.size; ++i) {
         for (int j = 0; j < settings->additional_settings.size; ++j) {
-            if (vegetationMap[i][j] > settings->troop_settings.max_terrain_difficulty){
-                vegetationMap[i][j] = -1;
+            if (vegetationMap[j][i] > settings->troop_settings.max_terrain_difficulty){
+                vegetationMap[j][i] = -1;
             }
         }
     }
