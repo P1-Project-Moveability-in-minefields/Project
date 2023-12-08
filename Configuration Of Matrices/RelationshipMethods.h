@@ -20,6 +20,6 @@ void printMatrix(int matrix[ROWS][COLS]);
 /// \param settings Pointer to the primary setting struct
 /// \return 1 on a success, 0 on failure, adjusts errno as necessary.
 int Relate_MineSlope(int** Mine_Matrix, int** Slope_Matrix, userSettings* settings);
-
+void determine_weights(WeightedMatrix matrix_array [], int array_length, userSettings *settings);
 
 #endif

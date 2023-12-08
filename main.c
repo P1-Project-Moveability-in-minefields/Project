@@ -70,6 +70,8 @@ int main() {
     double** mine_array = import_bmp("../Mock_Values/BMP's/mines.bmp");
     rotate90Clockwise(mine_array, 100, 100);
 
+    exportMatrixToFile(100,100,mine_array);
+
     ConfigureDepthMap(water_array, &userSettings);
     ConfigureVegetationMap(vegetation_array, &userSettings);
     ConfigureRoadQualityMap(road_array, &userSettings);
@@ -85,7 +87,7 @@ int main() {
 
     WeightedMatrix listOfConfiguredMatrix[6] = {configuredSoilMatrix, configuredWaterMatrix, configuredVegetationMatrix, configuredRoadMatrix, configuredSteepnessMatrix, configuredMineMatrix};
 
-
+    determine_weights(listOfConfiguredMatrix,6,&userSettings);
     double** processedMatrix = processMatrix(listOfConfiguredMatrix, 6, 100);
     int start_pos[2] = {99, 1};
     int end_pos[2] = {99, 99};
