@@ -51,7 +51,7 @@ void ConfigureDepthMap(double** waterMap, userSettings *settings){
             double* current_location = &waterMap[j][i];
             *current_location = 1.0 - *current_location;
             if (*current_location > max_water_depth){
-                *current_location = 0;
+                *current_location = -1;
             }
             else if (*current_location) {
                 *current_location = *current_location / max_water_depth ;
@@ -129,8 +129,11 @@ void ConfigureRoadQualityMap(double** roadQualityMap, userSettings *settings){
 
     for (int i = 0; i < settings->additional_settings.size; ++i) {
         for (int j = 0; j < settings->additional_settings.size; ++j) {
-            if (roadQualityMap[i][j] > settings->troop_settings.max_road){
-                roadQualityMap[i][j] = -1;
+            if (roadQualityMap[j][i] < settings->troop_settings.max_road){
+                roadQualityMap[j][i] = -1;
+            }
+            if (roadQualityMap[j][i] != -1) {
+                roadQualityMap[j][i] = 1 - roadQualityMap[j][i];
             }
         }
     }
