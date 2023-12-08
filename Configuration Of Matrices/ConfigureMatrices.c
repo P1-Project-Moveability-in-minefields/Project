@@ -48,7 +48,7 @@ void ConfigureDepthMap(double** waterMap, userSettings *settings){
 
     for (int i = 0; i < matrix_dimensions; ++i) {
         for (int j = 0; j < matrix_dimensions; ++j) {
-            double* current_location = &waterMap[j][i];
+            double* current_location = &waterMap[i][j];
             *current_location = 1.0 - *current_location;
             if (*current_location > max_water_depth){
                 *current_location = -1;
