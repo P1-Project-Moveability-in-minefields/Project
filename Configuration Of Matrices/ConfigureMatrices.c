@@ -67,11 +67,14 @@ void ConfigureMineMap(double** mineMap, userSettings *settings){
 
     for (int i = 0; i < settings->additional_settings.size; ++i) {
         for (int j = 0; j < settings->additional_settings.size; ++j) {
+            if (mineMap[i][j] == 0) {
+                mineMap[i][j] = 1;
+            }
+            else {
+                mineMap[i][j] = 1 - mineMap[i][j];
+            }
             if (mineMap[i][j] > settings->troop_settings.max_mine_risk){
                 mineMap[i][j] = -1;
-            }
-            if (mineMap[i][j] < 0 ) {
-                mineMap[i][j] = mineMap[i][j] + 1;
             }
         }
     }
