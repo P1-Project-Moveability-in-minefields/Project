@@ -4,7 +4,6 @@
 #include "math.h"
 #include "../Configuration Of Matrices/RelationshipMethods.h"
 
-
 double** import_bmp(char* path) {
     FILE* fp = fopen(path, "rb");
     //If path is wrong
