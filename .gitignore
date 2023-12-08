@@ -64,6 +64,7 @@
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
+.idea/codeStyles
 
 # JIRA plugin
 atlassian-ide-plugin.xml
