@@ -60,7 +60,14 @@ int main() {
     rotate90Clockwise(water_array, 100, 100);
 
     double** vegetation_array = import_bmp("../Mock_Values/BMP's/vegetation.bmp");
+
+    for (int i = 0; i < 100; i++){
+        for (int j = 0; j < 100; j++) {
+            vegetation_array[i][j] = 1 - vegetation_array[i][j];
+        }
+    }
     rotate90Clockwise(vegetation_array, 100, 100);
+
     double** road_array = import_bmp("../Mock_Values/BMP's/roads_and_infrastructure.bmp");
     rotate90Clockwise(road_array, 100, 100);
 
@@ -89,21 +96,24 @@ int main() {
 
     determine_weights(listOfConfiguredMatrix,6,&userSettings);
     double** processedMatrix = processMatrix(listOfConfiguredMatrix, 6, 100);
-    int start_pos[2] = {99, 1};
-    int end_pos[2] = {99, 99};
+    int start_pos[2] = {19, 1};
+    int end_pos[2] = {1, 19};
+
+
+
+
+    result* optimal_route = dijkstra(processedMatrix, 20, start_pos, end_pos);
+
+    double** matrixPainting = createMatrixPainting(100, soil_array, water_array, vegetation_array, road_array, mine_array, optimal_route->path, optimal_route->path_length);
 
     for (int i = 0; i < 100; ++i) {
         for (int j = 0; j < 100; ++j) {
-            printf("%lf ",processedMatrix[j][i]);
+            printf("%lf ", road_array[i][j]);
         }
         printf("\n");
     }
 
-
-    result* optimal_route = dijkstra(processedMatrix, 100, start_pos, end_pos);
-
-    double** matrixPainting = createMatrixPainting(100, soil_array, water_array, vegetation_array, road_array, mine_array, optimal_route->path, optimal_route->path_length);
-
+    exportMatrixToFile(100, 100, matrixPainting);
 
     return 0;
 }

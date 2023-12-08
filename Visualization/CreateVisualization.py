@@ -14,7 +14,8 @@ colors = [(0.95, 0.74, 0.43),  # 1.  Light soil/
           (0.43, 0.43, 0.43),  # 9.  Hard roads
           (0.9, 0.0, 0.0),     # 10. Mines
           (0.80, 0.00, 0.98)]  # 11. Optimal route
-values = [0.1,
+values = [0,
+          0.1,
           0.2,
           0.3,
           0.4,
@@ -23,8 +24,7 @@ values = [0.1,
           0.7,
           0.8,
           0.9,
-          0.95,
-          1]
+          1.0]
 custom_cmap = ListedColormap(colors, name='Custom Colormap', N=len(values))
 
 # Open the file for reading

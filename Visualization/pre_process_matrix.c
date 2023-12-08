@@ -36,8 +36,8 @@ void addSoilToMatrix(int size, double** matrix, double** terrainMatrix){
     for (int i = 0; i < size; i++){
         for (int j = 0; j < size; j++){
 
-            if (terrainMatrix[i][j] > 0.5) {
-                matrix[i][j] = 0.2;
+            if (terrainMatrix[i][j] > 0.2) {
+                matrix[i][j] = 0;
             } else {
                 matrix[i][j] = 0.1;
             }
@@ -46,20 +46,14 @@ void addSoilToMatrix(int size, double** matrix, double** terrainMatrix){
     }
 }
 void addWaterToMatrix(int size, double** matrix, double** terrainMatrix){
-    if (terrainMatrix == NULL){
-        return;
-    }
 
-    for (int row = 0; row < size; ++row) {
-        for (int col = 0; col < size; ++col) {
-            double value = terrainMatrix[row][col];
-            if (value > 0){
-                if (value > 0.5){
-                    matrix[row][col] = 0.4; // Set to the color of deep water
-                }
-                else {
-                    matrix[row][col] = 0.3; // Set to the color of shallow water
-                }
+    for (int i = 0; i < size; i++){
+        for (int j = 0; j < size; j++){
+
+            if (terrainMatrix[i][j] > 0.5) {
+                matrix[i][j] = 0.3;
+            } else if (terrainMatrix[i][j] > 0.1){
+                matrix[i][j] = 0.2;
             }
         }
     }
@@ -69,43 +63,41 @@ void addVegetationToMatrix(int size, double** matrix, double** terrainMatrix){
     for (int i = 0; i < size; i++){
         for (int j = 0; j < size; j++){
 
+            int isVegetation = 0;
+            int isWater = 0;
+            if (matrix[i][j] == 0.2 || matrix[i][j] == 0.3) {
+                isWater = 1;
+            }
+            if (terrainMatrix[i][j] > 0.25) {
+                isVegetation = 1;
+            }
 
             // If there is water and vegetation:
-            if (matrix[i][j] != 0) {
-                if (terrainMatrix[i][j] != 0) {
-                    matrix[i][j] = 0.5;
-                }
+            if (isWater && isVegetation){ // Water has value of 0.3
+                matrix[i][j] = 0.4;
             }
 
             // Else if no water and low vegetation
-            else if (terrainMatrix[i][j] < 0.5) {
-                matrix[i][j] = 0.6;
-            }
-
-            // Else if no water and high vegetation
-            else if (terrainMatrix[i][j] > 0.5) {
-                matrix[i][j] = 0.7;
+            else if (!isWater && isVegetation) {
+                if(0.2 < terrainMatrix[i][j] < 0.5)
+                { // low veg
+                    matrix[i][j] = 0.5;
+                }
+                else if (terrainMatrix[i][j] > 0.5)
+                { // high veg
+                    matrix[i][j] = 0.6;
+                }
             }
 
         }
     }
 }
 void addRoadToMatrix(int size, double** matrix, double** terrainMatrix){
-    if (terrainMatrix == NULL){
-        return;
-    }
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
 
-    for (int row = 0; row < size; ++row) {
-        for (int col = 0; col < size; ++col) {
-            double value = terrainMatrix[row][col];
-            if (value > 0){
-                if (value > 0.5){
-                    matrix[row][col] = 1; // Set the color to dark road
-                }
-                else {
-                    matrix[row][col] = 0.9; // Set the color to light road
-                }
-            }
+
+
         }
     }
 }
@@ -118,7 +110,7 @@ void addMineToMatrix(int size, double** matrix, double** terrainMatrix){
         for (int col = 0; col < size; ++col) {
             double value = terrainMatrix[row][col];
             if (value > 0){
-                matrix[row][col] = 0.95; // Set the color for mines
+                matrix[row][col] = 0.9; // Set the color for mines
             }
         }
     }
