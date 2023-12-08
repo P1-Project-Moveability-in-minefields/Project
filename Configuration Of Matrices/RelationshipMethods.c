@@ -11,13 +11,12 @@ double **processMatrix(WeightedMatrix matrix_array[], int array_length, int matr
     double **processed_matrix = CreateDynamicMatrix(matrix_size);
     double **current_matrix = NULL;
     for (int i = 0; i < array_length; ++i) {
+        current_matrix = matrix_array[i].matrix;
         for (int j = 0; j < matrix_size; ++j) {
             for (int k = 0; k < matrix_size; ++k) {
-                current_matrix = matrix_array[i].matrix;
-                if (current_matrix[j][k] == -1){
-                    processed_matrix[j][k] = -1;
-                    continue;
-                }
+                //if (current_matrix[j][k] == -1){
+                //    processed_matrix[j][k] = -1;
+                //}
                 processed_matrix[j][k] += matrix_array[i].weight * matrix_array[i].matrix[j][k];
             }
         }
