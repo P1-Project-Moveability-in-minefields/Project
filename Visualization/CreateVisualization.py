@@ -30,10 +30,9 @@ custom_cmap = ListedColormap(colors, name='Custom Colormap', N=len(values))
 # Open the file for reading
 with open("../OutputMatrices/outputMatrix.txt", "r") as file:
     # Read lines from the file
-    lines = file.readlines()
+    matrix = np.loadtxt(file)
 
 # Convert the lines into a 2D array in Python
-matrix = np.array([list(map(float, line.split())) for line in lines])
 
 # Print the array
 plt.imshow(matrix, cmap=custom_cmap)

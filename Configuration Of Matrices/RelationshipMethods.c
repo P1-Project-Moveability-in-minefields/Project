@@ -7,7 +7,7 @@
 // Should be corrected to refer to a doctrinal document.
 #define MAXIMUM_SLOPE 70
 
-double **processMatrix(WeightedMatrix matrix_array [], int array_length, int matrix_size){
+double **processMatrix(WeightedMatrix matrix_array[], int array_length, int matrix_size){
     double **processed_matrix = CreateDynamicMatrix(matrix_size);
     double **current_matrix = NULL;
     for (int i = 0; i < array_length; ++i) {

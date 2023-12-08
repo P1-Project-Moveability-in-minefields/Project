@@ -5,8 +5,10 @@
 #include "ConfigureMatrices.h"
 #include "../Databehandling/userPreferences.h"
 #include "stdbool.h"
+#include <stdlib.h>
+#include <stdio.h>
 
-int CreateSlopeMap(slope_struct** slopeMap,int** heightMap, userSettings *settings){
+void CreateSlopeMap(slope_struct** slopeMap,double** heightMap, userSettings *settings){
     int matrix_dimensions = settings->additional_settings.size;
 
     for (int x = 0; x < matrix_dimensions; ++x) {
@@ -38,33 +40,29 @@ int CreateSlopeMap(slope_struct** slopeMap,int** heightMap, userSettings *settin
             slopeMap[x][y] = slope_data;
         }
     }
-
-    return 1;
 }
 
-int ConfigureDepthMap(double** waterMap, userSettings *settings){
+void ConfigureDepthMap(double** waterMap, userSettings *settings){
     int matrix_dimensions = settings->additional_settings.size;
     double max_water_depth = settings->troop_settings.max_water_depth;
 
     for (int i = 0; i < matrix_dimensions; ++i) {
         for (int j = 0; j < matrix_dimensions; ++j) {
-            double* current_location = &waterMap[i][j];
+            double* current_location = &waterMap[j][i];
             if (*current_location > max_water_depth){
                 *current_location = 0;
             }
             else if (*current_location) {
-                *current_location = max_water_depth / *current_location;
+                *current_location = *current_location / max_water_depth ;
             }
             else {
                 *current_location = 0;
             }
         }
     }
-
-    return 1;
 }
 
-void ConfigureMineMap(int** mineMap, userSettings *settings){
+void ConfigureMineMap(double** mineMap, userSettings *settings){
 
     for (int i = 0; i < settings->additional_settings.size; ++i) {
         for (int j = 0; j < settings->additional_settings.size; ++j) {
@@ -75,18 +73,31 @@ void ConfigureMineMap(int** mineMap, userSettings *settings){
     }
 }
 
-int CombineMineMaps(int** mineMap, int*** mineMaps, int map_count, userSettings *settings){
+void CombineMineMaps(double** mineMap, double*** mineMaps, int map_count, userSettings* settings) {
+    // Assuming mineMap is a 2D array
+    // Ensure proper memory allocation for mineMap
+    for (int i = 0; i < settings->additional_settings.size; ++i) {
+        mineMap[i] = (double*)malloc(settings->additional_settings.size * sizeof(double));
+    }
+
+    // Combine mine maps
     for (int map_number = 0; map_number < map_count; ++map_number) {
         for (int x = 0; x < settings->additional_settings.size; ++x) {
-            for (int y = 0; x < settings->additional_settings.size; ++y){
-                mineMap[x][y] = (mineMap[x][y] + mineMaps[map_number][x][y]) / 2;
-                if (mineMap[x][y] > 1) {
-                    mineMap[x][y] = 1;
+            for (int y = 0; y < settings->additional_settings.size; ++y) {
+                // Ensure indices are within bounds
+                if (x < settings->additional_settings.size && y < settings->additional_settings.size) {
+                    mineMap[x][y] = (mineMap[x][y] + mineMaps[map_number][x][y]) / 2;
+                    if (mineMap[x][y] > 1) {
+                        mineMap[x][y] = 1;
+                    }
+                } else {
+                    // Handle index out-of-bounds error
+                    // Add appropriate error handling or print statements
+                    printf("Index out of bounds: x=%d, y=%d\n", x, y);
                 }
             }
         }
     }
-    return 1;
 }
 
 /*
@@ -102,7 +113,7 @@ void ConfigureSoilMap(MatrixInfo soilMap, userSettings settings){
 }
 */
 
-void ConfigureVegetationMap(int** vegetationMap, userSettings *settings){
+void ConfigureVegetationMap(double** vegetationMap, userSettings *settings){
 
     for (int i = 0; i < settings->additional_settings.size; ++i) {
         for (int j = 0; j < settings->additional_settings.size; ++j) {
@@ -113,7 +124,7 @@ void ConfigureVegetationMap(int** vegetationMap, userSettings *settings){
     }
 }
 
-void ConfigureRoadQualityMap(int** roadQualityMap, userSettings *settings){
+void ConfigureRoadQualityMap(double** roadQualityMap, userSettings *settings){
 
     for (int i = 0; i < settings->additional_settings.size; ++i) {
         for (int j = 0; j < settings->additional_settings.size; ++j) {

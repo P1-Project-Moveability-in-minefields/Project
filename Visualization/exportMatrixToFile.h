@@ -5,7 +5,7 @@
 #ifndef VISUALIZATION_H
 #define VISUALIZATION_H
 
-void exportMatrixToFile(int rows, int cols, double matrix[rows][cols]);
+void exportMatrixToFile(int rows, int cols, double** matrix);
 
 
 #endif //VISUALIZATION_H

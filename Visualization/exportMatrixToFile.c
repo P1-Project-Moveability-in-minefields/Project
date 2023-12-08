@@ -6,9 +6,9 @@
 
 #include "exportMatrixToFile.h"
 
-void exportMatrixToFile(int rows, int cols, double matrix[rows][cols]) {
+void exportMatrixToFile(int rows, int cols, double** matrix) {
 
-    FILE *file = fopen("../OutputMatrices/outputmatrix.txt", "w");
+    FILE *file = fopen("../OutputMatrices/outputMatrix.txt", "w");
 
     if (file == NULL) {
         printf("Error opening file for writing. Aborting...\n");
@@ -25,3 +25,5 @@ void exportMatrixToFile(int rows, int cols, double matrix[rows][cols]) {
     fclose(file);
 
 }
+
+

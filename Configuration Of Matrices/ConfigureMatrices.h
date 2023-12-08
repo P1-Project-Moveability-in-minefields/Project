@@ -30,7 +30,7 @@ typedef struct {
 /// \param heightMap pointer to 2D array containing altitude values
 /// \param settings pointer to struct array containing global user settings
 /// \return returns a 1 on success
-int CreateSlopeMap(slope_struct** slopeMap, int** heightMap, userSettings *settings);
+void CreateSlopeMap(slope_struct** slopeMap, double** heightMap, userSettings *settings);
 
 /// Pre-analysis configuration of watermap to account for user parameters
 ///
@@ -38,14 +38,14 @@ int CreateSlopeMap(slope_struct** slopeMap, int** heightMap, userSettings *setti
 /// \param waterMap (struct) is a matrix pointer and dimension values.
 /// \param settings (struct) is only used for the passable value in question with the map.
 /// \return returns a 1 on success
-int ConfigureDepthMap(double** waterMap, userSettings *settings);
+void ConfigureDepthMap(double** waterMap, userSettings *settings);
 
 /// Checks for unacceptable mine chances
 ///
 /// Parameters:
 /// \param mineMap (struct) is a matrix pointer and dimension values.
 /// \param settings (struct) is only used for the acceptable value in question with the map.
-void ConfigureMineMap(int** mineMap, userSettings *settings);
+void ConfigureMineMap(double** mineMap, userSettings *settings);
 
 /// Combines technical mine maps from multiple sources.
 /// Exclusively for use with high reliability sources.
@@ -54,33 +54,33 @@ void ConfigureMineMap(int** mineMap, userSettings *settings);
 /// \param map_count Amount of maps, for iteration
 /// \param settings Pointer to struct with global user settings
 /// \return Returns 1 on success
-int CombineMineMaps(int** mineMap, int*** mineMaps, int map_count, userSettings *settings);
+void CombineMineMaps(double** mineMap, double*** mineMaps, int map_count, userSettings *settings);
 
 /// Checks for acceptable amount of vegitation
 ///
 /// Parameters:
 /// \param vegetationMap (struct) is a matrix pointer and dimension values.
 /// \param settings (struct) is only used for the acceptable value in question with the map.
-void ConfigureSoilMap(int** soilMap, userSettings *settings);
+void ConfigureSoilMap(double** soilMap, userSettings *settings);
 
 /// Checks for acceptable road quality
 ///
 /// Parameters:
 /// \param roadQualityMap (struct) is a matrix pointer and dimension values.
 /// \param settings (struct) is only used for the acceptable value in question with the map.
-void ConfigureVegetationMap(int** vegetationMap, userSettings *settings);
+void ConfigureVegetationMap(double** vegetationMap, userSettings *settings);
 
 /// Configures matrix for acceptable road traversal
 ///
 /// \param roadQualityMap pointer to roadQuality matrix
 /// \param settings pointer to primary settings structs
-void ConfigureRoadQualityMap(int** roadQualityMap, userSettings *settings);
+void ConfigureRoadQualityMap(double** roadQualityMap, userSettings *settings);
 
 /// Configures matrix for known enemy activity
 ///
 /// \param enemyActivityMap pointer to matrix containing enemy activity values
 /// \param settings pointer to settings struct
-void ConfigureEnemyActivityMap(int** enemyActivityMap, userSettings *settings);
+void ConfigureEnemyActivityMap(double** enemyActivityMap, userSettings *settings);
 
 
 #endif //P1_PROJECT_CONFIGUREMATRICES_H
