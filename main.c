@@ -61,12 +61,6 @@ int main() {
 
     double** vegetation_array = import_bmp("../Mock_Values/BMP's/vegetation.bmp");
     rotate90Clockwise(vegetation_array, 100, 100);
-    for (int y = 0; y < 100; y++){
-        for (int x = 0; x < 100; x++){
-            printf("%lf ", vegetation_array[y][x]);
-        }
-        printf("\n");
-    }
     double** road_array = import_bmp("../Mock_Values/BMP's/roads_and_infrastructure.bmp");
     rotate90Clockwise(road_array, 100, 100);
 
@@ -76,20 +70,12 @@ int main() {
     double** mine_array = import_bmp("../Mock_Values/BMP's/mines.bmp");
     rotate90Clockwise(mine_array, 100, 100);
 
-    for (int i = 0; i < 100; ++i) {
-        for (int j = 0; j < 100; ++j) {
-            printf("%lf ",vegetation_array[j][i]);
-        }
-        printf("\n");
-    }
-
     ConfigureDepthMap(water_array, &userSettings);
     ConfigureVegetationMap(vegetation_array, &userSettings);
-
-    exportMatrixToFile(100, 100, vegetation_array);
-
     ConfigureRoadQualityMap(road_array, &userSettings);
     ConfigureMineMap(mine_array, &userSettings);
+
+
     WeightedMatrix configuredWaterMatrix = {water, water_array, 0};
     WeightedMatrix configuredSoilMatrix = {soil, soil_array, 0};
     WeightedMatrix configuredVegetationMatrix = {vegetation, vegetation_array, 0};
@@ -99,18 +85,17 @@ int main() {
 
     WeightedMatrix listOfConfiguredMatrix[6] = {configuredSoilMatrix, configuredWaterMatrix, configuredVegetationMatrix, configuredRoadMatrix, configuredSteepnessMatrix, configuredMineMatrix};
 
-    for (int i = 0; i < 100; ++i) {
-        for (int j = 0; j < 100; ++j) {
-            printf("%lf ",vegetation_array[j][i]);
-        }
-        printf("\n");
-    }
-
 
     double** processedMatrix = processMatrix(listOfConfiguredMatrix, 6, 100);
     int start_pos[2] = {99, 1};
-    int end_pos[2] = {1, 99};
-    
+    int end_pos[2] = {99, 99};
+
+    for (int i = 0; i < 100; ++i) {
+        for (int j = 0; j < 100; ++j) {
+            printf("%lf ",processedMatrix[j][i]);
+        }
+        printf("\n");
+    }
 
 
     result* optimal_route = dijkstra(processedMatrix, 100, start_pos, end_pos);
