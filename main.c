@@ -53,13 +53,13 @@ int main() {
     // Export matrix painting to txt
     userSettings userSettings = obtain_user_settings();
 
-    double** soil_array = import_bmp("/Users/lynneruup/CLionProjects/p1-project/Mock_Values/BMP's/soil.bmp");
+    double** soil_array = import_bmp("./Mock_Values/BMP's/soil.bmp");
     rotate90Clockwise(soil_array, 100, 100);
 
-    double** water_array = import_bmp("/Users/lynneruup/CLionProjects/p1-project/Mock_Values/BMP's/water_levels.bmp");
+    double** water_array = import_bmp("./Mock_Values/BMP's/water_levels.bmp");
     rotate90Clockwise(water_array, 100, 100);
 
-    double** vegetation_array = import_bmp("/Users/lynneruup/CLionProjects/p1-project/Mock_Values/BMP's/vegetation.bmp");
+    double** vegetation_array = import_bmp("./Mock_Values/BMP's/vegetation.bmp");
     rotate90Clockwise(vegetation_array, 100, 100);
     for (int y = 0; y < 100; y++){
         for (int x = 0; x < 100; x++){
@@ -67,13 +67,13 @@ int main() {
         }
         printf("\n");
     }
-    double** road_array = import_bmp("/Users/lynneruup/CLionProjects/p1-project/Mock_Values/BMP's/roads_and_infrastructure.bmp");
+    double** road_array = import_bmp("./Mock_Values/BMP's/roads_and_infrastructure.bmp");
     rotate90Clockwise(road_array, 100, 100);
 
-    double** steepness_array = import_bmp("/Users/lynneruup/CLionProjects/p1-project/Mock_Values/BMP's/steepness.bmp");
+    double** steepness_array = import_bmp("./Mock_Values/BMP's/steepness.bmp");
     rotate90Clockwise(steepness_array, 100, 100);
 
-    double** mine_array = import_bmp("/Users/lynneruup/CLionProjects/p1-project/Mock_Values/BMP's/mines.bmp");
+    double** mine_array = import_bmp("./Mock_Values/BMP's/mines.bmp");
     rotate90Clockwise(mine_array, 100, 100);
 
 
