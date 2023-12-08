@@ -18,3 +18,5 @@ add_executable(P1_Project main.c
         Visualization/pre_process_matrix.c
         Bitmap/bmp_import.c
         Bitmap/bmp_import.h)
+
+target_link_libraries(P1_Project m)
