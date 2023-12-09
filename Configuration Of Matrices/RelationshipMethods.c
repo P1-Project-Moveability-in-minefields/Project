@@ -15,10 +15,10 @@ double **processMatrix(WeightedMatrix matrix_array[], int array_length, int matr
         current_matrix = matrix_array[i].matrix;
         for (int j = 0; j < matrix_size; ++j) {
             for (int k = 0; k < matrix_size; ++k) {
-                //if (current_matrix[j][k] == -1){
-                //    processed_matrix[j][k] = -1;
-                //}
-                processed_matrix[j][k] += matrix_array[i].weight * matrix_array[i].matrix[j][k];
+                if (processed_matrix[j][k] == -1){
+                } else if (current_matrix[j][k] == -1){
+                    processed_matrix[j][k] = -1;
+                } else processed_matrix[j][k] += matrix_array[i].weight * matrix_array[i].matrix[j][k];
             }
         }
     }
