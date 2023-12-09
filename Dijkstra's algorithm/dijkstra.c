@@ -22,7 +22,10 @@ result *dijkstra(double **input, int size, const int start_pos[], const int end_
     while (goal->priority_status != -1){ // Priority status of -1 indicates that node is no longer in queue
         entry *current_entry = extract_min(priority_queue, &queue_size); // current entry = node with highest priority in queue
 
-        if (current_entry != root_entry && current_entry->previous == NULL) return NULL;
+        if (current_entry != root_entry && current_entry->previous == NULL){
+            printf("-1");
+            return NULL;
+        }
 
         int *current_pos = current_entry->pos;
         int neighbor_index = 0; // keeps track of number of valid neighbors

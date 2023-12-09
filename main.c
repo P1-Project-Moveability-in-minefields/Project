@@ -88,12 +88,18 @@ int main() {
     determine_weights(listOfConfiguredMatrix, 6, &userSettings);
     double** processedMatrix = processMatrix(listOfConfiguredMatrix, 6, 100);
     exportMatrixToFile(100,100,processedMatrix);
-    int start_pos[2] = {20, 1};
-    int end_pos[2] = {1, 20};
+    int start_pos[2] = {0, 10};
+    int end_pos[2] = {0, 0};
 
-    result* optimal_route = dijkstra(processedMatrix, 21, start_pos, end_pos);
+    result* optimal_route = dijkstra(processedMatrix, 15, start_pos, end_pos);
 
-    double** matrixPainting = createMatrixPainting(100, soil_array, water_array, vegetation_array, road_array, mine_array, optimal_route->path, optimal_route->path_length);
+    if (optimal_route == NULL){
+        printf("No path found");
+    }
+    else{
+        double** matrixPainting = createMatrixPainting(100, soil_array, water_array, vegetation_array, road_array, mine_array, optimal_route->path, optimal_route->path_length);
+        exportMatrixToFile(100, 100, matrixPainting);
+    }
 /*
     for (int i = 0; i < 100; ++i) {
         for (int j = 0; j < 100; ++j) {
@@ -102,7 +108,6 @@ int main() {
         printf("\n");
     }
 */
-    exportMatrixToFile(100, 100, matrixPainting);
 
     return 0;
 }

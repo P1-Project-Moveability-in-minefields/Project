@@ -6,13 +6,13 @@ void add_to_queue(entry *queue[], entry *key, int index){
 }
 
 void decrease_entry(entry *queue[], int child_index){
-    int parent_index = child_index/2;
+    int parent_index = (child_index-1)/2;
     while (queue[child_index]->current_cost < queue[parent_index]->current_cost){
         swap_entries(&queue[child_index], &queue[parent_index]); //function does not swap priority_status
 
         //Update indicies
         child_index = parent_index;
-        parent_index = child_index/2;
+        parent_index = (child_index-1)/2;
     }
 }
 
