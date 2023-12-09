@@ -88,10 +88,10 @@ int main() {
     determine_weights(listOfConfiguredMatrix, 6, &userSettings);
     double** processedMatrix = processMatrix(listOfConfiguredMatrix, 6, 100);
     exportMatrixToFile(100,100,processedMatrix);
-    int start_pos[2] = {0, 10};
-    int end_pos[2] = {0, 0};
+    int start_pos[2] = {90, 20};
+    int end_pos[2] = {5, 60};
 
-    result* optimal_route = dijkstra(processedMatrix, 15, start_pos, end_pos);
+    result* optimal_route = dijkstra(processedMatrix, 100, start_pos, end_pos);
 
     if (optimal_route == NULL){
         printf("No path found");
