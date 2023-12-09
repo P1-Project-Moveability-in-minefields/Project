@@ -3,6 +3,7 @@
 #include "../Databehandling/userPreferences.h"
 #include <stdlib.h>
 #include "math.h"
+#include "../Visualization/exportMatrixToFile.h"
 
 // Should be corrected to refer to a doctrinal document.
 #define MAXIMUM_SLOPE 70
@@ -20,7 +21,6 @@ double **processMatrix(WeightedMatrix matrix_array[], int array_length, int matr
                 processed_matrix[j][k] += matrix_array[i].weight * matrix_array[i].matrix[j][k];
             }
         }
-
     }
     return processed_matrix;
 }
@@ -32,14 +32,14 @@ void determine_weights(WeightedMatrix matrix_array [], int array_length, userSet
         if(matrix_array[i].type == mine) {
             switch (settings->priority_level.mine_risk) {
                 case High:
-                    matrix_array->weight = base_weight;
+                    matrix_array[i].weight = base_weight;
                 case Medium:
-                    matrix_array->weight = 1.5 * base_weight;
+                    matrix_array[i].weight = 1.5 * base_weight;
                 case Low:
-                    matrix_array->weight = 1.75 * base_weight;
+                    matrix_array[i].weight = 1.75 * base_weight;
             }
-            base_weight = (1-matrix_array->weight)/(array_length-1);
-        } else matrix_array->weight = base_weight;
+            base_weight = (1-matrix_array[i].weight)/(array_length-1);
+        } else matrix_array[i].weight = base_weight;
     }
 }
 
