@@ -60,6 +60,7 @@ void addWaterToMatrix(int size, double** matrix, double** terrainMatrix){
 }
 void addVegetationToMatrix(int size, double** matrix, double** terrainMatrix){
     // For each cell
+    int lastCellWasSwamp = 1;
     for (int i = 0; i < size; i++){
         for (int j = 0; j < size; j++){
 
@@ -74,7 +75,13 @@ void addVegetationToMatrix(int size, double** matrix, double** terrainMatrix){
 
             // If there is water and vegetation:
             if (isWater && isVegetation){ // Water has value of 0.3
-                matrix[i][j] = 0.4;
+                if (lastCellWasSwamp) {
+                    matrix[i][j] = 0.4;
+                    lastCellWasSwamp = 0;
+                } else {
+                    matrix[i][j] = 0.6;
+                    lastCellWasSwamp = 1;
+                }
             }
 
             // Else if no water and low vegetation
@@ -95,6 +102,16 @@ void addVegetationToMatrix(int size, double** matrix, double** terrainMatrix){
 void addRoadToMatrix(int size, double** matrix, double** terrainMatrix){
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
+
+            // Good road
+            if (terrainMatrix[i][j] == 0.8){
+                matrix[i][j] = 0.8;
+            }
+
+            // Poor road
+            else if ( terrainMatrix[i][j] < 1 ) {
+                matrix[i][j] = 0.7;
+            }
 
 
 
