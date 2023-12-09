@@ -19,7 +19,7 @@ result *dijkstra(double **input, int size, const int start_pos[], const int end_
     decrease_entry(priority_queue, start_pos[0]*size+start_pos[1]);
 
     // Loop keeps running until the end node is explored
-    while (goal->priority_status != -1){ // Priority status of -1 indicates that node is no longer in queue
+    while (goal->priority_status != 0){ // Priority status of -1 indicates that node is no longer in queue
         entry *current_entry = extract_min(priority_queue, &queue_size); // current entry = node with highest priority in queue
 
         if (current_entry != root_entry && current_entry->previous == NULL){
