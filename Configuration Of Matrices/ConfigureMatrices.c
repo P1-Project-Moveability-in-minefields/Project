@@ -67,12 +67,7 @@ void ConfigureMineMap(double** mineMap, userSettings *settings){
 
     for (int i = 0; i < settings->additional_settings.size; ++i) {
         for (int j = 0; j < settings->additional_settings.size; ++j) {
-            if (mineMap[i][j] == 0) {
-                mineMap[i][j] = 1;
-            }
-            else {
-                mineMap[i][j] = 1 - mineMap[i][j];
-            }
+            mineMap[i][j] = 1 - mineMap[i][j];
             if (mineMap[i][j] > settings->troop_settings.max_mine_risk){
                 mineMap[i][j] = -1;
             }
@@ -124,8 +119,9 @@ void ConfigureVegetationMap(double** vegetationMap, userSettings *settings){
 
     for (int i = 0; i < settings->additional_settings.size; ++i) {
         for (int j = 0; j < settings->additional_settings.size; ++j) {
-            if (vegetationMap[j][i] > settings->troop_settings.max_terrain_difficulty){
-                vegetationMap[j][i] = -1;
+            vegetationMap[i][j] = 1 - vegetationMap[i][j];
+            if (vegetationMap[i][j] > settings->troop_settings.max_terrain_difficulty){
+                vegetationMap[i][j] = -1;
             }
         }
     }
@@ -135,11 +131,9 @@ void ConfigureRoadQualityMap(double** roadQualityMap, userSettings *settings){
 
     for (int i = 0; i < settings->additional_settings.size; ++i) {
         for (int j = 0; j < settings->additional_settings.size; ++j) {
-            if (roadQualityMap[j][i] < settings->troop_settings.max_road){
-                roadQualityMap[j][i] = -1;
-            }
-            if (roadQualityMap[j][i] != -1) {
-                roadQualityMap[j][i] = 1 - roadQualityMap[j][i];
+            roadQualityMap[i][j] = 1 - roadQualityMap[i][j];
+            if (roadQualityMap[i][j] > settings->troop_settings.max_road){
+                roadQualityMap[i][j] = -1;
             }
         }
     }

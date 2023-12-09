@@ -20,6 +20,7 @@ double **processMatrix(WeightedMatrix matrix_array[], int array_length, int matr
                 processed_matrix[j][k] += matrix_array[i].weight * matrix_array[i].matrix[j][k];
             }
         }
+
     }
     return processed_matrix;
 }
@@ -28,7 +29,7 @@ void determine_weights(WeightedMatrix matrix_array [], int array_length, userSet
     double base_weight = (double)1/array_length;
 
     for (int i = 0; i < array_length; ++i) {
-        if(matrix_array->type == mine) {
+        if(matrix_array[i].type == mine) {
             switch (settings->priority_level.mine_risk) {
                 case High:
                     matrix_array->weight = base_weight;
@@ -38,9 +39,7 @@ void determine_weights(WeightedMatrix matrix_array [], int array_length, userSet
                     matrix_array->weight = 1.75 * base_weight;
             }
             base_weight = (1-matrix_array->weight)/(array_length-1);
-            continue;
-        }
-        matrix_array->weight = base_weight;
+        } else matrix_array->weight = base_weight;
     }
 }
 

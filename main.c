@@ -60,12 +60,6 @@ int main() {
     rotate90Clockwise(water_array, 100, 100);
 
     double** vegetation_array = import_bmp("../Mock_Values/BMP's/vegetation.bmp");
-
-    for (int i = 0; i < 100; i++){
-        for (int j = 0; j < 100; j++) {
-            vegetation_array[i][j] = 1 - vegetation_array[i][j];
-        }
-    }
     rotate90Clockwise(vegetation_array, 100, 100);
 
     double** road_array = import_bmp("../Mock_Values/BMP's/roads_and_infrastructure.bmp");
@@ -77,42 +71,37 @@ int main() {
     double** mine_array = import_bmp("../Mock_Values/BMP's/mines.bmp");
     rotate90Clockwise(mine_array, 100, 100);
 
-    exportMatrixToFile(100,100,mine_array);
-
     ConfigureDepthMap(water_array, &userSettings);
     ConfigureVegetationMap(vegetation_array, &userSettings);
     ConfigureRoadQualityMap(road_array, &userSettings);
     ConfigureMineMap(mine_array, &userSettings);
-
 
     WeightedMatrix configuredWaterMatrix = {water, water_array, 0};
     WeightedMatrix configuredSoilMatrix = {soil, soil_array, 0};
     WeightedMatrix configuredVegetationMatrix = {vegetation, vegetation_array, 0};
     WeightedMatrix configuredRoadMatrix = {road, road_array, 0};
     WeightedMatrix configuredSteepnessMatrix = {steepness, steepness_array, 0};
-    WeightedMatrix configuredMineMatrix = {water, mine_array, userSettings.priority_level.mine_risk};
+    WeightedMatrix configuredMineMatrix = {mine, mine_array, userSettings.priority_level.mine_risk};
 
-    WeightedMatrix listOfConfiguredMatrix[6] = {configuredSoilMatrix, configuredWaterMatrix, configuredVegetationMatrix, configuredRoadMatrix, configuredSteepnessMatrix, configuredMineMatrix};
+    WeightedMatrix listOfConfiguredMatrix[6] = {configuredMineMatrix, configuredSoilMatrix, configuredWaterMatrix, configuredVegetationMatrix, configuredRoadMatrix, configuredSteepnessMatrix};
 
-    determine_weights(listOfConfiguredMatrix,6,&userSettings);
+    determine_weights(listOfConfiguredMatrix, 6, &userSettings);
     double** processedMatrix = processMatrix(listOfConfiguredMatrix, 6, 100);
-    int start_pos[2] = {19, 1};
-    int end_pos[2] = {1, 19};
+    exportMatrixToFile(100,100,processedMatrix);
+    int start_pos[2] = {20, 1};
+    int end_pos[2] = {1, 20};
 
-
-
-
-    result* optimal_route = dijkstra(processedMatrix, 20, start_pos, end_pos);
+    result* optimal_route = dijkstra(processedMatrix, 21, start_pos, end_pos);
 
     double** matrixPainting = createMatrixPainting(100, soil_array, water_array, vegetation_array, road_array, mine_array, optimal_route->path, optimal_route->path_length);
-
+/*
     for (int i = 0; i < 100; ++i) {
         for (int j = 0; j < 100; ++j) {
             printf("%lf ", road_array[i][j]);
         }
         printf("\n");
     }
-
+*/
     exportMatrixToFile(100, 100, matrixPainting);
 
     return 0;
