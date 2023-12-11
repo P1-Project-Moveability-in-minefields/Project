@@ -83,4 +83,7 @@ void ConfigureRoadQualityMap(double** roadQualityMap, userSettings *settings);
 void ConfigureEnemyActivityMap(double** enemyActivityMap, userSettings *settings);
 
 
+WeightedMatrix* ConfigureListOfMatrices(double*** list_of_matrices, userSettings *settings);
+
+
 #endif //P1_PROJECT_CONFIGUREMATRICES_H

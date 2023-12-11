@@ -3,6 +3,7 @@
 //
 
 #include "ConfigureMatrices.h"
+#include "RelationshipMethods.h"
 #include "../Databehandling/userPreferences.h"
 #include "stdbool.h"
 #include <stdlib.h>
@@ -144,3 +145,27 @@ void ConfigureRoadQualityMap(double** roadQualityMap, userSettings *settings){
     }
 }
 
+WeightedMatrix* ConfigureListOfMatrices(double*** list_of_matrices, userSettings *settings){
+    ConfigureRoadQualityMap(list_of_matrices[3], settings);
+    ConfigureDepthMap(list_of_matrices[1], list_of_matrices[3], settings);
+    ConfigureVegetationMap(list_of_matrices[2], settings);
+    ConfigureMineMap(list_of_matrices[5], settings);
+
+    WeightedMatrix* list_of_configured_matrices = (WeightedMatrix*)malloc(6 * sizeof(WeightedMatrix));
+
+    if (!list_of_configured_matrices) {
+        perror("Memory allocation error");
+        exit(EXIT_FAILURE);
+    }
+
+    list_of_configured_matrices[0] = (WeightedMatrix){mine, list_of_matrices[5], settings->priority_level.mine_risk};
+    list_of_configured_matrices[1] = (WeightedMatrix){soil, list_of_matrices[0], 0};
+    list_of_configured_matrices[2] = (WeightedMatrix){water, list_of_matrices[1], 0};
+    list_of_configured_matrices[3] = (WeightedMatrix){vegetation, list_of_matrices[2], 0};
+    list_of_configured_matrices[4] = (WeightedMatrix){road, list_of_matrices[3], 0};
+    list_of_configured_matrices[5] = (WeightedMatrix){steepness, list_of_matrices[4], 0};
+
+    determine_weights(list_of_configured_matrices, 6, settings);
+
+    return list_of_configured_matrices;
+}

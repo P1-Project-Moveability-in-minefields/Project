@@ -17,6 +17,8 @@ add_executable(P1_Project main.c
         Visualization/exportMatrixToFile.c
         Visualization/pre_process_matrix.c
         Bitmap/bmp_import.c
-        Bitmap/bmp_import.h)
+        Bitmap/bmp_import.h
+        Visualization/matrix_manipulations.h
+        Visualization/matrix_manipulations.c)
 
 target_link_libraries(P1_Project m)

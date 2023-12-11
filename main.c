@@ -10,114 +10,49 @@
 #include <time.h>
 #define SIZE 100
 #include "Visualization/pre_process_matrix.h"
-
-
-void rotate90Clockwise(double** matrix, int numRows, int numCols) {
-    // Transpose the matrix
-    for (int i = 0; i < numRows; ++i) {
-        for (int j = i + 1; j < numCols; ++j) {
-            double temp = matrix[i][j];
-            matrix[i][j] = matrix[j][i];
-            matrix[j][i] = temp;
-        }
-    }
-
-    // Reverse the order of rows
-    for (int i = 0; i < numRows / 2; ++i) {
-        for (int j = 0; j < numCols; ++j) {
-            double temp = matrix[i][j];
-            matrix[i][j] = matrix[numRows - 1 - i][j];
-            matrix[numRows - 1 - i][j] = temp;
-        }
-    }
-}
-void flipHorizontally(double** matrix, int numRows, int numCols) {
-    // Reverse the order of columns
-    for (int j = 0; j < numCols / 2; ++j) {
-        for (int i = 0; i < numRows; ++i) {
-            double temp = matrix[i][j];
-            matrix[i][j] = matrix[i][numCols - 1 - j];
-            matrix[i][numCols - 1 - j] = temp;
-        }
-    }
-}
-
+#include "Visualization/matrix_manipulations.h"
 
 int main() {
     setbuf(stdout,0);
-    // Import bitmap funktion
-    // Configure matrices
-    // Combine matrices
-    // Insert into Djikstras
-    // Create matrix to be painted
-    // Export matrix painting to txt
+
+    // Initialize user settings
     userSettings userSettings = obtain_user_settings();
+    int size = userSettings.additional_settings.size;
 
-    double** soil_array = import_bmp("../Mock_Values/BMP's/soil.bmp");
-    rotate90Clockwise(soil_array, 100, 100);
-
-    double** water_array = import_bmp("../Mock_Values/BMP's/water_levels.bmp");
-    rotate90Clockwise(water_array, 100, 100);
-
-    double** vegetation_array = import_bmp("../Mock_Values/BMP's/vegetation.bmp");
-    rotate90Clockwise(vegetation_array, 100, 100);
-
-    double** road_array = import_bmp("../Mock_Values/BMP's/roads_and_infrastructure.bmp");
-    rotate90Clockwise(road_array, 100, 100);
-
-
-
-    double** steepness_array = import_bmp("../Mock_Values/BMP's/steepness.bmp");
-    rotate90Clockwise(steepness_array, 100, 100);
-
-    double** mine_array = import_bmp("../Mock_Values/BMP's/mines.bmp");
-    rotate90Clockwise(mine_array, 100, 100);
+    // Generate list of mock matrices
+    double*** list_of_matrices = generateListOfMockMatrices(100, 6);
 
     for (int i = 0; i < 100; ++i) {
         for (int j = 0; j < 100; ++j) {
-            printf("%lf ", road_array[i][j]);
+            printf("%lf ", list_of_matrices[3][i][j]);
         }
         printf("\n");
     }
-    exportMatrixToFile(100, 100, mine_array);
 
-    ConfigureRoadQualityMap(road_array, &userSettings); // It is important that road is configured before water!
-    ConfigureDepthMap(water_array, road_array, &userSettings);
-    ConfigureVegetationMap(vegetation_array, &userSettings);
-    ConfigureMineMap(mine_array, &userSettings);
+    // Create matrix painting based off of mock matrices (Save the current version of terrain matrices before configuration)
+    double** matrix_painting = createMatrixPainting(size, list_of_matrices);
 
-    WeightedMatrix configuredWaterMatrix = {water, water_array, 0};
-    WeightedMatrix configuredSoilMatrix = {soil, soil_array, 0};
-    WeightedMatrix configuredVegetationMatrix = {vegetation, vegetation_array, 0};
-    WeightedMatrix configuredRoadMatrix = {road, road_array, 0};
-    WeightedMatrix configuredSteepnessMatrix = {steepness, steepness_array, 0};
-    WeightedMatrix configuredMineMatrix = {mine, mine_array, userSettings.priority_level.mine_risk};
+    //Configure list of mock matrices
+    WeightedMatrix* list_of_configured_matrices = ConfigureListOfMatrices(list_of_matrices, &userSettings);
 
-    WeightedMatrix listOfConfiguredMatrix[6] = {configuredMineMatrix,
-                                                configuredSoilMatrix,
-                                                configuredWaterMatrix,
-                                                configuredVegetationMatrix,
-                                                configuredRoadMatrix,
-                                                configuredSteepnessMatrix}; // It is important that configuredMineMatrix is first in the list
+    // Process the matrix and combine them into final matrix.
+    double** processedMatrix = processMatrix(list_of_configured_matrices, 6, size);
 
-    determine_weights(listOfConfiguredMatrix, 6, &userSettings);
-    double** processedMatrix = processMatrix(listOfConfiguredMatrix, 6, 100);
-    // exportMatrixToFile(100,100,processedMatrix);
     int start_pos[2] = {0, 0};
     int end_pos[2] = {99, 0};
 
-    result* optimal_route = dijkstra(processedMatrix, 100, start_pos, end_pos);
+    result* optimal_route = dijkstra(processedMatrix, size, start_pos, end_pos);
 
     if (optimal_route == NULL){
-        printf("No path found");
-    }
-    else{
-        double** matrixPainting = createMatrixPainting(100, soil_array, water_array, vegetation_array, road_array, mine_array, optimal_route->path, optimal_route->path_length);
-        // exportMatrixToFile(100, 100, matrixPainting);
+        perror("No route can be found. Aborting...");
+        exit(EXIT_FAILURE);
     }
 
+    // Add the optimal route to the matrix painting, to be visualized.
+    addOptimalRouteToMatrix(size, matrix_painting, optimal_route->path, optimal_route->path_length);
 
-
+    // Export matrix painting for visualization in python.
+    exportMatrixToFile(size, size, matrix_painting);
 
     return 0;
 }

@@ -7,13 +7,7 @@
 #include <stdlib.h>
 
 double** createMatrixPainting(int size,
-                              double** soilMatrix,
-                              double** waterMatrix,
-                              double** vegetationMatrix,
-                              double** roadMatrix,
-                              double** mineMatrix,
-                              int** optimal_route,
-                              int number_of_steps) {
+                              double*** list_of_matrices) {
 
     double** matrix = malloc(size * sizeof(double*));
     for (int i = 0; i < size; ++i) {
@@ -21,12 +15,11 @@ double** createMatrixPainting(int size,
     }
 
     // Assuming these functions are correctly implemented to copy values
-    addSoilToMatrix(size, matrix, soilMatrix);
-    addWaterToMatrix(size, matrix, waterMatrix);
-    addVegetationToMatrix(size, matrix, vegetationMatrix);
-    addRoadToMatrix(size, matrix, roadMatrix);
-    addMineToMatrix(size, matrix, mineMatrix);
-    addOptimalRouteToMatrix(size, matrix, optimal_route, number_of_steps);
+    addSoilToMatrix(size, matrix, list_of_matrices[0]);
+    addWaterToMatrix(size, matrix, list_of_matrices[1]);
+    addVegetationToMatrix(size, matrix, list_of_matrices[2]);
+    addRoadToMatrix(size, matrix, list_of_matrices[3]);
+    addMineToMatrix(size, matrix, list_of_matrices[5]);
 
     return matrix;
 }
@@ -105,12 +98,12 @@ void addRoadToMatrix(int size, double** matrix, double** terrainMatrix){
         for (int j = 0; j < size; j++) {
 
             // Good road
-            if (terrainMatrix[i][j] == 0.8){
+            if (terrainMatrix[i][j] == 0.2){
                 matrix[i][j] = 0.8;
             }
 
             // Poor road
-            else if ( terrainMatrix[i][j] < 1 ) {
+            else if ( terrainMatrix[i][j] > 0.2 ) {
                 matrix[i][j] = 0.7;
             }
 

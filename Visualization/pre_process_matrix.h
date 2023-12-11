@@ -6,13 +6,7 @@
 #define P1_PROJECT_PRE_PROCESS_MATRIX_H
 
 double** createMatrixPainting(int size,
-                              double** soilMatrix,
-                              double** waterMatrix,
-                              double** vegetationMatrix,
-                              double** roadMatrix,
-                              double** mineMatrix,
-                              int** optimal_route,
-                              int number_of_steps);
+                              double*** list_of_matrices);
 
 void addOptimalRouteToMatrix(int size, double** matrix, int** optimal_route, int number_of_steps);
 void addSoilToMatrix(int size, double** matrix, double** terrainMatrix);
