@@ -35,16 +35,22 @@ double** import_bmp(char* path) {
     //Calculates the size of the rows in the pixel storage part of the bitmap, there is often padding at the end of rows
     int row_size = (int)ceil(((double)(bits_per_pixel * width) / 32)) * 4;
 
+    //Get color table
+    unsigned char color_table[64]; //16 times 4 bytes for red, green, blue and alpha
+    for (int i = 0; i < 64; ++i) {
+        color_table[i] = bmp[54 + i]; //Byte 54 is the start of color table
+    }
+
     //Loop over each pixel
     for (int i = 0; i < height; ++i) {
         for (int j = 0; j < width; ++j) {
             //Gets a byte from the specific pixel location
-            char value = bmp[pixel_data_offset + i * row_size + j/2];
-            //Gets the 4 pixels that includes the strength of one of the colors(RGB) of the pixels
-            //we assume that the colors of the bitmap is black and white
-            double masked_value = value & 0b00001111;
-            //We get the final 0 to 1 value by dividing by the max value of half a byte
-            double final_value = masked_value / 15;
+            char index_value = bmp[pixel_data_offset + i * row_size + j/2];
+            //Gets the index of the pixel, so we can map it to the correct color
+            int masked_index_value = index_value & 0x0F;
+            //Calculate normalised value from one of the color chanels of the pixel, given by the index
+            //(only one chanel is needed since input is black and white so RGB are all the same)
+            double final_value = (double)color_table[masked_index_value*4] / 255;
             //Save the value in the array
             pixel_color_strength_normalised_array[j][i] = final_value;
         }
