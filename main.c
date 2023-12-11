@@ -24,7 +24,7 @@ int main() {
 
     for (int i = 0; i < 100; ++i) {
         for (int j = 0; j < 100; ++j) {
-            printf("%lf ", list_of_matrices[3][i][j]);
+            printf("%lf ", list_of_matrices[2][i][j]);
         }
         printf("\n");
     }

@@ -29,10 +29,10 @@ void addSoilToMatrix(int size, double** matrix, double** terrainMatrix){
     for (int i = 0; i < size; i++){
         for (int j = 0; j < size; j++){
 
-            if (terrainMatrix[i][j] > 0.2) {
-                matrix[i][j] = 0.0;
-            } else {
+            if (terrainMatrix[i][j] < 0.5) {
                 matrix[i][j] = 0.1;
+            } else {
+                matrix[i][j] = 0.0;
             }
 
         }
@@ -63,28 +63,35 @@ void addVegetationToMatrix(int size, double** matrix, double** terrainMatrix){
             if (matrix[i][j] == 0.2 || matrix[i][j] == 0.3) {
                 isWater = 1;
             }
-            if (terrainMatrix[i][j] > 0.25) {
+            if (terrainMatrix[i][j] > 0.3) {
                 isVegetation = 1;
             }
 
             // If there is water and vegetation:
             if (isWater && isVegetation){ // Water has value of 0.3
                 if (lastCellWasSwamp) {
-                    matrix[i][j] = 0.4;
+                    if(terrainMatrix[i][j] < 0.75)
+                    { // low veg
+                        matrix[i][j] = 0.5;
+                    }
+                    else if (terrainMatrix[i][j] > 0.75)
+                    { // high veg
+                        matrix[i][j] = 0.6;
+                    }
                     lastCellWasSwamp = 0;
                 } else {
-                    matrix[i][j] = 0.6;
+                    matrix[i][j] = 0.4;
                     lastCellWasSwamp = 1;
                 }
             }
 
-            // Else if no water and low vegetation
+            // Else if no water and vegetation
             else if (!isWater && isVegetation) {
-                if(0.2 < terrainMatrix[i][j] < 0.5)
+                if(terrainMatrix[i][j] < 0.75)
                 { // low veg
                     matrix[i][j] = 0.5;
                 }
-                else if (terrainMatrix[i][j] > 0.5)
+                else if (terrainMatrix[i][j] > 0.75)
                 { // high veg
                     matrix[i][j] = 0.6;
                 }
@@ -98,12 +105,12 @@ void addRoadToMatrix(int size, double** matrix, double** terrainMatrix){
         for (int j = 0; j < size; j++) {
 
             // Good road
-            if (terrainMatrix[i][j] == 0.2){
+            if (terrainMatrix[i][j] < 0.3 ){
                 matrix[i][j] = 0.8;
             }
 
             // Poor road
-            else if ( terrainMatrix[i][j] > 0.2 ) {
+            else if ( terrainMatrix[i][j] < 1 ) {
                 matrix[i][j] = 0.7;
             }
 
