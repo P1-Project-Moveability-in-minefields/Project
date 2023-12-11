@@ -126,11 +126,23 @@ void addMineToMatrix(int size, double** matrix, double** terrainMatrix){
 
     for (int row = 0; row < size; ++row) {
         for (int col = 0; col < size; ++col) {
+
             double value = terrainMatrix[row][col];
+
             if (value > 0){
-                matrix[row][col] = 0.9; // Set the color for mines
+                if (value < 0.6) {
+                    matrix[row][col] = 0.9; // Set the color for mines
+                }
+                else {
+                    matrix[row][col] = 1.0; // Set the color for mines
+                }
+
             }
+
         }
+
+
+
     }
 }
 
@@ -139,7 +151,7 @@ void addOptimalRouteToMatrix(int size, double** matrix, int** optimal_route, int
     for (int i = 0; i < number_of_steps; i++) {
         int x = optimal_route[i][0];
         int y = optimal_route[i][1];
-        matrix[x][y] = 1;
+        matrix[x][y] = 1.1;
     }
 
 }
