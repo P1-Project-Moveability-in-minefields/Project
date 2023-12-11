@@ -32,8 +32,6 @@ with open("../OutputMatrices/outputMatrix.txt", "r") as file:
     # Read lines from the file
     matrix = np.loadtxt(file)
 
-# Convert the lines into a 2D array in Python
-
 # Print the array
 plt.imshow(matrix, cmap=custom_cmap)
 plt.title(f'Map and Optimal Route')
