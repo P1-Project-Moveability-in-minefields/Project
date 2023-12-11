@@ -71,9 +71,9 @@ int main() {
     double** mine_array = import_bmp("../Mock_Values/BMP's/mines.bmp");
     rotate90Clockwise(mine_array, 100, 100);
 
-    ConfigureDepthMap(water_array, &userSettings);
+    ConfigureRoadQualityMap(road_array, &userSettings); // It is important that road is configured before water!
+    ConfigureDepthMap(water_array, road_array, &userSettings);
     ConfigureVegetationMap(vegetation_array, &userSettings);
-    ConfigureRoadQualityMap(road_array, &userSettings);
     ConfigureMineMap(mine_array, &userSettings);
 
     WeightedMatrix configuredWaterMatrix = {water, water_array, 0};
@@ -83,13 +83,18 @@ int main() {
     WeightedMatrix configuredSteepnessMatrix = {steepness, steepness_array, 0};
     WeightedMatrix configuredMineMatrix = {mine, mine_array, userSettings.priority_level.mine_risk};
 
-    WeightedMatrix listOfConfiguredMatrix[6] = {configuredMineMatrix, configuredSoilMatrix, configuredWaterMatrix, configuredVegetationMatrix, configuredRoadMatrix, configuredSteepnessMatrix};
+    WeightedMatrix listOfConfiguredMatrix[6] = {configuredMineMatrix,
+                                                configuredSoilMatrix,
+                                                configuredWaterMatrix,
+                                                configuredVegetationMatrix,
+                                                configuredRoadMatrix,
+                                                configuredSteepnessMatrix}; // It is important that configuredMineMatrix is first in the list
 
     determine_weights(listOfConfiguredMatrix, 6, &userSettings);
     double** processedMatrix = processMatrix(listOfConfiguredMatrix, 6, 100);
     exportMatrixToFile(100,100,processedMatrix);
-    int start_pos[2] = {90, 20};
-    int end_pos[2] = {5, 60};
+    int start_pos[2] = {0, 0};
+    int end_pos[2] = {99, 0};
 
     result* optimal_route = dijkstra(processedMatrix, 100, start_pos, end_pos);
 
