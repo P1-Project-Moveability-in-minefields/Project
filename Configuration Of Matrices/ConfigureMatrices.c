@@ -51,7 +51,6 @@ void ConfigureDepthMap(double** waterMap, double** road_map, userSettings *setti
     for (int i = 0; i < matrix_dimensions; ++i) {
         for (int j = 0; j < matrix_dimensions; ++j) {
             current_location = &waterMap[i][j];
-            *current_location = 1.0 - *current_location;
             if (road_map[i][j] != -1 && road_map[i][j] < 1){
                 *current_location = 0;
             } else if (*current_location > max_water_depth){
@@ -71,7 +70,6 @@ void ConfigureMineMap(double** mineMap, userSettings *settings){
     for (int i = 0; i < matrix_dimensions; ++i) {
         for (int j = 0; j < matrix_dimensions; ++j) {
             current_location = &mineMap[i][j];
-            *current_location = 1 - *current_location;
             if (*current_location > max_mine_risk){
                 *current_location = -1;
             } else if (*current_location){
@@ -125,7 +123,6 @@ void ConfigureVegetationMap(double** vegetationMap, userSettings *settings){
 
     for (int i = 0; i < settings->additional_settings.size; ++i) {
         for (int j = 0; j < settings->additional_settings.size; ++j) {
-            vegetationMap[i][j] = 1 - vegetationMap[i][j];
             if (vegetationMap[i][j] > settings->troop_settings.max_terrain_difficulty){
                 vegetationMap[i][j] = -1;
             }
@@ -137,7 +134,6 @@ void ConfigureRoadQualityMap(double** roadQualityMap, userSettings *settings){
 
     for (int i = 0; i < settings->additional_settings.size; ++i) {
         for (int j = 0; j < settings->additional_settings.size; ++j) {
-            roadQualityMap[i][j] = 1 - roadQualityMap[i][j];
             if (roadQualityMap[i][j] > settings->troop_settings.max_road){
                 roadQualityMap[i][j] = -1;
             }
