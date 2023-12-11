@@ -38,7 +38,7 @@ void CreateSlopeMap(slope_struct** slopeMap, double** heightMap, userSettings *s
 /// \param waterMap (struct) is a matrix pointer and dimension values.
 /// \param settings (struct) is only used for the passable value in question with the map.
 /// \return returns a 1 on success
-void ConfigureDepthMap(double** waterMap, userSettings *settings);
+void ConfigureDepthMap(double** waterMap, double** road_map, userSettings *settings);
 
 /// Checks for unacceptable mine chances
 ///

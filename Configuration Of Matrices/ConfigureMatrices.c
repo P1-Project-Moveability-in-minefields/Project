@@ -42,7 +42,7 @@ void CreateSlopeMap(slope_struct** slopeMap,double** heightMap, userSettings *se
     }
 }
 
-void ConfigureDepthMap(double** waterMap, userSettings *settings){
+void ConfigureDepthMap(double** waterMap, double** road_map, userSettings *settings){
     int matrix_dimensions = settings->additional_settings.size;
     double max_water_depth = settings->troop_settings.max_water_depth;
     double *current_location = NULL;
@@ -51,7 +51,9 @@ void ConfigureDepthMap(double** waterMap, userSettings *settings){
         for (int j = 0; j < matrix_dimensions; ++j) {
             current_location = &waterMap[i][j];
             *current_location = 1.0 - *current_location;
-            if (*current_location > max_water_depth){
+            if (road_map[i][j] != -1 && road_map[i][j] < 1){
+                *current_location = 0;
+            } else if (*current_location > max_water_depth){
                 *current_location = -1;
             } else if (*current_location) {
                 *current_location = *current_location / max_water_depth ;
@@ -62,7 +64,7 @@ void ConfigureDepthMap(double** waterMap, userSettings *settings){
 
 void ConfigureMineMap(double** mineMap, userSettings *settings){
     int matrix_dimensions = settings->additional_settings.size;
-    double max_mine_risk = settings->troop_settings.max_road;
+    double max_mine_risk = settings->troop_settings.max_mine_risk;
     double *current_location = NULL;
 
     for (int i = 0; i < matrix_dimensions; ++i) {
