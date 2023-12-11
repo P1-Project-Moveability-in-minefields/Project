@@ -65,11 +65,21 @@ int main() {
     double** road_array = import_bmp("../Mock_Values/BMP's/roads_and_infrastructure.bmp");
     rotate90Clockwise(road_array, 100, 100);
 
+
+
     double** steepness_array = import_bmp("../Mock_Values/BMP's/steepness.bmp");
     rotate90Clockwise(steepness_array, 100, 100);
 
     double** mine_array = import_bmp("../Mock_Values/BMP's/mines.bmp");
     rotate90Clockwise(mine_array, 100, 100);
+
+    for (int i = 0; i < 100; ++i) {
+        for (int j = 0; j < 100; ++j) {
+            printf("%lf ", road_array[i][j]);
+        }
+        printf("\n");
+    }
+    exportMatrixToFile(100, 100, mine_array);
 
     ConfigureRoadQualityMap(road_array, &userSettings); // It is important that road is configured before water!
     ConfigureDepthMap(water_array, road_array, &userSettings);
@@ -92,7 +102,7 @@ int main() {
 
     determine_weights(listOfConfiguredMatrix, 6, &userSettings);
     double** processedMatrix = processMatrix(listOfConfiguredMatrix, 6, 100);
-    exportMatrixToFile(100,100,processedMatrix);
+    // exportMatrixToFile(100,100,processedMatrix);
     int start_pos[2] = {0, 0};
     int end_pos[2] = {99, 0};
 
@@ -103,16 +113,11 @@ int main() {
     }
     else{
         double** matrixPainting = createMatrixPainting(100, soil_array, water_array, vegetation_array, road_array, mine_array, optimal_route->path, optimal_route->path_length);
-        exportMatrixToFile(100, 100, matrixPainting);
+        // exportMatrixToFile(100, 100, matrixPainting);
     }
-/*
-    for (int i = 0; i < 100; ++i) {
-        for (int j = 0; j < 100; ++j) {
-            printf("%lf ", road_array[i][j]);
-        }
-        printf("\n");
-    }
-*/
+
+
+
 
     return 0;
 }

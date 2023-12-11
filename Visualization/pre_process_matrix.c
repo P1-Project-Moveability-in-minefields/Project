@@ -37,7 +37,7 @@ void addSoilToMatrix(int size, double** matrix, double** terrainMatrix){
         for (int j = 0; j < size; j++){
 
             if (terrainMatrix[i][j] > 0.2) {
-                matrix[i][j] = 0;
+                matrix[i][j] = 0.0;
             } else {
                 matrix[i][j] = 0.1;
             }
@@ -45,6 +45,7 @@ void addSoilToMatrix(int size, double** matrix, double** terrainMatrix){
         }
     }
 }
+
 void addWaterToMatrix(int size, double** matrix, double** terrainMatrix){
 
     for (int i = 0; i < size; i++){
