@@ -39,7 +39,6 @@ void flipHorizontally(double** matrix, int numRows, int numCols) {
 
 double*** generateListOfMockMatrices(int size, int numberOfMatrices) {
 
-    // Create an array of matrix file paths
     char* bmpPaths[] = {
             "../Mock_Values/BMP's/soil.bmp",
             "../Mock_Values/BMP's/water_levels.bmp",
@@ -49,7 +48,6 @@ double*** generateListOfMockMatrices(int size, int numberOfMatrices) {
             "../Mock_Values/BMP's/mines.bmp"
     };
 
-    // Allocate memory for the list of matrices
     double*** listOfMatrices = (double***)malloc(numberOfMatrices * sizeof(double**));
 
     if (!listOfMatrices) {
@@ -59,7 +57,7 @@ double*** generateListOfMockMatrices(int size, int numberOfMatrices) {
 
     // Loop through each BMP path, import the BMP, rotate it, and add it to the list
     for (int i = 0; i < numberOfMatrices; ++i) {
-        // Allocate memory for the matrix
+
         listOfMatrices[i] = (double**)malloc(size * sizeof(double*));
 
         if (!listOfMatrices[i]) {
