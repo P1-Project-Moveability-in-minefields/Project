@@ -23,7 +23,6 @@ result *dijkstra(double **input, int size, const int start_pos[], const int end_
         entry *current_entry = extract_min(priority_queue, &queue_size); // current entry = node with highest priority in queue
 
         if (current_entry != root_entry && current_entry->previous == NULL){
-            printf("-1");
             return NULL;
         }
 
