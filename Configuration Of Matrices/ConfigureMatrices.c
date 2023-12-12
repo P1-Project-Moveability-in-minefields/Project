@@ -107,12 +107,18 @@ void CombineMineMaps(double** mineMap, double*** mineMaps, int map_count, userSe
 }
 
 /*
-void ConfigureSoilMap(MatrixInfo soilMap, userSettings settings){
+void ConfigureSoilMap(double** soil_map, userSettings *settings){
+    int matrix_dimensions = settings->additional_settings.size;
+    double max_soil = settings->troop_settings.max_soil;
+    double *current_location = NULL;
 
-    for (int i = 0; i < soilMap.rows; ++i) {
-        for (int j = 0; j < soilMap.cols; ++j) {
-            if (soilMap[i][j] > settings.acceptableSoil true){
-                soilMap[i][j] = -1;
+    for (int i = 0; i < matrix_dimensions; ++i) {
+        for (int j = 0; j < matrix_dimensions; ++j) {
+            current_location = &soil_map[i][j];
+            if (*current_location > max_soil){
+                *current_location = -1;
+            } else if(*current_location){
+                *current_location = *current_location/max_soil;
             }
         }
     }
@@ -120,22 +126,34 @@ void ConfigureSoilMap(MatrixInfo soilMap, userSettings settings){
 */
 
 void ConfigureVegetationMap(double** vegetationMap, userSettings *settings){
+    int matrix_dimensions = settings->additional_settings.size;
+    double max_terrain_difficulty = settings->troop_settings.max_terrain_difficulty;
+    double *current_location = NULL;
 
-    for (int i = 0; i < settings->additional_settings.size; ++i) {
-        for (int j = 0; j < settings->additional_settings.size; ++j) {
-            if (vegetationMap[i][j] > settings->troop_settings.max_terrain_difficulty){
+    for (int i = 0; i < matrix_dimensions; ++i) {
+        for (int j = 0; j < matrix_dimensions; ++j) {
+            current_location = &vegetationMap[i][j];
+            if (*current_location > max_terrain_difficulty){
                 vegetationMap[i][j] = -1;
+            } else if(*current_location){
+                *current_location = *current_location/max_terrain_difficulty;
             }
         }
     }
 }
 
 void ConfigureRoadQualityMap(double** roadQualityMap, userSettings *settings){
+    int matrix_dimensions = settings->additional_settings.size;
+    double max_road = settings->troop_settings.max_road;
+    double *current_location = NULL;
 
-    for (int i = 0; i < settings->additional_settings.size; ++i) {
-        for (int j = 0; j < settings->additional_settings.size; ++j) {
-            if (roadQualityMap[i][j] > settings->troop_settings.max_road){
-                roadQualityMap[i][j] = -1;
+    for (int i = 0; i < matrix_dimensions; ++i) {
+        for (int j = 0; j < matrix_dimensions; ++j) {
+            current_location = &roadQualityMap[i][j];
+            if (*current_location > max_road){
+                *current_location = -1;
+            } else if(*current_location){
+                *current_location = *current_location/max_road;
             }
         }
     }
