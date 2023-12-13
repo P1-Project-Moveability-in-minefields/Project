@@ -35,6 +35,7 @@ void add_soil_to_matrix(int size, double** matrixPainting, double** terrainMatri
     for (int i = 0; i < size; i++){
         for (int j = 0; j < size; j++){
 
+            // If value of cell in soil matrix is less than 0.5, replace cell in matrixPainting with 0.1 (hard soil)
             if (terrainMatrix[i][j] < 0.5) {
                 matrixPainting[i][j] = 0.1;
             } else {
@@ -166,11 +167,9 @@ void add_mine_to_matrix(int size, double** matrixPainting, double** terrainMatri
 }
 
 void add_optimal_route_to_matrix(int size, double** matrixPainting, int** optimalRoute, int numberOfSteps){
-
     for (int i = 0; i < numberOfSteps; i++) {
         int x = optimalRoute[i][0];
         int y = optimalRoute[i][1];
         matrixPainting[x][y] = 1.1;
     }
-
 }
