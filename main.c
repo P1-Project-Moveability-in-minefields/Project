@@ -5,7 +5,6 @@
 #include "Configuration Of Matrices/ConfigureMatrices.h"
 #include "Visualization/exportMatrixToFile.h"
 #include "Bitmap/bmp_import.h"
-#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include "Visualization/pre_process_matrix.h"
