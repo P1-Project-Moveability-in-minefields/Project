@@ -7,7 +7,7 @@
 
 double** create_matrix_painting(int size, double*** listOfMatrices) {
 
-    double** matrixPainting = malloc(size * sizeof(double**));
+    double** matrixPainting = malloc(size * sizeof(double*));
 
     for (int i = 0; i < size; ++i) {
         matrixPainting[i] = malloc(size * sizeof(double));
