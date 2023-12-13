@@ -26,7 +26,7 @@ void rotate_90_clockwise(double** matrix, int numRows, int numCols) {
     }
 }
 
-void flip_horizontally(double** matrix, int numRows, int numCols) {
+/* void flip_horizontally(double** matrix, int numRows, int numCols) {
     // Reverse the order of columns
     for (int j = 0; j < numCols / 2; ++j) {
         for (int i = 0; i < numRows; ++i) {
@@ -35,7 +35,7 @@ void flip_horizontally(double** matrix, int numRows, int numCols) {
             matrix[i][numCols - 1 - j] = temp;
         }
     }
-}
+} */
 
 double*** generate_list_of_matrices(int size, int numberOfMatrices) {
 
