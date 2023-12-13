@@ -3,63 +3,63 @@
 //The specific locations of values in the bitmap can be found at: (https://en.wikipedia.org/wiki/BMP_file_format)
 double** import_bmp(char* path) {
     //Opens the file, with read binary parameter
-    FILE* file_pointer = fopen(path, "rb");
+    FILE* filePointer = fopen(path, "rb");
     
     //Exit with failure if the file opening failed
-    if (file_pointer == NULL) {
+    if (filePointer == NULL) {
         exit(EXIT_FAILURE);
     }
     
     //Get the size of the file
-    int file_size = get_file_size(file_pointer);
+    int fileSize = get_file_size(filePointer);
     
     //Make char(size of 1 byte) array to store the file and write the file into the array
-    char bmp[file_size];
-    fread(&bmp, file_size, 1, file_pointer);
+    char bmp[fileSize];
+    fread(&bmp, fileSize, 1, filePointer);
 
     //Checks that the bitmap is supported for the function
     check_bmp_supported(bmp);
 
     //Get the pixel data offset from the 10-14 bytes in the bmp and the width, height and bits per pixel from the
     //different locations in the bmp
-    int pixel_data_offset = (int)bmp[10];
+    int pixelDataOffset = (int)bmp[10];
     int width = (int)bmp[18];
     int height = (int)bmp[22];
-    int bits_per_pixel = (short)bmp[28];
+    int bitsPerPixel = (short)bmp[28];
 
     //Uses other function to create a matrix that follows the standard for this project, which will store the 0-1 values
     //given the strength of the color for each pixel in the bitmap
-    double** pixel_color_strength_normalised_array = create_dynamic_matrix(width);
+    double** pixelColorStrengthNormalizedArray = create_dynamic_matrix(width);
 
     //Calculates the size of the rows in the pixel storage part of the bitmap, there is often padding at the end of rows
-    int row_size = (int)ceil(((double)(bits_per_pixel * width) / 32)) * 4;
+    int rowSize = (int)ceil(((double)(bitsPerPixel * width) / 32)) * 4;
 
     //Get color table
-    unsigned char color_table[64]; //16 times 4 bytes for red, green, blue and alpha
+    unsigned char colorTable[64]; //16 times 4 bytes for red, green, blue and alpha
     for (int i = 0; i < 64; ++i) {
-        color_table[i] = bmp[54 + i]; //Byte 54 is the start of color table
+        colorTable[i] = bmp[54 + i]; //Byte 54 is the start of color table
     }
 
     //Loop over each pixel
     for (int i = 0; i < height; ++i) {
         for (int j = 0; j < width; ++j) {
             //Gets a byte from the specific pixel location
-            char index_value = bmp[pixel_data_offset + i * row_size + j/2];
+            char indexValue = bmp[pixelDataOffset + i * rowSize + j/2];
 
             //Gets the index of the pixel, so we can map it to the correct color
-            int masked_index_value = index_value & 0x0F;
+            int maskedIndexValue = indexValue & 0x0F;
 
             //Calculate normalised value from one of the color chanels of the pixel, given by the index
             //(only one chanel is needed since input is black and white so RGB are all the same)
-            double final_value = (double)color_table[masked_index_value*4] / 255;
+            double finalValue = (double)colorTable[maskedIndexValue*4] / 255;
 
             //Save the value in the array
-            pixel_color_strength_normalised_array[j][i] = final_value;
+            pixelColorStrengthNormalizedArray[j][i] = finalValue;
         }
     }
 
     //Returns the extracted matrix from the bitmap
-    return pixel_color_strength_normalised_array;
+    return pixelColorStrengthNormalizedArray;
 }
 
 //Checks whether the bitmap is supported or not
@@ -86,15 +86,15 @@ void check_bmp_supported(const char* bmp) {
 }
 
 //Get the size of a file and reset the file pointer to the beginning of the file
-int get_file_size(FILE* file_pointer) {
+int get_file_size(FILE* filePointer) {
     //Sets the positions to the end of the file
-    fseek(file_pointer, 0, SEEK_END);
+    fseek(filePointer, 0, SEEK_END);
 
     //Gets the position of the end of the file, which also is the total size
-    int size = ftell(file_pointer);
+    int size = ftell(filePointer);
 
     //Sets the reading position back to the beginning of the file
-    fseek(file_pointer, 0, SEEK_SET);
+    fseek(filePointer, 0, SEEK_SET);
 
     //Returns the size of the file
     return size;
