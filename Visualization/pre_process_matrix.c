@@ -51,6 +51,7 @@ void add_water_to_matrix(int size, double** matrix, double** terrainMatrix){
         }
     }
 }
+
 void add_vegetation_or_swampland_to_matrix(int size, double** matrix, double** terrainMatrix){
     // For each cell
     int lastCellWasSwamp = 1;
