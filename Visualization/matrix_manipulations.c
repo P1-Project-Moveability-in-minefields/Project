@@ -56,40 +56,14 @@ double*** generateListOfMockMatrices(int size, int numberOfMatrices) {
     }
 
     // Loop through each BMP path, import the BMP, rotate it, and add it to the list
+
     for (int i = 0; i < numberOfMatrices; ++i) {
-
-        listOfMatrices[i] = (double**)malloc(size * sizeof(double*));
-
-        if (!listOfMatrices[i]) {
-            perror("Memory allocation error");
-            exit(EXIT_FAILURE);
-        }
-
-        for (int j = 0; j < size; ++j) {
-            listOfMatrices[i][j] = (double*)malloc(size * sizeof(double));
-
-            if (!listOfMatrices[i][j]) {
-                perror("Memory allocation error");
-                exit(EXIT_FAILURE);
-            }
-        }
 
         // Import the BMP and rotate it
         double** matrix = import_bmp(bmpPaths[i]);
         rotate90Clockwise(matrix, size, size);
 
-        // Copy the rotated matrix to the list
-        for (int j = 0; j < size; ++j) {
-            for (int k = 0; k < size; ++k) {
-                listOfMatrices[i][j][k] = matrix[j][k];
-            }
-        }
-
-        // Free the memory allocated for the imported matrix
-        for (int j = 0; j < size; ++j) {
-            free(matrix[j]);
-        }
-        free(matrix);
+        listOfMatrices[i] = matrix;
     }
 
     return listOfMatrices;
