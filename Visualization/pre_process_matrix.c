@@ -1,7 +1,6 @@
 //
 // Created by Andreas Lynnerup on 06/12/2023.
 ///
-#define NUMBEROFMATRICES 5
 #include "pre_process_matrix.h"
 #include "stdio.h"
 #include <stdlib.h>
