@@ -7,10 +7,10 @@
 #define NUMBER_OF_TROOP_SETTINGS 5
 
 typedef enum {
-    Squad_Unit,     // 7-14 soldiers
-    Company_Unit,   // 100-250 soldiers
-    Logistic_Unit,  // Vehicles transporting troops, supplies and equipment
-    Armor_Unit,     // Armored vehicles such as tanks
+    SquadUnit,     // 7-14 soldiers
+    CompanyUnit,   // 100-250 soldiers
+    LogisticUnit,  // Vehicles transporting troops, supplies and equipment
+    ArmorUnit,     // Armored vehicles such as tanks
 } troop;
 
 typedef enum {
@@ -27,33 +27,33 @@ typedef enum {
 } clearing_implement;
 
 typedef struct {
-    double max_water_depth;
-    double max_mine_risk;
-    double max_slope;
-    double max_road;
-    double max_terrain_difficulty;
+    double maxWaterDepth;
+    double maxMineRisk;
+    double maxSlope;
+    double maxRoad;
+    double maxTerrainDifficulty;
 }troop_settings;
 
 typedef struct {
-    int is_cover_prioritized;
-    clearing_implement clearing_implement;
+    int isCoverPrioritized;
+    clearing_implement clearingImplement;
     int size;
 }additional_settings;
 
 typedef struct {
     // risk road_weight;
-    risk mine_risk;
+    risk mineRisk;
     // risk vegetation_weight;
 } priorities;
 
 typedef struct {
-    troop_settings troop_settings;
-    priorities priority_level;
-    additional_settings additional_settings;
+    troop_settings troopSettings;
+    priorities priorityLevel;
+    additional_settings additionalSettings;
 } userSettings;
 
 userSettings obtain_user_settings();
 
-void add_troop_settings(userSettings *chosenSettings, int troop_type);
+void add_troop_settings(userSettings *chosenSettings, int troopType);
 
 #endif //PROJECT_USERPREFERENCES_H

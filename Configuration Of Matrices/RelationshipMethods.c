@@ -8,42 +8,42 @@
 // Should be corrected to refer to a doctrinal document.
 #define MAXIMUM_SLOPE 70
 
-double **processMatrix(WeightedMatrix matrix_array[], int array_length, int matrix_size){
-    double **processed_matrix = CreateDynamicMatrix(matrix_size);
-    double **current_matrix = NULL;
-    for (int i = 0; i < array_length; ++i) {
-        current_matrix = matrix_array[i].matrix;
-        for (int j = 0; j < matrix_size; ++j) {
-            for (int k = 0; k < matrix_size; ++k) {
-                if (processed_matrix[j][k] == -1){
-                } else if (current_matrix[j][k] == -1){
-                    processed_matrix[j][k] = -1;
-                } else processed_matrix[j][k] += matrix_array[i].weight * matrix_array[i].matrix[j][k];
+double **process_matrix(weightedMatrix matrixArray[], int arrayLength, int matrixSize){
+    double **processedMatrix = create_dynamic_matrix(matrixSize);
+    double **currentMatrix = NULL;
+    for (int i = 0; i < arrayLength; ++i) {
+        currentMatrix = matrixArray[i].matrix;
+        for (int j = 0; j < matrixSize; ++j) {
+            for (int k = 0; k < matrixSize; ++k) {
+                if (processedMatrix[j][k] == -1){
+                } else if (currentMatrix[j][k] == -1){
+                    processedMatrix[j][k] = -1;
+                } else processedMatrix[j][k] += matrixArray[i].weight * matrixArray[i].matrix[j][k];
             }
         }
     }
-    return processed_matrix;
+    return processedMatrix;
 }
 
-void determine_weights(WeightedMatrix matrix_array [], int array_length, userSettings *settings){
-    double base_weight = (double)1/array_length;
+void determine_weights(weightedMatrix matrixArray [], int arrayLength, userSettings *settings){
+    double baseWeight = (double)1/arrayLength;
 
-    for (int i = 0; i < array_length; ++i) {
-        if(matrix_array[i].type == mine) {
-            switch (settings->priority_level.mine_risk) {
+    for (int i = 0; i < arrayLength; ++i) {
+        if(matrixArray[i].type == mine) {
+            switch (settings->priorityLevel.mineRisk) {
                 case High:
-                    matrix_array[i].weight = base_weight;
+                    matrixArray[i].weight = baseWeight;
                 case Medium:
-                    matrix_array[i].weight = 1.5 * base_weight;
+                    matrixArray[i].weight = 1.5 * baseWeight;
                 case Low:
-                    matrix_array[i].weight = 1.75 * base_weight;
+                    matrixArray[i].weight = 1.75 * baseWeight;
             }
-            base_weight = (1-matrix_array[i].weight)/(array_length-1);
-        } else matrix_array[i].weight = base_weight;
+            baseWeight = (1-matrixArray[i].weight)/(arrayLength-1);
+        } else matrixArray[i].weight = baseWeight;
     }
 }
 
-double** CreateDynamicMatrix(int size){
+double** create_dynamic_matrix(int size){
     double** matrix = (double**)calloc(size, sizeof(double*));
     for (int i = 0; i < size; i++) {
         matrix[i] = (double*)calloc(size, sizeof(double));
@@ -52,7 +52,7 @@ double** CreateDynamicMatrix(int size){
 }
 
 //  Til at udskrive matricen
-void printMatrix(int matrix[ROWS][COLS]) {
+void print_matrix(int matrix[ROWS][COLS]) {
     for (int i = 0; i < ROWS; ++i) {
         for (int j = 0; j < COLS; ++j) {
             printf("%d ", matrix[i][j]);
@@ -61,14 +61,14 @@ void printMatrix(int matrix[ROWS][COLS]) {
     }
 }
 
-int Relate_MineSlope(int** Mine_Matrix, int** Slope_Matrix, userSettings* settings){
+int relate_mineslope(int** mineMatrix, int** slopeMatrix, userSettings* settings){
     int success = 0;
-    int matrix_dimensions = settings->additional_settings.size;
+    int matrixDimensions = settings->additionalSettings.size;
 
-    for (int i = 0; i < matrix_dimensions; ++i) {
-        for (int j = 0; j < matrix_dimensions; ++j) {
-            if (Slope_Matrix[i][j] > MAXIMUM_SLOPE) {
-                Mine_Matrix[i][j] = 0;
+    for (int i = 0; i < matrixDimensions; ++i) {
+        for (int j = 0; j < matrixDimensions; ++j) {
+            if (slopeMatrix[i][j] > MAXIMUM_SLOPE) {
+                mineMatrix[i][j] = 0;
             }
         }
     }

@@ -9,89 +9,89 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void CreateSlopeMap(slope_struct** slopeMap,double** heightMap, userSettings *settings){
-    int matrix_dimensions = settings->additional_settings.size;
+void create_slope_map(slopeStruct ** slopeMap, double** heightMap, userSettings *settings){
+    int matrix_dimensions = settings->additionalSettings.size;
 
     for (int x = 0; x < matrix_dimensions; ++x) {
         for (int y = 0; y < matrix_dimensions; ++y) {
-            slope_struct slope_data;
-            slope_data.altitude = heightMap[x][y];
+            slopeStruct slopeData;
+            slopeData.altitude = heightMap[x][y];
             if (x > 0) {
-                slope_data.westward_slope = 100*(heightMap[x][y] / heightMap[x-1][y]);
-                slope_data.steepest_slope = slope_data.westward_slope;
+                slopeData.westwardSlope = 100*(heightMap[x][y] / heightMap[x-1][y]);
+                slopeData.steepestSlope = slopeData.westwardSlope;
             }
             if (x < matrix_dimensions) {
-                slope_data.eastward_slope = 100*(heightMap[x][y] / heightMap[x+1][y]);
-                if (!slope_data.steepest_slope || slope_data.steepest_slope < slope_data.eastward_slope) {
-                    slope_data.steepest_slope = slope_data.eastward_slope;
+                slopeData.eastwardSlope = 100*(heightMap[x][y] / heightMap[x+1][y]);
+                if (!slopeData.steepestSlope || slopeData.steepestSlope < slopeData.eastwardSlope) {
+                    slopeData.steepestSlope = slopeData.eastwardSlope;
                 }
             }
             if (y > 0) {
-                slope_data.northward_slope = 100*(heightMap[x][y] / heightMap[x][y+1]);
-                if (!slope_data.steepest_slope || slope_data.steepest_slope < slope_data.northward_slope) {
-                    slope_data.steepest_slope = slope_data.northward_slope;
+                slopeData.northwardSlope = 100*(heightMap[x][y] / heightMap[x][y+1]);
+                if (!slopeData.steepestSlope || slopeData.steepestSlope < slopeData.northwardSlope) {
+                    slopeData.steepestSlope = slopeData.northwardSlope;
                 }
             }
             if (y < matrix_dimensions) {
-                slope_data.southward_slope = 100*(heightMap[x][y] / heightMap[x][y-1]);
-                if (!slope_data.steepest_slope || slope_data.steepest_slope < slope_data.northward_slope) {
-                    slope_data.steepest_slope = slope_data.northward_slope;
+                slopeData.southwardSlope = 100*(heightMap[x][y] / heightMap[x][y-1]);
+                if (!slopeData.steepestSlope || slopeData.steepestSlope < slopeData.northwardSlope) {
+                    slopeData.steepestSlope = slopeData.northwardSlope;
                 }
             }
-            slopeMap[x][y] = slope_data;
+            slopeMap[x][y] = slopeData;
         }
     }
 }
 
-void ConfigureDepthMap(double** waterMap, double** road_map, userSettings *settings){
-    int matrix_dimensions = settings->additional_settings.size;
-    double max_water_depth = settings->troop_settings.max_water_depth;
-    double *current_location = NULL;
+void configure_depth_map(double** waterMap, double** roadMap, userSettings *settings){
+    int matrixDimensions = settings->additionalSettings.size;
+    double maxWaterDepth = settings->troopSettings.maxWaterDepth;
+    double *currentLocation = NULL;
 
-    for (int i = 0; i < matrix_dimensions; ++i) {
-        for (int j = 0; j < matrix_dimensions; ++j) {
-            current_location = &waterMap[i][j];
-            if (road_map[i][j] != -1 && road_map[i][j] < 1){
-                *current_location = 0;
-            } else if (*current_location > max_water_depth){
-                *current_location = -1;
-            } else if (*current_location) {
-                *current_location = *current_location / max_water_depth ;
+    for (int i = 0; i < matrixDimensions; ++i) {
+        for (int j = 0; j < matrixDimensions; ++j) {
+            currentLocation = &waterMap[i][j];
+            if (roadMap[i][j] != -1 && roadMap[i][j] < 1){
+                *currentLocation = 0;
+            } else if (*currentLocation > maxWaterDepth){
+                *currentLocation = -1;
+            } else if (*currentLocation) {
+                *currentLocation = *currentLocation / maxWaterDepth ;
             }
         }
     }
 }
 
-void ConfigureMineMap(double** mineMap, userSettings *settings){
-    int matrix_dimensions = settings->additional_settings.size;
-    double max_mine_risk = settings->troop_settings.max_mine_risk;
-    double *current_location = NULL;
+void configure_mine_map(double** mineMap, userSettings *settings){
+    int matrixDimensions = settings->additionalSettings.size;
+    double maxMineRisk = settings->troopSettings.maxMineRisk;
+    double *currentLocation = NULL;
 
-    for (int i = 0; i < matrix_dimensions; ++i) {
-        for (int j = 0; j < matrix_dimensions; ++j) {
-            current_location = &mineMap[i][j];
-            if (*current_location > max_mine_risk){
-                *current_location = -1;
-            } else if (*current_location){
-                *current_location = *current_location / max_mine_risk;
+    for (int i = 0; i < matrixDimensions; ++i) {
+        for (int j = 0; j < matrixDimensions; ++j) {
+            currentLocation = &mineMap[i][j];
+            if (*currentLocation > maxMineRisk){
+                *currentLocation = -1;
+            } else if (*currentLocation){
+                *currentLocation = *currentLocation / maxMineRisk;
             }
         }
     }
 }
 
-void CombineMineMaps(double** mineMap, double*** mineMaps, int map_count, userSettings* settings) {
+void combine_mine_maps(double** mineMap, double*** mineMaps, int mapCount, userSettings* settings) {
     // Assuming mineMap is a 2D array
     // Ensure proper memory allocation for mineMap
-    for (int i = 0; i < settings->additional_settings.size; ++i) {
-        mineMap[i] = (double*)malloc(settings->additional_settings.size * sizeof(double));
+    for (int i = 0; i < settings->additionalSettings.size; ++i) {
+        mineMap[i] = (double*)malloc(settings->additionalSettings.size * sizeof(double));
     }
 
     // Combine mine maps
-    for (int map_number = 0; map_number < map_count; ++map_number) {
-        for (int x = 0; x < settings->additional_settings.size; ++x) {
-            for (int y = 0; y < settings->additional_settings.size; ++y) {
+    for (int map_number = 0; map_number < mapCount; ++map_number) {
+        for (int x = 0; x < settings->additionalSettings.size; ++x) {
+            for (int y = 0; y < settings->additionalSettings.size; ++y) {
                 // Ensure indices are within bounds
-                if (x < settings->additional_settings.size && y < settings->additional_settings.size) {
+                if (x < settings->additionalSettings.size && y < settings->additionalSettings.size) {
                     mineMap[x][y] = (mineMap[x][y] + mineMaps[map_number][x][y]) / 2;
                     if (mineMap[x][y] > 1) {
                         mineMap[x][y] = 1;
@@ -107,8 +107,8 @@ void CombineMineMaps(double** mineMap, double*** mineMaps, int map_count, userSe
 }
 
 /*
-void ConfigureSoilMap(double** soil_map, userSettings *settings){
-    int matrix_dimensions = settings->additional_settings.size;
+void configure_soil_map(double** soil_map, userSettings *settings){
+    int matrix_dimensions = settings->additionalSettings.size;
     double max_soil = settings->troop_settings.max_soil;
     double *current_location = NULL;
 
@@ -125,61 +125,61 @@ void ConfigureSoilMap(double** soil_map, userSettings *settings){
 }
 */
 
-void ConfigureVegetationMap(double** vegetationMap, userSettings *settings){
-    int matrix_dimensions = settings->additional_settings.size;
-    double max_terrain_difficulty = settings->troop_settings.max_terrain_difficulty;
-    double *current_location = NULL;
+void configure_vegetation_map(double** vegetationMap, userSettings *settings){
+    int matrixDimensions = settings->additionalSettings.size;
+    double maxTerrainDifficulty = settings->troopSettings.maxTerrainDifficulty;
+    double *currentLocation = NULL;
 
-    for (int i = 0; i < matrix_dimensions; ++i) {
-        for (int j = 0; j < matrix_dimensions; ++j) {
-            current_location = &vegetationMap[i][j];
-            if (*current_location > max_terrain_difficulty){
+    for (int i = 0; i < matrixDimensions; ++i) {
+        for (int j = 0; j < matrixDimensions; ++j) {
+            currentLocation = &vegetationMap[i][j];
+            if (*currentLocation > maxTerrainDifficulty){
                 vegetationMap[i][j] = -1;
-            } else if(*current_location){
-                *current_location = *current_location/max_terrain_difficulty;
+            } else if(*currentLocation){
+                *currentLocation = *currentLocation/maxTerrainDifficulty;
             }
         }
     }
 }
 
-void ConfigureRoadQualityMap(double** roadQualityMap, userSettings *settings){
-    int matrix_dimensions = settings->additional_settings.size;
-    double max_road = settings->troop_settings.max_road;
-    double *current_location = NULL;
+void configure_road_quality_map(double** roadQualityMap, userSettings *settings){
+    int matrixDimensions = settings->additionalSettings.size;
+    double maxRoad = settings->troopSettings.maxRoad;
+    double *currentLocation = NULL;
 
-    for (int i = 0; i < matrix_dimensions; ++i) {
-        for (int j = 0; j < matrix_dimensions; ++j) {
-            current_location = &roadQualityMap[i][j];
-            if (*current_location > max_road){
-                *current_location = -1;
-            } else if(*current_location){
-                *current_location = *current_location/max_road;
+    for (int i = 0; i < matrixDimensions; ++i) {
+        for (int j = 0; j < matrixDimensions; ++j) {
+            currentLocation = &roadQualityMap[i][j];
+            if (*currentLocation > maxRoad){
+                *currentLocation = -1;
+            } else if(*currentLocation){
+                *currentLocation = *currentLocation/maxRoad;
             }
         }
     }
 }
 
-WeightedMatrix* ConfigureListOfMatrices(double*** list_of_matrices, userSettings *settings){
-    ConfigureRoadQualityMap(list_of_matrices[3], settings);
-    ConfigureDepthMap(list_of_matrices[1], list_of_matrices[3], settings);
-    ConfigureVegetationMap(list_of_matrices[2], settings);
-    ConfigureMineMap(list_of_matrices[5], settings);
+weightedMatrix* configure_list_of_matrices(double*** listOfMatrices, userSettings *settings){
+    configure_road_quality_map(listOfMatrices[3], settings);
+    configure_depth_map(listOfMatrices[1], listOfMatrices[3], settings);
+    configure_vegetation_map(listOfMatrices[2], settings);
+    configure_mine_map(listOfMatrices[5], settings);
 
-    WeightedMatrix* list_of_configured_matrices = (WeightedMatrix*)malloc(6 * sizeof(WeightedMatrix));
+    weightedMatrix* listOfConfiguredMatrices = (weightedMatrix* )malloc(6 * sizeof(weightedMatrix ));
 
-    if (!list_of_configured_matrices) {
+    if (!listOfConfiguredMatrices) {
         perror("Memory allocation error");
         exit(EXIT_FAILURE);
     }
 
-    list_of_configured_matrices[0] = (WeightedMatrix){mine, list_of_matrices[5], settings->priority_level.mine_risk};
-    list_of_configured_matrices[1] = (WeightedMatrix){soil, list_of_matrices[0], 0};
-    list_of_configured_matrices[2] = (WeightedMatrix){water, list_of_matrices[1], 0};
-    list_of_configured_matrices[3] = (WeightedMatrix){vegetation, list_of_matrices[2], 0};
-    list_of_configured_matrices[4] = (WeightedMatrix){road, list_of_matrices[3], 0};
-    list_of_configured_matrices[5] = (WeightedMatrix){steepness, list_of_matrices[4], 0};
+    listOfConfiguredMatrices[0] = (weightedMatrix ){mine, listOfMatrices[5], settings->priorityLevel.mineRisk};
+    listOfConfiguredMatrices[1] = (weightedMatrix){soil, listOfMatrices[0], 0};
+    listOfConfiguredMatrices[2] = (weightedMatrix){water, listOfMatrices[1], 0};
+    listOfConfiguredMatrices[3] = (weightedMatrix){vegetation, listOfMatrices[2], 0};
+    listOfConfiguredMatrices[4] = (weightedMatrix){road, listOfMatrices[3], 0};
+    listOfConfiguredMatrices[5] = (weightedMatrix){steepness, listOfMatrices[4], 0};
 
-    determine_weights(list_of_configured_matrices, 6, settings);
+    determine_weights(listOfConfiguredMatrices, 6, settings);
 
-    return list_of_configured_matrices;
+    return listOfConfiguredMatrices;
 }

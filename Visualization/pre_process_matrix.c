@@ -1,13 +1,12 @@
 //
 // Created by Andreas Lynnerup on 06/12/2023.
 ///
-#define NUMBEROFMATRICES 5
 #include "pre_process_matrix.h"
 #include "stdio.h"
 #include <stdlib.h>
 
-double** createMatrixPainting(int size,
-                              double*** list_of_matrices) {
+double** create_matrix_painting(int size,
+                              double*** listOfMatrices) {
 
     double** matrix = malloc(size * sizeof(double*));
     for (int i = 0; i < size; ++i) {
@@ -15,17 +14,17 @@ double** createMatrixPainting(int size,
     }
 
     // Assuming these functions are correctly implemented to copy values
-    addSoilToMatrix(size, matrix, list_of_matrices[0]);
-    addWaterToMatrix(size, matrix, list_of_matrices[1]);
-    addVegetationToMatrix(size, matrix, list_of_matrices[2]);
-    addRoadToMatrix(size, matrix, list_of_matrices[3]);
-    addMineToMatrix(size, matrix, list_of_matrices[5]);
+    add_soil_to_matrix(size, matrix, listOfMatrices[0]);
+    add_water_to_matrix(size, matrix, listOfMatrices[1]);
+    add_vegetation_or_swampland_to_matrix(size, matrix, listOfMatrices[2]);
+    add_road_to_matrix(size, matrix, listOfMatrices[3]);
+    add_mine_to_matrix(size, matrix, listOfMatrices[5]);
 
     return matrix;
 }
 
 
-void addSoilToMatrix(int size, double** matrix, double** terrainMatrix){
+void add_soil_to_matrix(int size, double** matrix, double** terrainMatrix){
     for (int i = 0; i < size; i++){
         for (int j = 0; j < size; j++){
 
@@ -39,7 +38,7 @@ void addSoilToMatrix(int size, double** matrix, double** terrainMatrix){
     }
 }
 
-void addWaterToMatrix(int size, double** matrix, double** terrainMatrix){
+void add_water_to_matrix(int size, double** matrix, double** terrainMatrix){
 
     for (int i = 0; i < size; i++){
         for (int j = 0; j < size; j++){
@@ -52,55 +51,68 @@ void addWaterToMatrix(int size, double** matrix, double** terrainMatrix){
         }
     }
 }
-void addVegetationToMatrix(int size, double** matrix, double** terrainMatrix){
+
+void add_vegetation_or_swampland_to_matrix(int size, double** matrix, double** terrainMatrix){
     // For each cell
     int lastCellWasSwamp = 1;
     for (int i = 0; i < size; i++){
         for (int j = 0; j < size; j++){
-
             int isVegetation = 0;
             int isWater = 0;
-            if (matrix[i][j] == 0.2 || matrix[i][j] == 0.3) {
+
+            double terrainCell = terrainMatrix[i][j];
+            double* matrixCell = &matrix[i][j];
+
+            if (*matrixCell == 0.2 || *matrixCell == 0.3) {
                 isWater = 1;
             }
-            if (terrainMatrix[i][j] > 0.3) {
+            if (terrainCell > 0.3) {
                 isVegetation = 1;
             }
 
             // If there is water and vegetation:
             if (isWater && isVegetation){ // Water has value of 0.3
-                if (lastCellWasSwamp) {
-                    if(terrainMatrix[i][j] < 0.75)
-                    { // low veg
-                        matrix[i][j] = 0.5;
-                    }
-                    else if (terrainMatrix[i][j] > 0.75)
-                    { // high veg
-                        matrix[i][j] = 0.6;
-                    }
-                    lastCellWasSwamp = 0;
-                } else {
-                    matrix[i][j] = 0.4;
-                    lastCellWasSwamp = 1;
-                }
+                add_swamp_to_matrix(&lastCellWasSwamp, terrainCell, matrixCell);
             }
 
             // Else if no water and vegetation
             else if (!isWater && isVegetation) {
-                if(terrainMatrix[i][j] < 0.75)
-                { // low veg
-                    matrix[i][j] = 0.5;
-                }
-                else if (terrainMatrix[i][j] > 0.75)
-                { // high veg
-                    matrix[i][j] = 0.6;
-                }
+                add_vegetation_to_matrix(terrainCell, matrixCell);
             }
 
         }
     }
 }
-void addRoadToMatrix(int size, double** matrix, double** terrainMatrix){
+
+void add_swamp_to_matrix(int* lastCellWasSwamp,  double terrainCell, double* matrixCell){
+    if (*lastCellWasSwamp) {
+        if(terrainCell < 0.75)
+        { // low veg
+            *matrixCell = 0.5;
+        }
+        else if (terrainCell > 0.75)
+        { // high veg
+            *matrixCell = 0.6;
+        }
+        *lastCellWasSwamp = 0;
+    } else {
+        *matrixCell = 0.4;
+        *lastCellWasSwamp = 1;
+    }
+}
+
+void add_vegetation_to_matrix(double terrainCell, double* matrixCell){
+    if(terrainCell < 0.75)
+    { // low veg
+        *matrixCell = 0.5;
+    }
+    else if (terrainCell > 0.75)
+    { // high veg
+        *matrixCell = 0.6;
+    }
+}
+
+void add_road_to_matrix(int size, double** matrix, double** terrainMatrix){
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
 
@@ -119,7 +131,7 @@ void addRoadToMatrix(int size, double** matrix, double** terrainMatrix){
         }
     }
 }
-void addMineToMatrix(int size, double** matrix, double** terrainMatrix){
+void add_mine_to_matrix(int size, double** matrix, double** terrainMatrix){
     if (terrainMatrix == NULL){
         return;
     }
@@ -146,11 +158,11 @@ void addMineToMatrix(int size, double** matrix, double** terrainMatrix){
     }
 }
 
-void addOptimalRouteToMatrix(int size, double** matrix, int** optimal_route, int number_of_steps){
+void add_optimal_route_to_matrix(int size, double** matrix, int** optimalRoute, int numberOfSteps){
 
-    for (int i = 0; i < number_of_steps; i++) {
-        int x = optimal_route[i][0];
-        int y = optimal_route[i][1];
+    for (int i = 0; i < numberOfSteps; i++) {
+        int x = optimalRoute[i][0];
+        int y = optimalRoute[i][1];
         matrix[x][y] = 1.1;
     }
 

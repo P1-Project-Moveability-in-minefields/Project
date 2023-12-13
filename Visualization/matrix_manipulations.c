@@ -6,7 +6,7 @@
 #include "matrix_manipulations.h"
 #include "../Bitmap/bmp_import.h"
 
-void rotate90Clockwise(double** matrix, int numRows, int numCols) {
+void rotate_90_clockwise(double** matrix, int numRows, int numCols) {
     // Transpose the matrix
     for (int i = 0; i < numRows; ++i) {
         for (int j = i + 1; j < numCols; ++j) {
@@ -26,7 +26,7 @@ void rotate90Clockwise(double** matrix, int numRows, int numCols) {
     }
 }
 
-void flipHorizontally(double** matrix, int numRows, int numCols) {
+/* void flip_horizontally(double** matrix, int numRows, int numCols) {
     // Reverse the order of columns
     for (int j = 0; j < numCols / 2; ++j) {
         for (int i = 0; i < numRows; ++i) {
@@ -35,9 +35,9 @@ void flipHorizontally(double** matrix, int numRows, int numCols) {
             matrix[i][numCols - 1 - j] = temp;
         }
     }
-}
+} */
 
-double*** generateListOfMockMatrices(int size, int numberOfMatrices) {
+double*** generate_list_of_matrices(int size, int numberOfMatrices) {
 
     char* bmpPaths[] = {
             "../Mock_Values/BMP's/soil.bmp",
@@ -56,40 +56,14 @@ double*** generateListOfMockMatrices(int size, int numberOfMatrices) {
     }
 
     // Loop through each BMP path, import the BMP, rotate it, and add it to the list
+
     for (int i = 0; i < numberOfMatrices; ++i) {
-
-        listOfMatrices[i] = (double**)malloc(size * sizeof(double*));
-
-        if (!listOfMatrices[i]) {
-            perror("Memory allocation error");
-            exit(EXIT_FAILURE);
-        }
-
-        for (int j = 0; j < size; ++j) {
-            listOfMatrices[i][j] = (double*)malloc(size * sizeof(double));
-
-            if (!listOfMatrices[i][j]) {
-                perror("Memory allocation error");
-                exit(EXIT_FAILURE);
-            }
-        }
 
         // Import the BMP and rotate it
         double** matrix = import_bmp(bmpPaths[i]);
-        rotate90Clockwise(matrix, size, size);
+        rotate_90_clockwise(matrix, size, size);
 
-        // Copy the rotated matrix to the list
-        for (int j = 0; j < size; ++j) {
-            for (int k = 0; k < size; ++k) {
-                listOfMatrices[i][j][k] = matrix[j][k];
-            }
-        }
-
-        // Free the memory allocated for the imported matrix
-        for (int j = 0; j < size; ++j) {
-            free(matrix[j]);
-        }
-        free(matrix);
+        listOfMatrices[i] = matrix;
     }
 
     return listOfMatrices;
