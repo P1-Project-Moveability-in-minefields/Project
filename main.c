@@ -16,7 +16,7 @@ int main() {
 
     // Initialize user settings
     userSettings userSettings = obtain_user_settings();
-    int size = userSettings.additional_settings.size;
+    int size = userSettings.additionalSettings.size;
 
     // Generate list of mock matrices
     // [0] = soil
@@ -25,32 +25,32 @@ int main() {
     // [3] = roads
     // [4] = steepness
     // [5] = mines
-    double*** list_of_matrices = generate_list_of_matrices(100, 6);
+    double*** listOfMatrices = generate_list_of_matrices(100, 6);
 
     // Create matrix painting based off of mock matrices (Save the current version of terrain matrices before configuration)
-    double** matrix_painting = create_matrix_painting(size, list_of_matrices);
+    double** matrixPainting = create_matrix_painting(size, listOfMatrices);
 
     //Configure list of mock matrices
-    weighted_matrix* list_of_configured_matrices = configure_list_of_matrices(list_of_matrices, &userSettings);
+    weightedMatrix * listOfConfiguredMatrices = configure_list_of_matrices(listOfMatrices, &userSettings);
 
     // Process the matrix and combine them into final matrix.
-    double** processedMatrix = processMatrix(list_of_configured_matrices, 6, size);
+    double** processedMatrix = process_matrix(listOfConfiguredMatrices, 6, size);
 
     // Run Dijkstra algorithm.
-    int start_pos[2] = {99, 30};
-    int end_pos[2] = {5, 60};
-    result* optimal_route = dijkstra(processedMatrix, size, start_pos, end_pos);
+    int startPos[2] = {99, 30};
+    int endPos[2] = {5, 60};
+    result* optimalRoute = dijkstra(processedMatrix, size, startPos, endPos);
 
-    if (optimal_route == NULL){
+    if (optimalRoute == NULL){
         perror("No route can be found. Aborting...");
         exit(EXIT_FAILURE);
     }
 
     // Add the optimal route to the matrix painting, to be visualized.
-    add_optimal_route_to_matrix(size, matrix_painting, optimal_route->path, optimal_route->path_length);
+    add_optimal_route_to_matrix(size, matrixPainting, optimalRoute->path, optimalRoute->path_length);
 
     // Export matrix painting for visualization in python.
-    exportMatrixToFile(size, size, matrix_painting);
+    exportMatrixToFile(size, size, matrixPainting);
 
     return 0;
 }
