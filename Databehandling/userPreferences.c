@@ -57,7 +57,7 @@ userSettings obtain_user_settings() {
     */
 
     //6th setting
-    printf("\n6. Specify available and desired clearance method: ('0' = None '1' = MICLIC, '2' = Vehicle mounted plow, '3' = Rafael Missile Carpet System");
+    printf("\n6. Specify available and desired clearance method: ('0' = None '1' = MICLIC, '2' = Vehicle mounted plow, '3' = Rafael Missile Carpet System\n");
     scanf("%d",&chosenSettings.additional_settings.clearing_implement);
     printf("You have specified the availability of clearance method %s\n", stringClearanceType[chosenSettings.additional_settings.clearing_implement]);
 
