@@ -17,7 +17,7 @@ typedef struct{
     double weight;
 } weighted_matrix;
 
-/// A data container,
+/// A data container, SOMEONE FILL OUT THIS
 typedef struct {
     double altitude;
     double northward_slope;
