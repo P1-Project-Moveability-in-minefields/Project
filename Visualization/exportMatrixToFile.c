@@ -6,7 +6,7 @@
 
 #include "exportMatrixToFile.h"
 
-void exportMatrixToFile(int rows, int cols, double** matrix) {
+void export_matrix_to_file(int rows, int cols, double** matrix) {
 
     FILE *file = fopen("../OutputMatrices/outputMatrix.txt", "w");
 

@@ -50,7 +50,7 @@ int main() {
     add_optimal_route_to_matrix(size, matrixPainting, optimalRoute->path, optimalRoute->path_length);
 
     // Export matrix painting for visualization in python.
-    exportMatrixToFile(size, size, matrixPainting);
+    export_matrix_to_file(size, size, matrixPainting);
 
     return 0;
 }

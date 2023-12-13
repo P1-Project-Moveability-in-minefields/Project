@@ -6,7 +6,7 @@
 #include <stdlib.h>
 
 double** create_matrix_painting(int size,
-                              double*** list_of_matrices) {
+                              double*** listOfMatrices) {
 
     double** matrix = malloc(size * sizeof(double*));
     for (int i = 0; i < size; ++i) {
@@ -14,11 +14,11 @@ double** create_matrix_painting(int size,
     }
 
     // Assuming these functions are correctly implemented to copy values
-    add_soil_to_matrix(size, matrix, list_of_matrices[0]);
-    add_water_to_matrix(size, matrix, list_of_matrices[1]);
-    add_vegetation_or_swampland_to_matrix(size, matrix, list_of_matrices[2]);
-    add_road_to_matrix(size, matrix, list_of_matrices[3]);
-    add_mine_to_matrix(size, matrix, list_of_matrices[5]);
+    add_soil_to_matrix(size, matrix, listOfMatrices[0]);
+    add_water_to_matrix(size, matrix, listOfMatrices[1]);
+    add_vegetation_or_swampland_to_matrix(size, matrix, listOfMatrices[2]);
+    add_road_to_matrix(size, matrix, listOfMatrices[3]);
+    add_mine_to_matrix(size, matrix, listOfMatrices[5]);
 
     return matrix;
 }
@@ -157,11 +157,11 @@ void add_mine_to_matrix(int size, double** matrix, double** terrainMatrix){
     }
 }
 
-void add_optimal_route_to_matrix(int size, double** matrix, int** optimal_route, int number_of_steps){
+void add_optimal_route_to_matrix(int size, double** matrix, int** optimalRoute, int numberOfSteps){
 
-    for (int i = 0; i < number_of_steps; i++) {
-        int x = optimal_route[i][0];
-        int y = optimal_route[i][1];
+    for (int i = 0; i < numberOfSteps; i++) {
+        int x = optimalRoute[i][0];
+        int y = optimalRoute[i][1];
         matrix[x][y] = 1.1;
     }
 
