@@ -18,14 +18,13 @@ double** import_bmp(char* path) {
     fread(&bmp, file_size, 1, file_pointer);
 
     //Checks that the bitmap is supported for the function
-    check_bmp_unsupported(bmp);
+    check_bmp_supported(bmp);
 
-    //Get the pixel data offset from the 10-14 bytes in the bmp
+    //Get the pixel data offset from the 10-14 bytes in the bmp and the width, height and bits per pixel from the
+    //different locations in the bmp
     int pixel_data_offset = (int)bmp[10];
-
-    //Get the width, height and bits per pixel from the different locations in the bmp
-    int width = *(int*)&bmp[18];
-    int height = *(int*)&bmp[22];
+    int width = (int)bmp[18];
+    int height = (int)bmp[22];
     int bits_per_pixel = (short)bmp[28];
 
     //Uses other function to create a matrix that follows the standard for this project, which will store the 0-1 values
@@ -46,11 +45,14 @@ double** import_bmp(char* path) {
         for (int j = 0; j < width; ++j) {
             //Gets a byte from the specific pixel location
             char index_value = bmp[pixel_data_offset + i * row_size + j/2];
+
             //Gets the index of the pixel, so we can map it to the correct color
             int masked_index_value = index_value & 0x0F;
+
             //Calculate normalised value from one of the color chanels of the pixel, given by the index
             //(only one chanel is needed since input is black and white so RGB are all the same)
             double final_value = (double)color_table[masked_index_value*4] / 255;
+
             //Save the value in the array
             pixel_color_strength_normalised_array[j][i] = final_value;
         }
@@ -60,7 +62,8 @@ double** import_bmp(char* path) {
     return pixel_color_strength_normalised_array;
 }
 
-void check_bmp_unsupported(const char* bmp) {
+//Checks whether the bitmap is supported or not
+void check_bmp_supported(const char* bmp) {
     //Exit with failure if not a bitmap file
     if (bmp[0] != 'B' && bmp[1] != 'M') {
         exit(EXIT_FAILURE);
@@ -82,6 +85,7 @@ void check_bmp_unsupported(const char* bmp) {
     }
 }
 
+//Get the size of a file and reset the file pointer to the beginning of the file
 int get_file_size(FILE* file_pointer) {
     //Sets the positions to the end of the file
     fseek(file_pointer, 0, SEEK_END);
