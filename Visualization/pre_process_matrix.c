@@ -6,7 +6,7 @@
 #include "stdio.h"
 #include <stdlib.h>
 
-double** createMatrixPainting(int size,
+double** create_matrix_painting(int size,
                               double*** list_of_matrices) {
 
     double** matrix = malloc(size * sizeof(double*));
@@ -15,17 +15,17 @@ double** createMatrixPainting(int size,
     }
 
     // Assuming these functions are correctly implemented to copy values
-    addSoilToMatrix(size, matrix, list_of_matrices[0]);
-    addWaterToMatrix(size, matrix, list_of_matrices[1]);
-    addVegetationToMatrix(size, matrix, list_of_matrices[2]);
-    addRoadToMatrix(size, matrix, list_of_matrices[3]);
-    addMineToMatrix(size, matrix, list_of_matrices[5]);
+    add_soil_to_matrix(size, matrix, list_of_matrices[0]);
+    add_water_to_matrix(size, matrix, list_of_matrices[1]);
+    add_vegetation_to_matrix(size, matrix, list_of_matrices[2]);
+    add_road_to_matrix(size, matrix, list_of_matrices[3]);
+    add_mine_to_matrix(size, matrix, list_of_matrices[5]);
 
     return matrix;
 }
 
 
-void addSoilToMatrix(int size, double** matrix, double** terrainMatrix){
+void add_soil_to_matrix(int size, double** matrix, double** terrainMatrix){
     for (int i = 0; i < size; i++){
         for (int j = 0; j < size; j++){
 
@@ -39,7 +39,7 @@ void addSoilToMatrix(int size, double** matrix, double** terrainMatrix){
     }
 }
 
-void addWaterToMatrix(int size, double** matrix, double** terrainMatrix){
+void add_water_to_matrix(int size, double** matrix, double** terrainMatrix){
 
     for (int i = 0; i < size; i++){
         for (int j = 0; j < size; j++){
@@ -52,7 +52,7 @@ void addWaterToMatrix(int size, double** matrix, double** terrainMatrix){
         }
     }
 }
-void addVegetationToMatrix(int size, double** matrix, double** terrainMatrix){
+void add_vegetation_to_matrix(int size, double** matrix, double** terrainMatrix){
     // For each cell
     int lastCellWasSwamp = 1;
     for (int i = 0; i < size; i++){
@@ -100,7 +100,7 @@ void addVegetationToMatrix(int size, double** matrix, double** terrainMatrix){
         }
     }
 }
-void addRoadToMatrix(int size, double** matrix, double** terrainMatrix){
+void add_road_to_matrix(int size, double** matrix, double** terrainMatrix){
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
 
@@ -119,7 +119,7 @@ void addRoadToMatrix(int size, double** matrix, double** terrainMatrix){
         }
     }
 }
-void addMineToMatrix(int size, double** matrix, double** terrainMatrix){
+void add_mine_to_matrix(int size, double** matrix, double** terrainMatrix){
     if (terrainMatrix == NULL){
         return;
     }
@@ -146,7 +146,7 @@ void addMineToMatrix(int size, double** matrix, double** terrainMatrix){
     }
 }
 
-void addOptimalRouteToMatrix(int size, double** matrix, int** optimal_route, int number_of_steps){
+void add_optimal_route_to_matrix(int size, double** matrix, int** optimal_route, int number_of_steps){
 
     for (int i = 0; i < number_of_steps; i++) {
         int x = optimal_route[i][0];

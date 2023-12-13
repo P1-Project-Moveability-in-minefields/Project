@@ -25,10 +25,10 @@ int main() {
     // [3] = roads
     // [4] = steepness
     // [5] = mines
-    double*** list_of_matrices = generateListOfMockMatrices(100, 6);
+    double*** list_of_matrices = generate_list_of_matrices(100, 6);
 
     // Create matrix painting based off of mock matrices (Save the current version of terrain matrices before configuration)
-    double** matrix_painting = createMatrixPainting(size, list_of_matrices);
+    double** matrix_painting = create_matrix_painting(size, list_of_matrices);
 
     //Configure list of mock matrices
     weighted_matrix* list_of_configured_matrices = configure_list_of_matrices(list_of_matrices, &userSettings);
@@ -47,7 +47,7 @@ int main() {
     }
 
     // Add the optimal route to the matrix painting, to be visualized.
-    addOptimalRouteToMatrix(size, matrix_painting, optimal_route->path, optimal_route->path_length);
+    add_optimal_route_to_matrix(size, matrix_painting, optimal_route->path, optimal_route->path_length);
 
     // Export matrix painting for visualization in python.
     exportMatrixToFile(size, size, matrix_painting);
