@@ -7,8 +7,10 @@
 
 double** create_matrix_painting(int size, double*** listOfMatrices) {
 
+    // Allocate arrays of type double, size times
     double** matrixPainting = malloc(size * sizeof(double*));
 
+    // For each row, allocate 100 doubles.
     for (int i = 0; i < size; ++i) {
         matrixPainting[i] = malloc(size * sizeof(double));
     }
