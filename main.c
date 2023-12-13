@@ -31,7 +31,7 @@ int main() {
     double** matrix_painting = createMatrixPainting(size, list_of_matrices);
 
     //Configure list of mock matrices
-    WeightedMatrix* list_of_configured_matrices = ConfigureListOfMatrices(list_of_matrices, &userSettings);
+    weighted_matrix* list_of_configured_matrices = configure_list_of_matrices(list_of_matrices, &userSettings);
 
     // Process the matrix and combine them into final matrix.
     double** processedMatrix = processMatrix(list_of_configured_matrices, 6, size);

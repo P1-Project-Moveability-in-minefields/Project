@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void CreateSlopeMap(slope_struct** slopeMap,double** heightMap, userSettings *settings){
+void create_slope_map(slope_struct** slopeMap, double** heightMap, userSettings *settings){
     int matrix_dimensions = settings->additional_settings.size;
 
     for (int x = 0; x < matrix_dimensions; ++x) {
@@ -43,7 +43,7 @@ void CreateSlopeMap(slope_struct** slopeMap,double** heightMap, userSettings *se
     }
 }
 
-void ConfigureDepthMap(double** waterMap, double** road_map, userSettings *settings){
+void configure_depth_map(double** waterMap, double** road_map, userSettings *settings){
     int matrix_dimensions = settings->additional_settings.size;
     double max_water_depth = settings->troop_settings.max_water_depth;
     double *current_location = NULL;
@@ -62,7 +62,7 @@ void ConfigureDepthMap(double** waterMap, double** road_map, userSettings *setti
     }
 }
 
-void ConfigureMineMap(double** mineMap, userSettings *settings){
+void configure_mine_map(double** mineMap, userSettings *settings){
     int matrix_dimensions = settings->additional_settings.size;
     double max_mine_risk = settings->troop_settings.max_mine_risk;
     double *current_location = NULL;
@@ -79,7 +79,7 @@ void ConfigureMineMap(double** mineMap, userSettings *settings){
     }
 }
 
-void CombineMineMaps(double** mineMap, double*** mineMaps, int map_count, userSettings* settings) {
+void combine_mine_maps(double** mineMap, double*** mineMaps, int map_count, userSettings* settings) {
     // Assuming mineMap is a 2D array
     // Ensure proper memory allocation for mineMap
     for (int i = 0; i < settings->additional_settings.size; ++i) {
@@ -107,7 +107,7 @@ void CombineMineMaps(double** mineMap, double*** mineMaps, int map_count, userSe
 }
 
 /*
-void ConfigureSoilMap(double** soil_map, userSettings *settings){
+void configure_soil_map(double** soil_map, userSettings *settings){
     int matrix_dimensions = settings->additional_settings.size;
     double max_soil = settings->troop_settings.max_soil;
     double *current_location = NULL;
@@ -125,7 +125,7 @@ void ConfigureSoilMap(double** soil_map, userSettings *settings){
 }
 */
 
-void ConfigureVegetationMap(double** vegetationMap, userSettings *settings){
+void configure_vegetation_map(double** vegetationMap, userSettings *settings){
     int matrix_dimensions = settings->additional_settings.size;
     double max_terrain_difficulty = settings->troop_settings.max_terrain_difficulty;
     double *current_location = NULL;
@@ -142,7 +142,7 @@ void ConfigureVegetationMap(double** vegetationMap, userSettings *settings){
     }
 }
 
-void ConfigureRoadQualityMap(double** roadQualityMap, userSettings *settings){
+void configure_road_quality_map(double** roadQualityMap, userSettings *settings){
     int matrix_dimensions = settings->additional_settings.size;
     double max_road = settings->troop_settings.max_road;
     double *current_location = NULL;
@@ -159,25 +159,25 @@ void ConfigureRoadQualityMap(double** roadQualityMap, userSettings *settings){
     }
 }
 
-WeightedMatrix* ConfigureListOfMatrices(double*** list_of_matrices, userSettings *settings){
-    ConfigureRoadQualityMap(list_of_matrices[3], settings);
-    ConfigureDepthMap(list_of_matrices[1], list_of_matrices[3], settings);
-    ConfigureVegetationMap(list_of_matrices[2], settings);
-    ConfigureMineMap(list_of_matrices[5], settings);
+weighted_matrix* configure_list_of_matrices(double*** list_of_matrices, userSettings *settings){
+    configure_road_quality_map(list_of_matrices[3], settings);
+    configure_depth_map(list_of_matrices[1], list_of_matrices[3], settings);
+    configure_vegetation_map(list_of_matrices[2], settings);
+    configure_mine_map(list_of_matrices[5], settings);
 
-    WeightedMatrix* list_of_configured_matrices = (WeightedMatrix*)malloc(6 * sizeof(WeightedMatrix));
+    weighted_matrix* list_of_configured_matrices = (weighted_matrix*)malloc(6 * sizeof(weighted_matrix));
 
     if (!list_of_configured_matrices) {
         perror("Memory allocation error");
         exit(EXIT_FAILURE);
     }
 
-    list_of_configured_matrices[0] = (WeightedMatrix){mine, list_of_matrices[5], settings->priority_level.mine_risk};
-    list_of_configured_matrices[1] = (WeightedMatrix){soil, list_of_matrices[0], 0};
-    list_of_configured_matrices[2] = (WeightedMatrix){water, list_of_matrices[1], 0};
-    list_of_configured_matrices[3] = (WeightedMatrix){vegetation, list_of_matrices[2], 0};
-    list_of_configured_matrices[4] = (WeightedMatrix){road, list_of_matrices[3], 0};
-    list_of_configured_matrices[5] = (WeightedMatrix){steepness, list_of_matrices[4], 0};
+    list_of_configured_matrices[0] = (weighted_matrix){mine, list_of_matrices[5], settings->priority_level.mine_risk};
+    list_of_configured_matrices[1] = (weighted_matrix){soil, list_of_matrices[0], 0};
+    list_of_configured_matrices[2] = (weighted_matrix){water, list_of_matrices[1], 0};
+    list_of_configured_matrices[3] = (weighted_matrix){vegetation, list_of_matrices[2], 0};
+    list_of_configured_matrices[4] = (weighted_matrix){road, list_of_matrices[3], 0};
+    list_of_configured_matrices[5] = (weighted_matrix){steepness, list_of_matrices[4], 0};
 
     determine_weights(list_of_configured_matrices, 6, settings);
 

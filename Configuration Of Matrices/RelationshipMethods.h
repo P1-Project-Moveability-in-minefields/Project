@@ -8,7 +8,7 @@
 #define ROWS 3
 #define COLS 3
 
-double **processMatrix(WeightedMatrix matrix_array [], int array_size, int matrix_size);
+double **processMatrix(weighted_matrix matrix_array [], int array_size, int matrix_size);
 
 double** CreateDynamicMatrix(int size);
 void printMatrix(int matrix[ROWS][COLS]);
@@ -20,6 +20,6 @@ void printMatrix(int matrix[ROWS][COLS]);
 /// \param settings Pointer to the primary setting struct
 /// \return 1 on a success, 0 on failure, adjusts errno as necessary.
 int Relate_MineSlope(int** Mine_Matrix, int** Slope_Matrix, userSettings* settings);
-void determine_weights(WeightedMatrix matrix_array [], int array_length, userSettings *settings);
+void determine_weights(weighted_matrix matrix_array [], int array_length, userSettings *settings);
 
 #endif
