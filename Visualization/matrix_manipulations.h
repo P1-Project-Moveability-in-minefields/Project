@@ -17,7 +17,7 @@ void rotate90Clockwise(double** matrix, int numRows, int numCols);
 /// \param numCols (int), the dimensions (colmumns) of the matrix.
 void flipHorizontally(double** matrix, int numRows, int numCols);
 
-/// Imports a number of matrices based on hardcoded paths.
+/// Imports a number of matrices based on hardcoded paths, and manipulates them so they are ready for use.
 /// \param size (int), the size of the matrices that will be imported.
 /// \param numberOfMatrices (int), the amount of matrices to import.
 /// \return (double***), returns an array with all the matrices that has been imported.
