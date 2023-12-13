@@ -11,11 +11,6 @@ typedef struct{
     int priority_status; // Keeps track of previous
 }entry;
 
-
- * @param element the node node that will
- * @param index
- */
-
 /// Adds a node to a priority queue
 /// \param queue (entry *) the priority queue in to which the node will be added
 /// \param element (entry *) the node that will be added to queue
