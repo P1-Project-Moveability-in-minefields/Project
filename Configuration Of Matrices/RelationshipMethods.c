@@ -8,7 +8,7 @@
 // Should be corrected to refer to a doctrinal document.
 #define MAXIMUM_SLOPE 70
 
-double **processMatrix(WeightedMatrix matrix_array[], int array_length, int matrix_size){
+double **processMatrix(weighted_matrix matrix_array[], int array_length, int matrix_size){
     double **processed_matrix = CreateDynamicMatrix(matrix_size);
     double **current_matrix = NULL;
     for (int i = 0; i < array_length; ++i) {
@@ -25,7 +25,7 @@ double **processMatrix(WeightedMatrix matrix_array[], int array_length, int matr
     return processed_matrix;
 }
 
-void determine_weights(WeightedMatrix matrix_array [], int array_length, userSettings *settings){
+void determine_weights(weighted_matrix matrix_array [], int array_length, userSettings *settings){
     double base_weight = (double)1/array_length;
 
     for (int i = 0; i < array_length; ++i) {
