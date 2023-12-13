@@ -30,7 +30,7 @@ double** import_bmp(char* path) {
 
     //Uses other function to create a matrix that follows the standard for this project, which will store the 0-1 values
     //given the strength of the color for each pixel in the bitmap
-    double** pixel_color_strength_normalised_array = CreateDynamicMatrix(width);
+    double** pixel_color_strength_normalised_array = create_dynamic_matrix(width);
 
     //Calculates the size of the rows in the pixel storage part of the bitmap, there is often padding at the end of rows
     int row_size = (int)ceil(((double)(bits_per_pixel * width) / 32)) * 4;

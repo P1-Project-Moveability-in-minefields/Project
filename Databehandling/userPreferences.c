@@ -8,10 +8,10 @@ const char* stringRiskLevel[] = {"Low", "Medium", "High"};
 const char* stringPrioritizeCover[] = {"False", "True"};
 const char* stringClearanceType[] = {"none","MICLIC","Plow","Rafael"};
 
-double SQUAD_UNIT_SETTINGS[NUMBER_OF_TROOP_SETTINGS] = {1, 1, 1, 1, 1};
-double COMPANY_UNIT[NUMBER_OF_TROOP_SETTINGS]        = {0.95, 0.2, 0.9, 1, 0.9};
-double LOGISTIC_UNIT[NUMBER_OF_TROOP_SETTINGS]       = {1, 1, 1, 1, 1};
-double ARMOR_UNIT[NUMBER_OF_TROOP_SETTINGS]          = {1, 1, 1, 1, 1};
+double squadUnitSettings[NUMBER_OF_TROOP_SETTINGS] = {1, 1, 1, 1, 1};
+double companyUnitSettings[NUMBER_OF_TROOP_SETTINGS]        = {0.95, 0.2, 0.9, 1, 0.9};
+double logisticUnitSettings[NUMBER_OF_TROOP_SETTINGS]       = {1, 1, 1, 1, 1};
+double armorUnitSettings[NUMBER_OF_TROOP_SETTINGS]          = {1, 1, 1, 1, 1};
 
 
 // Ask user to decide settings, then return the settings.
@@ -30,15 +30,15 @@ userSettings obtain_user_settings() {
 
     //1st setting
     printf("\n1. Which troop type should maneuver? ('0' = Squad  |  '1' = Company  |  '2' = Logistic unit  |  '3' = Armor unit )\n");
-    int troop_type;
-    scanf("%d", &troop_type);
-    add_troop_settings(&chosenSettings, troop_type);
-    printf("You have choosen %s as the troop type", stringTroopType[troop_type]);
+    int troopType;
+    scanf("%d", &troopType);
+    add_troop_settings(&chosenSettings, troopType);
+    printf("You have choosen %s as the troop type", stringTroopType[troopType]);
 
     //2nd setting
     printf("\n2. How much risk is acceptable? ('0' = Low risk  |  '1' = Medium risk  |  '2' = High risk )\n");
-    scanf("%d", &chosenSettings.priority_level.mine_risk);
-    printf("You have chosen a %s risk level", stringRiskLevel[chosenSettings.priority_level.mine_risk]);
+    scanf("%d", &chosenSettings.priorityLevel.mineRisk);
+    printf("You have chosen a %s risk level", stringRiskLevel[chosenSettings.priorityLevel.mineRisk]);
 
     /*3rd setting
     printf("\n3. Road priority? ('0' = Low  |  '1' = Medium  |  '2' = High )\n");
@@ -58,38 +58,38 @@ userSettings obtain_user_settings() {
 
     //6th setting
     printf("\n6. Specify available and desired clearance method: ('0' = None '1' = MICLIC, '2' = Vehicle mounted plow, '3' = Rafael Missile Carpet System\n");
-    scanf("%d",&chosenSettings.additional_settings.clearing_implement);
-    printf("You have specified the availability of clearance method %s\n", stringClearanceType[chosenSettings.additional_settings.clearing_implement]);
+    scanf("%d",&chosenSettings.additionalSettings.clearingImplement);
+    printf("You have specified the availability of clearance method %s\n", stringClearanceType[chosenSettings.additionalSettings.clearingImplement]);
 
     printf("\n7. What is the size of the input matrices?\n");
-    scanf("%d",&chosenSettings.additional_settings.size);
+    scanf("%d",&chosenSettings.additionalSettings.size);
 
     printf("\nYour chosen settings are: \n");
-    printf("1. Troop type:          %s\n", stringTroopType[troop_type]);
-    printf("2. Risk level:          %s\n", stringRiskLevel[chosenSettings.priority_level.mine_risk]);
+    printf("1. Troop type:          %s\n", stringTroopType[troopType]);
+    printf("2. Risk level:          %s\n", stringRiskLevel[chosenSettings.priorityLevel.mineRisk]);
     // printf("3. Road priority:       %s\n", stringRiskLevel[chosenSettings.additional_settings.is_cover_prioritized]);
     // printf("4. Terrain priority:    %s\n", stringRiskLevel[chosenSettings.weights.vegetation_weight]);
     // printf("5. Prioritize cover:    %s\n", stringPrioritizeCover[chosenSettings.additional_settings.is_cover_prioritized]);
-    printf("6. Clearance method:    %s\n", stringClearanceType[chosenSettings.additional_settings.clearing_implement]);
-    printf("7. Size of matrices:    %dx%d\n", chosenSettings.additional_settings.size,chosenSettings.additional_settings.size);
+    printf("6. Clearance method:    %s\n", stringClearanceType[chosenSettings.additionalSettings.clearingImplement]);
+    printf("7. Size of matrices:    %dx%d\n", chosenSettings.additionalSettings.size,chosenSettings.additionalSettings.size);
     return (chosenSettings);
 }
 
-void add_troop_settings(userSettings *settings, int troop_type){
-    double *current_troop_settings = NULL;
-    if(troop_type == Squad_Unit){
-        current_troop_settings = SQUAD_UNIT_SETTINGS;
-    } else if(troop_type == Company_Unit){
-        current_troop_settings = COMPANY_UNIT;
-    } else if(troop_type == Logistic_Unit){
-        current_troop_settings = LOGISTIC_UNIT;
-    } else if(troop_type == Armor_Unit){
-        current_troop_settings = ARMOR_UNIT;
+void add_troop_settings(userSettings *settings, int troopType){
+    double *currentTroopSettings = NULL;
+    if(troopType == SquadUnit){
+        currentTroopSettings = squadUnitSettings;
+    } else if(troopType == CompanyUnit){
+        currentTroopSettings = companyUnitSettings;
+    } else if(troopType == LogisticUnit){
+        currentTroopSettings = logisticUnitSettings;
+    } else if(troopType == ArmorUnit){
+        currentTroopSettings = armorUnitSettings;
     } else printf("Invalid troop type!");
 
-    settings->troop_settings.max_water_depth = current_troop_settings[0];
-    settings->troop_settings.max_mine_risk = current_troop_settings[1];
-    settings->troop_settings.max_road = current_troop_settings[2];
-    settings->troop_settings.max_slope = current_troop_settings[3];
-    settings->troop_settings.max_terrain_difficulty = current_troop_settings[4];
+    settings->troopSettings.maxWaterDepth = currentTroopSettings[0];
+    settings->troopSettings.maxMineRisk = currentTroopSettings[1];
+    settings->troopSettings.maxRoad = currentTroopSettings[2];
+    settings->troopSettings.maxSlope = currentTroopSettings[3];
+    settings->troopSettings.maxTerrainDifficulty = currentTroopSettings[4];
 }
