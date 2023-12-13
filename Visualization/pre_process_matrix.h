@@ -34,11 +34,22 @@ void add_soil_to_matrix(int size, double** matrix, double** terrainMatrix);
 /// \param terrainMatrix
 void add_water_to_matrix(int size, double** matrix, double** terrainMatrix);
 
-/// Paints each cell int he matrixPainting either 0.4, 0.5 for swampy areas, or 0.6
+/// Determines whether to add vegetation or to add swamplands.
 /// \param size
 /// \param matrix
 /// \param terrainMatrix
-void add_vegetation_to_matrix(int size, double** matrix, double** terrainMatrix);
+void add_vegetation_or_swampland_to_matrix(int size, double** matrix, double** terrainMatrix);
+
+/// Paints each cell in the matrixPainting either 0.5 or 0.6 for swampy areas
+/// \param lastCellWasSwamp (int*), reference to whether the last cell was determined to be a swampland.
+/// \param terrainCell (double), the value of the current terrain map cell.
+/// \param matrixCell (double*), reference to the matrix cell that needs to be painted.
+void add_swamp_to_matrix(int* lastCellWasSwamp,  double terrainCell, double* matrixCell);
+
+/// Paints each cell in the matrixPainting either 0.5 for low vegetation or 0.6 for high
+/// \param terrainCell (double), the value of the current terrain map cell.
+/// \param matrixCell (double*), reference to the matrix cell that needs to be painted.
+void add_vegetation_to_matrix(double terrainCell, double* matrixCell);
 
 /// Paints each cell in the matrixPainting either 0.7 or 0.8
 /// \param size
