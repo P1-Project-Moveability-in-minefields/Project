@@ -15,7 +15,7 @@ void rotate_90_clockwise(double** matrix, int numRows, int numCols);
 /// \param matrix (double**), the matrix to flip.
 /// \param numRows (int), the dimensions (rows) of the matrix.
 /// \param numCols (int), the dimensions (colmumns) of the matrix.
-void flip_horizontally(double** matrix, int numRows, int numCols);
+// void flip_horizontally(double** matrix, int numRows, int numCols); //
 
 /// Imports a number of matrices based on hardcoded paths, and manipulates them so they are ready for use.
 /// \param size (int), the size of the matrices that will be imported.
