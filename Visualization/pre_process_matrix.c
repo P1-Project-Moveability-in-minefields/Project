@@ -5,54 +5,59 @@
 #include "stdio.h"
 #include <stdlib.h>
 
-double** create_matrix_painting(int size,
-                              double*** listOfMatrices) {
+double** create_matrix_painting(int size, double*** listOfMatrices) {
 
-    double** matrix = malloc(size * sizeof(double*));
+    double** matrixPainting = malloc(size * sizeof(double**));
+
     for (int i = 0; i < size; ++i) {
-        matrix[i] = malloc(size * sizeof(double));
+        matrixPainting[i] = malloc(size * sizeof(double));
     }
 
-    // Assuming these functions are correctly implemented to copy values
-    add_soil_to_matrix(size, matrix, listOfMatrices[0]);
-    add_water_to_matrix(size, matrix, listOfMatrices[1]);
-    add_vegetation_or_swampland_to_matrix(size, matrix, listOfMatrices[2]);
-    add_road_to_matrix(size, matrix, listOfMatrices[3]);
-    add_mine_to_matrix(size, matrix, listOfMatrices[5]);
+    // For each terrain matrix, "paint" the matrix painting
+    add_listOfMatrices_to_matrixPainting(size, matrixPainting, listOfMatrices);
 
-    return matrix;
+    return matrixPainting;
+}
+
+void add_listOfMatrices_to_matrixPainting(int size, double** matrixPainting, double*** listOfMatrices){
+    add_soil_to_matrix(size, matrixPainting, listOfMatrices[0]);
+    add_water_to_matrix(size, matrixPainting, listOfMatrices[1]);
+    add_vegetation_or_swampland_to_matrix(size, matrixPainting, listOfMatrices[2]);
+    add_road_to_matrix(size, matrixPainting, listOfMatrices[3]);
+    add_mine_to_matrix(size, matrixPainting, listOfMatrices[5]);
 }
 
 
-void add_soil_to_matrix(int size, double** matrix, double** terrainMatrix){
+
+void add_soil_to_matrix(int size, double** matrixPainting, double** terrainMatrix){
     for (int i = 0; i < size; i++){
         for (int j = 0; j < size; j++){
 
             if (terrainMatrix[i][j] < 0.5) {
-                matrix[i][j] = 0.1;
+                matrixPainting[i][j] = 0.1;
             } else {
-                matrix[i][j] = 0.0;
+                matrixPainting[i][j] = 0.0;
             }
 
         }
     }
 }
 
-void add_water_to_matrix(int size, double** matrix, double** terrainMatrix){
+void add_water_to_matrix(int size, double** matrixPainting, double** terrainMatrix){
 
     for (int i = 0; i < size; i++){
         for (int j = 0; j < size; j++){
 
             if (terrainMatrix[i][j] > 0.5) {
-                matrix[i][j] = 0.3;
+                matrixPainting[i][j] = 0.3;
             } else if (terrainMatrix[i][j] > 0.1){
-                matrix[i][j] = 0.2;
+                matrixPainting[i][j] = 0.2;
             }
         }
     }
 }
 
-void add_vegetation_or_swampland_to_matrix(int size, double** matrix, double** terrainMatrix){
+void add_vegetation_or_swampland_to_matrix(int size, double** matrixPainting, double** terrainMatrix){
     // For each cell
     int lastCellWasSwamp = 1;
     for (int i = 0; i < size; i++){
@@ -61,7 +66,7 @@ void add_vegetation_or_swampland_to_matrix(int size, double** matrix, double** t
             int isWater = 0;
 
             double terrainCell = terrainMatrix[i][j];
-            double* matrixCell = &matrix[i][j];
+            double* matrixCell = &matrixPainting[i][j];
 
             if (*matrixCell == 0.2 || *matrixCell == 0.3) {
                 isWater = 1;
@@ -112,18 +117,18 @@ void add_vegetation_to_matrix(double terrainCell, double* matrixCell){
     }
 }
 
-void add_road_to_matrix(int size, double** matrix, double** terrainMatrix){
+void add_road_to_matrix(int size, double** matrixPainting, double** terrainMatrix){
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
 
             // Good road
             if (terrainMatrix[i][j] < 0.3 ){
-                matrix[i][j] = 0.8;
+                matrixPainting[i][j] = 0.8;
             }
 
             // Poor road
             else if ( terrainMatrix[i][j] < 1 ) {
-                matrix[i][j] = 0.7;
+                matrixPainting[i][j] = 0.7;
             }
 
 
@@ -131,7 +136,7 @@ void add_road_to_matrix(int size, double** matrix, double** terrainMatrix){
         }
     }
 }
-void add_mine_to_matrix(int size, double** matrix, double** terrainMatrix){
+void add_mine_to_matrix(int size, double** matrixPainting, double** terrainMatrix){
     if (terrainMatrix == NULL){
         return;
     }
@@ -143,10 +148,10 @@ void add_mine_to_matrix(int size, double** matrix, double** terrainMatrix){
 
             if (value > 0){
                 if (value < 0.6) {
-                    matrix[row][col] = 0.9; // Set the color for mines
+                    matrixPainting[row][col] = 0.9; // Set the color for mines
                 }
                 else {
-                    matrix[row][col] = 1.0; // Set the color for mines
+                    matrixPainting[row][col] = 1.0; // Set the color for mines
                 }
 
             }
@@ -158,12 +163,12 @@ void add_mine_to_matrix(int size, double** matrix, double** terrainMatrix){
     }
 }
 
-void add_optimal_route_to_matrix(int size, double** matrix, int** optimalRoute, int numberOfSteps){
+void add_optimal_route_to_matrix(int size, double** matrixPainting, int** optimalRoute, int numberOfSteps){
 
     for (int i = 0; i < numberOfSteps; i++) {
         int x = optimalRoute[i][0];
         int y = optimalRoute[i][1];
-        matrix[x][y] = 1.1;
+        matrixPainting[x][y] = 1.1;
     }
 
 }

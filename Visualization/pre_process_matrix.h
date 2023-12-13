@@ -15,30 +15,37 @@
 double** create_matrix_painting(int size,
                               double*** list_of_matrices);
 
+/// Adds every terrain matrix to the matrixPainting
+/// \param size
+/// \param matrix
+/// \param listOfMatrices
+void add_listOfMatrices_to_matrixPainting(int size, double** matrixPainting, double*** listOfMatrices);
+
+
 /// For each step in the optimal route, paints this step into the matrix painting
 /// \param size
 /// \param matrix
 /// \param optimal_route
 /// \param number_of_steps
-void add_optimal_route_to_matrix(int size, double** matrix, int** optimal_route, int number_of_steps);
+void add_optimal_route_to_matrix(int size, double** matrixPainting, int** optimal_route, int number_of_steps);
 
 /// Paints each cell in the matrixPainting either 0.0 or 0.1.
 /// \param size
 /// \param matrix
 /// \param terrainMatrix
-void add_soil_to_matrix(int size, double** matrix, double** terrainMatrix);
+void add_soil_to_matrix(int size, double** matrixPainting, double** terrainMatrix);
 
 /// Paints each cell in the matrixPainting either 0.2 or 0.3
 /// \param size
 /// \param matrix
 /// \param terrainMatrix
-void add_water_to_matrix(int size, double** matrix, double** terrainMatrix);
+void add_water_to_matrix(int size, double** matrixPainting, double** terrainMatrix);
 
 /// Determines whether to add vegetation or to add swamplands.
 /// \param size
 /// \param matrix
 /// \param terrainMatrix
-void add_vegetation_or_swampland_to_matrix(int size, double** matrix, double** terrainMatrix);
+void add_vegetation_or_swampland_to_matrix(int size, double** matrixPainting, double** terrainMatrix);
 
 /// Paints each cell in the matrixPainting either 0.5 or 0.6 for swampy areas
 /// \param lastCellWasSwamp (int*), reference to whether the last cell was determined to be a swampland.
@@ -55,13 +62,13 @@ void add_vegetation_to_matrix(double terrainCell, double* matrixCell);
 /// \param size
 /// \param matrix
 /// \param terrainMatrix
-void add_road_to_matrix(int size, double** matrix, double** terrainMatrix);
+void add_road_to_matrix(int size, double** matrixPainting, double** terrainMatrix);
 
 /// Paints each cell in the matrixPainting either 0.9 or 1
 /// \param size
 /// \param matrix
 /// \param terrainMatrix
-void add_mine_to_matrix(int size, double** matrix, double** terrainMatrix);
+void add_mine_to_matrix(int size, double** matrixPainting, double** terrainMatrix);
 
 
 #endif //P1_PROJECT_PRE_PROCESS_MATRIX_H
