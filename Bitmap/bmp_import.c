@@ -26,7 +26,7 @@ double** import_bmp(char* path) {
     int width = (int)bmp[OFFSET_OF_WIDTH];
     int height = (int)bmp[OFFSET_OF_HEIGHT];
     int bitsPerPixel = (short)bmp[OFFSET_OF_BITS_PER_PIXEL];
-    int colorTableSize = (int)bmp[OFFSET_OF_COLOR_TABLE_SIZE];
+    int colorTableSize = (int)bmp[OFFSET_OF_COLOR_TABLE_SIZE] * 4; //Because 4 bytes for each color
 
     //Uses other function to create a matrix that follows the standard for this project, which will store the 0-1 values
     //given the strength of the color for each pixel in the bitmap
@@ -52,7 +52,7 @@ double** import_bmp(char* path) {
 
             //Calculate normalised value from one of the color chanels of the pixel, given by the index
             //(only one chanel is needed since input is black and white so RGB are all the same)
-            double finalValue = (double)colorTable[maskedIndexValue*4] / UCHAR_MAX;
+            double finalValue = (double)colorTable[maskedIndexValue*4] / 255;
 
             //Save the value in the array
             pixelColorStrengthNormalizedArray[j][i] = finalValue;
