@@ -77,3 +77,6 @@ fabric.properties
 
 #Cmake Debug files
 cmake-build-debug
+
+# Apple users
+.DS_Store
