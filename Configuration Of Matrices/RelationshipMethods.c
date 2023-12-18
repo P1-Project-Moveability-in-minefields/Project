@@ -9,39 +9,39 @@
 #define MAXIMUM_SLOPE 70
 
 double **process_matrix(weightedMatrix matrix_array[], int array_length, int matrixSize){
-    double **processedMatrix = create_dynamic_matrix(matrixSize);
-    double **currentMatrix = NULL;
+    double **processed_matrix = create_dynamic_matrix(matrixSize);
+    double **current_matrix = NULL;
     for (int i = 0; i < array_length; ++i) {
-        currentMatrix = matrix_array[i].matrix;
+        current_matrix = matrix_array[i].matrix;
         for (int j = 0; j < matrixSize; ++j) {
             for (int k = 0; k < matrixSize; ++k) {
-                if (processedMatrix[j][k] == -1){
-                } else if (currentMatrix[j][k] == -1){
-                    processedMatrix[j][k] = -1;
-                } else processedMatrix[j][k] += matrix_array[i].weight * matrix_array[i].matrix[j][k];
+                if (processed_matrix[j][k] == -1){
+                } else if (current_matrix[j][k] == -1){
+                    processed_matrix[j][k] = -1;
+                } else processed_matrix[j][k] += matrix_array[i].weight * matrix_array[i].matrix[j][k];
             }
         }
     }
-    return processedMatrix;
+    return processed_matrix;
 }
 
 void determine_weights(weightedMatrix matrix_array [], int array_length, userSettings *settings){
-    double baseWeight = (double)1/array_length;
+    double base_weight = (double)1/array_length;
 
     if(matrix_array->type == mine) {
         switch (settings->priorityLevel.mineRisk) {
             case High:
-                matrix_array->weight = baseWeight;
+                matrix_array->weight = base_weight;
             case Medium:
-                matrix_array->weight = 1.5 * baseWeight;
+                matrix_array->weight = 1.5 * base_weight;
             case Low:
-                matrix_array->weight = 5 * baseWeight;
+                matrix_array->weight = 5 * base_weight;
         }
-        baseWeight = (1-matrix_array->weight)/(array_length-1);
-    } else matrix_array->weight = baseWeight;
+        base_weight = (1-matrix_array->weight)/(array_length-1);
+    } else matrix_array->weight = base_weight;
 
     for (int i = 1; i < array_length; ++i) {
-        matrix_array[i].weight = baseWeight;
+        matrix_array[i].weight = base_weight;
     }
 }
 
