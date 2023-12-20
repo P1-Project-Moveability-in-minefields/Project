@@ -24,8 +24,8 @@ entry *extract_min(entry *queue[], int *queue_size){
     *queue_size -= 1;
 
     int index = 0;
-    int left_index = left_child_index(index, queue, queue_size);
-    int right_index = right_child_index(index, queue, queue_size);
+    int left_index = left_child_index(index, queue, queue_size); // -1 is returned if left_child does not exist or if left_child is correctly located
+    int right_index = right_child_index(index, queue, queue_size); // -1 is returned if right_child does not exist or if right_child is correctly located
 
     while (left_index != -1 || right_index != -1){
         int min_index;
