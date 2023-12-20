@@ -33,9 +33,9 @@ void determine_weights(weightedMatrix matrix_array [], int array_length, userSet
             case High:
                 matrix_array->weight = base_weight;
             case Medium:
-                matrix_array->weight = 1.5 * base_weight;
+                matrix_array->weight = 0.5;
             case Low:
-                matrix_array->weight = 5 * base_weight;
+                matrix_array->weight = 0.75;
         }
         base_weight = (1-matrix_array->weight)/(array_length-1);
     } else matrix_array->weight = base_weight;
