@@ -8,10 +8,9 @@
 #include <stdlib.h>
 #include <time.h>
 #include "Visualization/pre_process_matrix.h"
-#include "Visualization/matrix_manipulations.h"
+#include "Configuration Of Matrices/matrix_manipulations.h"
 
 int main() {
-    setbuf(stdout,0);
 
     // Initialize user settings
     userSettings userSettings = obtain_user_settings();
@@ -36,8 +35,8 @@ int main() {
     double** processedMatrix = process_matrix(listOfConfiguredMatrices, 6, size);
 
     // Run Dijkstra algorithm.
-    int startPos[2] = {99, 30};
-    int endPos[2] = {5, 60};
+    int startPos[2] = {70, 95};
+    int endPos[2] = {20, 2};
     result* optimalRoute = dijkstra(processedMatrix, size, startPos, endPos);
 
     if (optimalRoute == NULL){

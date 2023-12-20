@@ -35,8 +35,7 @@ typedef struct {
 }troop_settings;
 
 typedef struct {
-    int isCoverPrioritized;
-    clearing_implement clearingImplement;
+    // other settings
     int size;
 }additional_settings;
 
