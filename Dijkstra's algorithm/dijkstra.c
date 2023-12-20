@@ -16,10 +16,10 @@ result *dijkstra(double **input, int size, const int start_pos[], const int end_
 
     // The starting node is initialized separately, as it differs from the rest
     root_entry->current_cost = root_entry->weight;
-    decrease_entry(priority_queue, start_pos[0]*size+start_pos[1]);
+    decrease_entry(priority_queue, root_entry->priority_status);
 
     // Loop keeps running until the end node is explored
-    while (goal->priority_status != 0){ // Priority status of -1 indicates that node is no longer in queue
+    while (goal->priority_status != 0){ // Priority status of 0 indicates that node has
         entry *current_entry = extract_min(priority_queue, &queue_size); // current entry = node with highest priority in queue
 
         if (current_entry != root_entry && current_entry->previous == NULL){
@@ -69,8 +69,9 @@ void initialization(int size, entry **priority_queue, entry **matrix, double **i
             matrix[i][j].weight = input[i][j];
             matrix[i][j].current_cost = INFINITY;
             matrix[i][j].previous = NULL;
+            matrix[i][j].priority_status = i*size+j;
 
-            add_to_queue(priority_queue, &matrix[i][j], i*size+j);
+            add_to_queue(priority_queue, &matrix[i][j], matrix[i][j].priority_status);
         }
     }
 }

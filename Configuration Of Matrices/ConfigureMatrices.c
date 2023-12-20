@@ -51,7 +51,7 @@ void configure_depth_map(double** waterMap, double** roadMap, userSettings *sett
     for (int i = 0; i < matrixDimensions; ++i) {
         for (int j = 0; j < matrixDimensions; ++j) {
             currentLocation = &waterMap[i][j];
-            if (roadMap[i][j] != -1 && roadMap[i][j] < 1){
+            if (roadMap[i][j] != -1 && roadMap[i][j] < 1){ // checks if road passes water
                 *currentLocation = 0;
             } else if (*currentLocation > maxWaterDepth){
                 *currentLocation = -1;

@@ -8,9 +8,8 @@ const char* stringRiskLevel[] = {"Low", "Medium", "High"};
 const char* stringPrioritizeCover[] = {"False", "True"};
 const char* stringClearanceType[] = {"none","MICLIC","Plow","Rafael"};
 
-// Predefined settings for different troop sizes
-double squadUnitSettings[NUMBER_OF_TROOP_SETTINGS] =          {0.6, 1, 1, 1, 1};
-double companyUnitSettings[NUMBER_OF_TROOP_SETTINGS]        = {0.95, 0.2, 0.9, 1, 0.9};
+double squadUnitSettings[NUMBER_OF_TROOP_SETTINGS] = {0.5, 0, 1, 1, 1};
+double companyUnitSettings[NUMBER_OF_TROOP_SETTINGS]        = {0.95, 1, 0.9, 1, 0.9};
 double logisticUnitSettings[NUMBER_OF_TROOP_SETTINGS]       = {1, 1, 1, 1, 1};
 double armorUnitSettings[NUMBER_OF_TROOP_SETTINGS]          = {1, 1, 1, 1, 1};
 
@@ -56,6 +55,7 @@ userSettings obtain_user_settings() {
     scanf("%d", &chosenSettings.additional_settings.is_cover_prioritized);
     printf("You have chosen to make cover prioritization %s\n", stringPrioritizeCover[chosenSettings.additional_settings.is_cover_prioritized]);
 
+
     //6th setting
     printf("\n6. Specify available and desired clearance method: ('0' = None '1' = MICLIC, '2' = Vehicle mounted plow, '3' = Rafael Missile Carpet System\n");
     scanf("%d",&chosenSettings.additionalSettings.clearingImplement);
@@ -71,7 +71,7 @@ userSettings obtain_user_settings() {
     // printf("4. Terrain priority:    %s\n", stringRiskLevel[chosenSettings.weights.vegetation_weight]);
     // printf("5. Prioritize cover:    %s\n", stringPrioritizeCover[chosenSettings.additional_settings.is_cover_prioritized]);
     // printf("6. Clearance method:    %s\n", stringClearanceType[chosenSettings.additionalSettings.clearingImplement]);
-    printf("7. Size of matrices:    %dx%d\n", chosenSettings.additionalSettings.size,chosenSettings.additionalSettings.size);
+    printf("3. Size of matrices:    %dx%d\n", chosenSettings.additionalSettings.size,chosenSettings.additionalSettings.size);
     return (chosenSettings);
 }
 
