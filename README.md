@@ -9,10 +9,12 @@ application. You will be prompted to answer 3 questions:
 
 The scale of the bitmaps used in our program are scaled to 100x100, 
 thus the only sensible size of the matrices is a 100. Write '100' as the 
-program understands the matrices as quadratic. The program should 
-still run given a matrix size of less than 100, as long as your start 
-and end positions are within the valid borders of a reduced matrix size.
-The start and end positions can be chosen from the main.c file.
+program understands the matrices as quadratic. When making new bitmaps the 
+settings should be 4 bits per pixel and uncompressed and then just paint a 
+map in black/white. The program should still run given a matrix size of 
+less than 100, as long as your start and end positions are within the 
+valid borders of a reduced matrix size. The start and end positions 
+can be chosen from the main.c file.
 
 ### Unused Code
 Within the different C files there exists code and 
@@ -27,7 +29,7 @@ the optimal route.
 
 ### Python visualization
 The optimal route can be visualized by running the CreateVisualization.py 
-function from the Visualization folder. In order run the script, 
+function from the Visualization folder. In order to run the script, 
 a valid python interpreter must be installed and setup correctly. If Python
 is installed on your machine, you should be prompted with a setup notification
 when viewing the Python script in Clion. 
