@@ -8,7 +8,8 @@ const char* stringRiskLevel[] = {"Low", "Medium", "High"};
 const char* stringPrioritizeCover[] = {"False", "True"};
 const char* stringClearanceType[] = {"none","MICLIC","Plow","Rafael"};
 
-double squadUnitSettings[NUMBER_OF_TROOP_SETTINGS] = {1, 1, 1, 1, 1};
+// Predefined settings for different troop sizes
+double squadUnitSettings[NUMBER_OF_TROOP_SETTINGS] =          {0.6, 1, 1, 1, 1};
 double companyUnitSettings[NUMBER_OF_TROOP_SETTINGS]        = {0.95, 0.2, 0.9, 1, 0.9};
 double logisticUnitSettings[NUMBER_OF_TROOP_SETTINGS]       = {1, 1, 1, 1, 1};
 double armorUnitSettings[NUMBER_OF_TROOP_SETTINGS]          = {1, 1, 1, 1, 1};
@@ -54,7 +55,6 @@ userSettings obtain_user_settings() {
     printf("\n5. Should cover be prioritized? ('1' = yes  |  '0' = no )\n");
     scanf("%d", &chosenSettings.additional_settings.is_cover_prioritized);
     printf("You have chosen to make cover prioritization %s\n", stringPrioritizeCover[chosenSettings.additional_settings.is_cover_prioritized]);
-
 
     //6th setting
     printf("\n6. Specify available and desired clearance method: ('0' = None '1' = MICLIC, '2' = Vehicle mounted plow, '3' = Rafael Missile Carpet System\n");
