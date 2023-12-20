@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "Dijkstra's algorithm/dijkstra.h"
-#include "Databehandling/userPreferences.h"
+#include "User Preferences/userPreferences.h"
 #include "Configuration Of Matrices/RelationshipMethods.h"
 #include "Configuration Of Matrices/ConfigureMatrices.h"
 #include "Visualization/exportMatrixToFile.h"

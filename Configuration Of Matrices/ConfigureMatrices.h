@@ -2,7 +2,7 @@
 // Created by thoma on 05/12/2023.
 //
 
-#include "../Databehandling/userPreferences.h"
+#include "../User Preferences/userPreferences.h"
 
 #ifndef P1_PROJECT_CONFIGUREMATRICES_H
 #define P1_PROJECT_CONFIGUREMATRICES_H

@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "RelationshipMethods.h"
-#include "../Databehandling/userPreferences.h"
+#include "../User Preferences/userPreferences.h"
 #include <stdlib.h>
 #include "math.h"
 #include "../Visualization/exportMatrixToFile.h"
