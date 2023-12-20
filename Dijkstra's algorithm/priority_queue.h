@@ -5,10 +5,10 @@ struct entry;
 
 typedef struct{
     int pos[2]; // position in matrix
-    double weight; // wight of edges directed to node
+    double weight; // weight of edges directed to node
     double current_cost; // cost of currently cheapest path to node
     struct entry *previous; // Every node keeps track of the previous node in the path. This makes it possible to backtrack the final path
-    int priority_status; // Keeps track of previous
+    int priority_status; // Keeps track of index in priority queue
 }entry;
 
 /// Adds a node to a priority queue
