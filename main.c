@@ -35,8 +35,8 @@ int main() {
     double** processedMatrix = process_matrix(listOfConfiguredMatrices, 6, size);
 
     // Run Dijkstra algorithm.
-    int startPos[2] = {70, 95};
-    int endPos[2] = {20, 2};
+    int startPos[2] = {99, 1};
+    int endPos[2] = {1, 99};
     result* optimalRoute = dijkstra(processedMatrix, size, startPos, endPos);
 
     if (optimalRoute == NULL){

@@ -37,6 +37,18 @@ double*** generate_list_of_matrices(int size, int numberOfMatrices) {
             "../Mock_Values/BMP's/mines.bmp"
     };
 
+    /* char* bmpPaths[] = {
+            "../Mock_Values/BMP's/soil2b.bmp",
+            "../Mock_Values/BMP's/water2b.bmp",
+            "../Mock_Values/BMP's/vegetation3b.bmp",
+            "../Mock_Values/BMP's/roads3b.bmp",
+            "../Mock_Values/BMP's/steepness2b.bmp",
+            "../Mock_Values/BMP's/mines2b.bmp"
+    }; */
+
+
+
+
     double*** listOfMatrices = (double***)malloc(numberOfMatrices * sizeof(double**));
 
     if (!listOfMatrices) {

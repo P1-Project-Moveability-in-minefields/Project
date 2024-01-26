@@ -9,7 +9,7 @@ const char* stringPrioritizeCover[] = {"False", "True"};
 const char* stringClearanceType[] = {"none","MICLIC","Plow","Rafael"};
 
 double squadUnitSettings[NUMBER_OF_TROOP_SETTINGS] = {0.5, 0, 1, 1, 1};
-double companyUnitSettings[NUMBER_OF_TROOP_SETTINGS]        = {0.95, 1, 0.9, 1, 0.9};
+double companyUnitSettings[NUMBER_OF_TROOP_SETTINGS]        = {0.95, 1, 1, 1, 0.9};
 double logisticUnitSettings[NUMBER_OF_TROOP_SETTINGS]       = {1, 1, 1, 1, 1};
 double armorUnitSettings[NUMBER_OF_TROOP_SETTINGS]          = {1, 1, 1, 1, 1};
 
